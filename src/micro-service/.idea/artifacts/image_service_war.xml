@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="image-service:war">
+    <output-path>$PROJECT_DIR$/../microservice/image-service-1/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>image-service</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="image-service.war">
+      <element id="artifact" artifact-name="image-service:war exploded" />
+    </root>
+  </artifact>
+</component>
