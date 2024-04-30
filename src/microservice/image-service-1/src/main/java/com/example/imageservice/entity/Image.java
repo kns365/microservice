@@ -1,4 +1,4 @@
-package com.example.galleryservice.entity;
+package com.example.imageservice.entity;
 
 public class Image {
     private Integer id;

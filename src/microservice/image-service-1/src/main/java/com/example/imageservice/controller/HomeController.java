@@ -1,6 +1,6 @@
-package com.example.galleryservice.controller;
+package com.example.imageservice.controller;
 
-import com.example.galleryservice.entity.Image;
+import com.example.imageservice.entity.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
