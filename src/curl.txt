@@ -1,3 +1,8 @@
+https://tubean.github.io/2018/12/microservice-springboot-eureka/
+https://tubean.github.io/2018/12/microservice-springboot-eureka-part2/
+https://tubean.github.io/2018/12/microservice-springboot-eureka-part3/
+https://tubean.github.io/2018/12/microservice-key-architectural-concepts/
+
 curl --location 'http://localhost:8762/auth' \
 --header 'Content-Type: application/json' \
 --data '{
