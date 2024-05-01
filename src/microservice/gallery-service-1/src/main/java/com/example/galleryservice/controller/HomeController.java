@@ -1,6 +1,9 @@
 package com.example.galleryservice.controller;
 
 import com.example.galleryservice.entity.Gallery;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +22,8 @@ public class HomeController {
     @Autowired
     private Environment env;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+
     @RequestMapping("/")
     public String home() {
         // This is useful for debugging
@@ -27,17 +32,20 @@ public class HomeController {
         return "Hello from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 
+    @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping("/{id}")
     public Gallery getGallery(@PathVariable final int id) {
-        System.out.println("getGallery " + env.getProperty("local.server.port"));
+        LOGGER.info("Creating gallery object ... ");
         // create gallery object
         Gallery gallery = new Gallery();
         gallery.setId(id);
 
         // get list of available images
+        @SuppressWarnings("unchecked")    // we'll throw an exception from image service to simulate a failure
         List<Object> images = restTemplate.getForObject("http://image-service/images/", List.class);
         gallery.setImages(images);
 
+        LOGGER.info("Returning images ... ");
         return gallery;
     }
 
@@ -47,6 +55,11 @@ public class HomeController {
     @RequestMapping("/admin")
     public String homeAdmin() {
         return "This is the admin area of Gallery service running at port: " + env.getProperty("local.server.port");
+    }
+
+    // a fallback method to be called if failure happened
+    public Gallery fallback(int galleryId, Throwable hystrixCommand) {
+        return new Gallery(galleryId);
     }
 }
 

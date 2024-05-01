@@ -14,6 +14,10 @@ public class Gallery {
     public Gallery() {
     }
 
+    public Gallery(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -30,3 +34,4 @@ public class Gallery {
         this.images = images;
     }
 }
+
