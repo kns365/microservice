@@ -1,7 +1,8 @@
-package com.example.configserver.security;
+package com.example.authserver.security;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.configserver.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

@@ -1,4 +1,4 @@
-package com.example.configserver;
+package com.example.zuulserver;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(AuthServerApplication.class);
+        return application.sources(ZuulServerApplication.class);
     }
 
 }

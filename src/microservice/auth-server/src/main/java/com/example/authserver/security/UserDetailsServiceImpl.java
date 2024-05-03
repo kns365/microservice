@@ -1,4 +1,4 @@
-package com.example.configserver.security;
+package com.example.authserver.security;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
 		
 		// hard coding the users. All passwords must be encoded.
 		final List<AppUser> users = Arrays.asList(
-			new AppUser(1, "tubean", encoder.encode("12345"), "USER"),
+			new AppUser(1, "user", encoder.encode("12345"), "USER"),
 			new AppUser(2, "admin", encoder.encode("12345"), "ADMIN")
 		);
 		
