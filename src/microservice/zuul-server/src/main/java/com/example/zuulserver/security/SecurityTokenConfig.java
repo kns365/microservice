@@ -2,7 +2,7 @@ package com.example.zuulserver.security;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.configserver.security.JwtConfig;
+import com.example.commonserver.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
