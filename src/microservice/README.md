@@ -2,7 +2,7 @@
 
 ## The series of servers:
 
-- ### 1/ Config server-8760 ()
+- ### 1/ Config server-8760 (All other servers connect to it to receive config, Required username/password to connect)
 - ### 2/ Eureka server-8761 (Discovery, Registration)
 - ### 3/ Zuul server-8762 (API gateway, Spring security)
     - SecurityTokenConfig (WebSecurityConfigurerAdapter)
