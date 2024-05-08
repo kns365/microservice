@@ -9,6 +9,7 @@
     - JwtTokenAuthenticationFilter (OncePerRequestFilter)
 - ### 4/ Common server-8763 (The class can imported by other module over pom file)
     - JwtConfig
+    - Model(ResponseDto,...)
 - ### 5/ Auth server-8764 (Spring security, Generation and Validation user/request by JWT)
     - JwtUsernameAndPasswordAuthenticationFilter (UsernamePasswordAuthenticationFilter)
     - SecurityCredentialsConfig (WebSecurityConfigurerAdapter)
