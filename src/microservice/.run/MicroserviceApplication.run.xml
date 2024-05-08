@@ -5,10 +5,10 @@
     <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="AuthServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="CommonServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="GalleryServiceApplication" type="SpringBootApplicationConfigurationType" />	
     <toRun name="GalleryServiceApplication (1)" type="SpringBootApplicationConfigurationType" />
+    <toRun name="GalleryServiceApplication (2)" type="SpringBootApplicationConfigurationType" />
     <toRun name="ImageServiceApplication (1)" type="SpringBootApplicationConfigurationType" />
-    <toRun name="ImageServiceApplication" type="SpringBootApplicationConfigurationType" />  
+    <toRun name="ImageServiceApplication (2)" type="SpringBootApplicationConfigurationType" />  
     <method v="2" />
   </configuration>
 </component>

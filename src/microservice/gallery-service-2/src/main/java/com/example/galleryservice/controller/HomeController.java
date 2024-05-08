@@ -59,6 +59,7 @@ public class HomeController {
 
     // a fallback method to be called if failure happened
     public Gallery fallback(int galleryId, Throwable hystrixCommand) {
+        LOGGER.info("fallback ... ");
         return new Gallery(galleryId);
     }
 }

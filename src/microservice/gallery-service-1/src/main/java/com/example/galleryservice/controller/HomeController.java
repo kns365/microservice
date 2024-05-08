@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,7 +60,11 @@ public class HomeController {
 
     // a fallback method to be called if failure happened
     public Gallery fallback(int galleryId, Throwable hystrixCommand) {
-        return new Gallery(galleryId);
+        LOGGER.info("fallback ... ");
+        List<Object> list = new ArrayList<>();
+        Gallery temp = new Gallery(503, "The service is unavailable");
+        list.add(temp);
+        return new Gallery(503, list);
     }
 }
 

@@ -1,14 +1,20 @@
 package com.example.galleryservice.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gallery {
     private Integer id;
-    private List<Object> images;
+    private List<Object> images = new ArrayList<>();
 
     public Gallery(Integer id, List<Object> images) {
         this.id = id;
         this.images = images;
+    }
+
+    public Gallery(Integer id, Object images) {
+        this.id = id;
+        this.images.add(images);
     }
 
     public Gallery() {
