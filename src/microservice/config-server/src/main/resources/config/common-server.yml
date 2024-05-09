@@ -7,3 +7,10 @@ server:
 spring:
   application:
     name: common-server
+#security:
+#  jwt:
+#    uri: '/auth/**'
+#    header: 'Authorization'
+#    prefix: 'Bearer '
+#    expiration: 24*60*60
+#    secret: JwtSecretKey

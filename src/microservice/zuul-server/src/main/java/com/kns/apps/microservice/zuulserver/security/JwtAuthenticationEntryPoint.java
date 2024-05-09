@@ -1,5 +1,4 @@
-/*
-package com.example.galleryservice.security;
+package com.kns.apps.microservice.zuulserver.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -24,4 +23,4 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);       
     }
-}*/
+}
