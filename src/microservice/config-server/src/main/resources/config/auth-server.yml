@@ -20,15 +20,10 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  config:
+    import: application.properties
 logging:
-  file:
-    name: ./logs/auth-server.log
-  level:
-    root: info
+  file: ${logging.path}/${spring.application.name}.log
   logback:
     rollingpolicy:
-      file-name-pattern: ./logs/auth-server.%d{yyyy-MM-dd}.%i.log.gz
-      max-file-size: 10MB
-      total-size-cap: 1000MB
-      max-history: 90
-      clean-history-on-start: false
+      file-name-pattern: ${logging.path}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz

@@ -7,6 +7,19 @@ server:
 spring:
   application:
     name: gallery-service
+  config:
+    import: application.properties
+logging:
+  file: ${logging.path}/${spring.application.name}.log
+  level:
+    root: info
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.path}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
+      max-file-size: 10MB
+      total-size-cap: 1000MB
+      max-history: 90
+      clean-history-on-start: false
 hystrix:
   command:
     default:
