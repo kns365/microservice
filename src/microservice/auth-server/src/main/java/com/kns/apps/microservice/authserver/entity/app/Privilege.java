@@ -1,6 +1,6 @@
 package com.kns.apps.microservice.authserver.entity.app;
 
-import com.kns.apps.microservice.commonserver.core.model.BaseEntity;
+import com.kns.apps.microservice.configserver.core.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

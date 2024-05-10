@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.kns.apps.microservice</groupId>
-            <artifactId>common-server</artifactId>
+            <artifactId>config-server</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>
@@ -44,7 +44,7 @@
             </dependency>
             <dependency>
                 <groupId>com.kns.apps.microservice</groupId>
-                <artifactId>common-server</artifactId>
+                <artifactId>config-server</artifactId>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>

@@ -1,6 +1,6 @@
 package com.kns.apps.microservice.authserver.security;
 
-import com.kns.apps.microservice.commonserver.security.JwtConfig;
+import com.kns.apps.microservice.configserver.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

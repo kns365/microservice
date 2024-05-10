@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.commonserver.core.model;
+package com.kns.apps.microservice.configserver.core.model;
 
 import lombok.Getter;
 import lombok.Setter;

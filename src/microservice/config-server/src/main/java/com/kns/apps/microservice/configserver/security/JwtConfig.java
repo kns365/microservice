@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.commonserver.security;
+package com.kns.apps.microservice.configserver.security;
 
 import org.springframework.beans.factory.annotation.Value;
 

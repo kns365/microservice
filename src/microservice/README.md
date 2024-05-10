@@ -2,15 +2,17 @@
 
 ## The series of servers:
 
-- ### 1/ Config server-8760 (All other servers connect to it to receive config, Required username/password to connect)
+- ### 1/ Config server-8760 (Spring security, common class)
+    - All other servers connect to it to receive config
+    - Required username/password to connect
+    - The class can imported by other module over pom file
+    - JwtConfig
+    - Model(ResponseDto,...)
 - ### 2/ Eureka server-8761 (Discovery, Registration)
 - ### 3/ Zuul server-8762 (API gateway, Spring security)
     - SecurityTokenConfig (WebSecurityConfigurerAdapter)
     - JwtTokenAuthenticationFilter (OncePerRequestFilter)
-- ### 4/ Common server-8763 (The class can imported by other module over pom file)
-    - JwtConfig
-    - Model(ResponseDto,...)
-- ### 5/ Auth server-8764 (Spring security, Generation and Validation user/request by JWT)
+- ### 4/ Auth server-8763 (Spring security, Generation and Validation user/request by JWT)
     - JwtUsernameAndPasswordAuthenticationFilter (UsernamePasswordAuthenticationFilter)
     - SecurityCredentialsConfig (WebSecurityConfigurerAdapter)
     - UserDetailsServiceImpl (UserDetailsService)
