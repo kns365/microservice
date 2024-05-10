@@ -7,11 +7,11 @@ server:
 spring:
   application:
     name: common-server
-#  autoconfigure:
-#    exclude:
-#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-#      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
 #security:
 #  jwt:
 #    uri: '/auth/**'

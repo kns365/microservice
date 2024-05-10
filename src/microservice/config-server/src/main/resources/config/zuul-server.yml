@@ -7,11 +7,6 @@ server:
 spring:
   application:
     name: zuul-server
-#  autoconfigure:
-#    exclude:
-#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-#      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
 zuul:
   # A prefix that can added to beginning of all requests.
 #  prefix: /api
