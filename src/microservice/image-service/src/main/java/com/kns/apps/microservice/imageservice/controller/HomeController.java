@@ -32,7 +32,7 @@ public class HomeController {
                 new Image(2, "The Town", "https://www.imdb.com/title/tt0096697/mediaviewer/rm3698134272"),
                 new Image(3, "The Last Traction Hero", "https://www.imdb.com/title/tt0096697/mediaviewer/rm1445594112"));
         try {
-            throw new Exception("Images can't be fetched");
+//            throw new Exception("Images can't be fetched");
         } catch (Exception e) {
             e.printStackTrace();
         }

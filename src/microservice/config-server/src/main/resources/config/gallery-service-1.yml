@@ -7,3 +7,10 @@ server:
 spring:
   application:
     name: gallery-service
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
