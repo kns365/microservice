@@ -1,4 +1,7 @@
 # Microservices with Spring Boot
+Attention version: Do not upgrade version
+Spring boot: 2.1.3.RELEASE
+Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
 
 ## The series of servers:
 
@@ -10,6 +13,7 @@
     - Model(ResponseDto,...)
 - ### 2/ Eureka server-8761 (Discovery, Registration)
 - ### 3/ Zuul server-8762 (API gateway, Spring security)
+    - Zuul removed by version cloud > Hoxton
     - SecurityTokenConfig (WebSecurityConfigurerAdapter)
     - JwtTokenAuthenticationFilter (OncePerRequestFilter)
 - ### 4/ Auth server-8763 (Spring security, Generation and Validation user/request by JWT)

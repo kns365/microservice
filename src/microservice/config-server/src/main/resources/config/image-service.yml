@@ -13,4 +13,4 @@ logging:
   file: ${logging.path}/${spring.application.name}.log
   logback:
     rollingpolicy:
-      file-name-pattern: ${logging.path}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
+      file-name-pattern: ${logging.path}/archive/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
