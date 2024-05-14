@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.configserver.helper;
+package com.kns.apps.microservice.configserver.application.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

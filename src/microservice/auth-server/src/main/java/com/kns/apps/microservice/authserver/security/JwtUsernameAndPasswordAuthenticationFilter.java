@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kns.apps.microservice.authserver.core.model.JwtDto;
 import com.kns.apps.microservice.configserver.core.model.ResponseDto;
-import com.kns.apps.microservice.configserver.helper.JsonHelper;
+import com.kns.apps.microservice.configserver.application.helper.JsonHelper;
 import com.kns.apps.microservice.configserver.security.JwtConfig;
 import lombok.Getter;
 import lombok.Setter;
@@ -89,11 +89,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
 
             // Add token to body
-            ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), jwt);
+            ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, jwt);
             response.getWriter().write(JsonHelper.objectToJson(res));
         } catch (IOException io) {
             try {
-                ResponseDto res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), io.getMessage(), null);
+                ResponseDto res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), null, io.getMessage(), null);
                 response.getWriter().write(JsonHelper.objectToJson(res));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
@@ -106,11 +106,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        ResponseDto res = new ResponseDto(HttpStatus.UNAUTHORIZED.value(), failed.getMessage(), null);
+        ResponseDto res = new ResponseDto(HttpStatus.UNAUTHORIZED.value(), failed.getMessage(), null, null);
         try {
             response.getWriter().write(JsonHelper.objectToJson(res));
         } catch (IOException io) {
-            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), io.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), io.getMessage(), null, null);
             response.getWriter().write(JsonHelper.objectToJson(res));
         }
     }
