@@ -1,6 +1,6 @@
-package com.kns.apps.microservice.authserver.repository.app;
+package com.kns.apps.microservice.authserver.data.repository.app;
 
-import com.kns.apps.microservice.authserver.entity.app.Role;
+import com.kns.apps.microservice.authserver.core.entity.app.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

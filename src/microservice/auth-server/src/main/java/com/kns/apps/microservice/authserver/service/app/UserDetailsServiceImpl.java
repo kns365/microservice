@@ -1,9 +1,9 @@
 package com.kns.apps.microservice.authserver.service.app;
 
-import com.kns.apps.microservice.authserver.entity.app.Privilege;
-import com.kns.apps.microservice.authserver.entity.app.Role;
-import com.kns.apps.microservice.authserver.entity.app.User;
-import com.kns.apps.microservice.authserver.repository.app.UserRepository;
+import com.kns.apps.microservice.authserver.core.entity.app.Privilege;
+import com.kns.apps.microservice.authserver.core.entity.app.Role;
+import com.kns.apps.microservice.authserver.core.entity.app.User;
+import com.kns.apps.microservice.authserver.data.repository.app.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

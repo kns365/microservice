@@ -1,6 +1,6 @@
-package com.kns.apps.microservice.authserver.repository.app;
+package com.kns.apps.microservice.authserver.data.repository.app;
 
-import com.kns.apps.microservice.authserver.entity.app.User;
+import com.kns.apps.microservice.authserver.core.entity.app.Privilege;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Page<User> findAll(@Nullable Specification<User> spec, @NonNull Pageable pageable);
-    Optional<User> findByUsername(String username);
+public interface PrivilegeRepository extends JpaRepository<Privilege, Long> {
+    Page<Privilege> findAll(@Nullable Specification<Privilege> spec, @NonNull Pageable pageable);
+    Optional<Privilege> findByName(String input);
 }
