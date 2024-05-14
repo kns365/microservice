@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authserver.core.entity.app;
+package com.kns.apps.microservice.authserver.core.entity;
 
 import com.kns.apps.microservice.configserver.core.model.BaseEntity;
 import lombok.AllArgsConstructor;
