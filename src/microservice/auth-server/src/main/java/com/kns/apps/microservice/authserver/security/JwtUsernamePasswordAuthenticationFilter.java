@@ -1,20 +1,14 @@
 package com.kns.apps.microservice.authserver.security;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import javax.servlet.FilterChain;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kns.apps.microservice.authserver.core.entity.RefreshToken;
 import com.kns.apps.microservice.authserver.core.model.JwtDto;
-import com.kns.apps.microservice.configserver.core.model.ResponseDto;
+import com.kns.apps.microservice.authserver.core.model.UserCredentials;
 import com.kns.apps.microservice.configserver.application.helper.JsonHelper;
+import com.kns.apps.microservice.configserver.core.model.ResponseDto;
 import com.kns.apps.microservice.configserver.security.JwtConfig;
-import lombok.Getter;
-import lombok.Setter;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,21 +18,25 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
-public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     // We use auth manager to validate the user credentials
     private AuthenticationManager authManager;
-
     private final JwtConfig jwtConfig;
+    private RefreshTokenService refreshTokenService;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig) {
+    public JwtUsernamePasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig, RefreshTokenService refreshTokenService) {
         this.authManager = authManager;
         this.jwtConfig = jwtConfig;
+        this.refreshTokenService = refreshTokenService;
 
         // By default, UsernamePasswordAuthenticationFilter listens to "/login" path.
         // In our case, we use "/auth". So, we need to override the defaults.
@@ -83,7 +81,10 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                     .setExpiration(exp)
                     .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
                     .compact();
-            JwtDto jwt = new JwtDto(token, jwtConfig.getPrefix(), String.valueOf(exp.getTime()), "");
+
+            RefreshToken refreshToken = refreshTokenService.generateRefreshToken(auth.getName());
+
+            JwtDto jwt = new JwtDto(token, jwtConfig.getPrefix(), String.valueOf(exp.getTime()), refreshToken.getRefreshToken());
 
             // Add token to header
             response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
@@ -115,10 +116,4 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         }
     }
 
-    // A (temporary) class just to represent the user credentials
-    @Getter
-    @Setter
-    public static class UserCredentials {
-        private String username, password;
-    }
 }
