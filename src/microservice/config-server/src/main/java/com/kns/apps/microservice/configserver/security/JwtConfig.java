@@ -20,45 +20,19 @@ public class JwtConfig {
 
     // Spring doesn't inject/autowire to "static" fields.
     // Link: https://stackoverflow.com/a/6897406
-    @Value("${security.jwt.uri:/auth/**}")
-//    @Value("${security.jwt.uri}")
+    @Value("${security.jwt.uri}")
     private String Uri;
 
-    @Value("${security.jwt.header:Authorization}")
-//    @Value("${security.jwt.header}")
+    @Value("${security.jwt.header}")
     private String header;
 
-    @Value("${security.jwt.prefix:Bearer }")
-//    @Value("${security.jwt.prefix}")
+    @Value("${security.jwt.prefix}")
     private String prefix;
 
-    @Value("${security.jwt.expiration:#{24*60*60}}")
-//    @Value("${security.jwt.expiration}")
+    @Value("${security.jwt.expiration}")
     private int expiration;
 
-    @Value("${security.jwt.secret:JwtSecretKey}")
-//    @Value("${security.jwt.secret}")
+    @Value("${security.jwt.secret}")
     private String secret;
-
-    // In case you want to use plain getters instead of lombok.
-    /*public String getUri() {
-        return Uri;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public int getExpiration() {
-        return expiration;
-    }
-
-    public String getSecret() {
-        return secret;
-    }*/
 
 }
