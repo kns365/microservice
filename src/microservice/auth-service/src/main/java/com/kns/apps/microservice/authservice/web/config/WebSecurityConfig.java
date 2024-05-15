@@ -56,9 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/getToken", "/refreshToken").permitAll()
                 .antMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-//                .antMatchers("/ws/**", "/app/**", "/topic/**", "/hello/**").permitAll()
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
         ;
         httpSecurity.addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
