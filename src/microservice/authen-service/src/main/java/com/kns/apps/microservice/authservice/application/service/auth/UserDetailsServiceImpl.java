@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.security;
+package com.kns.apps.microservice.authservice.application.service.auth;
 
 import com.kns.apps.microservice.authservice.core.entity.Privilege;
 import com.kns.apps.microservice.authservice.core.entity.Role;
@@ -30,6 +30,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(),
                 getAuthorities(user.getRoles()));
     }
+
+//    private Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles) {
+//            return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+//    }
 
     private Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles) {
         return getGrantedAuthorities(getPrivileges(roles));

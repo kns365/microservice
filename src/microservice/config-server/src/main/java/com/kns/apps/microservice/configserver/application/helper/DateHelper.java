@@ -21,13 +21,13 @@ public class DateHelper {
     }
 
     public static String getSystemDateMilis() {
-        return getSystemDateStr(sDateMilis);
+        return getDateStr(sDateMilis, null);
     }
 
-    public static String getSystemDateStr(String format) {
+    public static String getDateStr(String format, Date date) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = StringUtils.isBlank(format) ? new SimpleDateFormat(sDateSeconds) : new SimpleDateFormat(format);
-        return sdf.format(calendar.getTime());
+        return sdf.format(date != null ? date.getTime() : calendar.getTime());
     }
 
     public static Date getSystemDate() {
@@ -63,6 +63,33 @@ public class DateHelper {
         return sdf.format(dateStr);
     }
 
+    public static Date getPastDate(int num) {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -num);
+        return cal.getTime();
+    }
+
+    public static Date getMinDay(String formatTypeInput, String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat(formatTypeInput);
+        Date output = null;
+        try {
+            Date temp = sdf.parse(dateStr);
+            output = getMinDay(temp);
+        } catch (Exception ignore) {
+        }
+        return output;
+    }
+
+    public static Date getMaxDay(String formatTypeInput, String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat(formatTypeInput);
+        Date output = null;
+        try {
+            Date temp = sdf.parse(dateStr);
+            output = getMaxDay(temp);
+        } catch (Exception ignore) {
+        }
+        return output;
+    }
 
     public static Date getMinDay(Date input) {
         Calendar cal = Calendar.getInstance();

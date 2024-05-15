@@ -26,7 +26,7 @@ public class ResponseDto {
         }
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
-        this.timestamp = DateHelper.getSystemDateStr("yyyy-MM-dd HH:mm:ss");
+        this.timestamp = DateHelper.getDateStr("yyyy-MM-dd HH:mm:ss", null);
         this.transactionId = transactionId;
         this.data = data;
     }
