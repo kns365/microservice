@@ -55,9 +55,25 @@ public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAut
             // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
             return authManager.authenticate(authToken);
         } catch (IOException e) {
-            response.addHeader(jwtConfig.getHeader(), String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
             throw new RuntimeException(e);
         }
+    }
+
+    private String generateToken(Authentication auth) {
+        Long now = System.currentTimeMillis();
+        Date iat = new Date(now);
+        Date exp = new Date(now + jwtConfig.getExpiration() * 1000);// in milliseconds
+        String token = Jwts.builder()
+                .setSubject(auth.getName())
+                // Convert to list of strings.
+                // This is important because it affects the way we get them back in the Gateway.
+                .claim("authorities", auth.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setIssuedAt(iat)
+                .setExpiration(exp)
+                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
+                .compact();
+        return token;
     }
 
     // Upon successful authentication, generate a token.
@@ -71,16 +87,7 @@ public class JwtUsernamePasswordAuthenticationFilter extends UsernamePasswordAut
             Long now = System.currentTimeMillis();
             Date iat = new Date(now);
             Date exp = new Date(now + jwtConfig.getExpiration() * 1000);// in milliseconds
-            String token = Jwts.builder()
-                    .setSubject(auth.getName())
-                    // Convert to list of strings.
-                    // This is important because it affects the way we get them back in the Gateway.
-                    .claim("authorities", auth.getAuthorities().stream()
-                            .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                    .setIssuedAt(iat)
-                    .setExpiration(exp)
-                    .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
-                    .compact();
+            String token = generateToken(auth);
 
             RefreshToken refreshToken = refreshTokenService.generateRefreshToken(auth.getName());
 

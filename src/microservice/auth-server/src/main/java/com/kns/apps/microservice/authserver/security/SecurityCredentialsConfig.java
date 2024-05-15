@@ -39,10 +39,11 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 		    // What's the authenticationManager()?
 		    // An object provided by WebSecurityConfigurerAdapter, used to authenticate the user passing user's credentials
 		    // The filter needs this auth manager to authenticate the user.
-		    .addFilter(new JwtUsernamePasswordAuthenticationFilter(authenticationManager(), jwtConfig,refreshTokenService))
+		    .addFilter(new JwtUsernamePasswordAuthenticationFilter(authenticationManager(), jwtConfig, refreshTokenService))
 		.authorizeRequests()
 		    // allow all POST requests
 		    .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+			.antMatchers("/refresh").permitAll()
 		    // any other requests must be authenticated
 		    .anyRequest().authenticated();
 	}
