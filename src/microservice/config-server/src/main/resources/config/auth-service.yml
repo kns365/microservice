@@ -1,0 +1,29 @@
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+server:
+  port: 8764
+spring:
+  application:
+    name: auth-service
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.148.50.4:1521/DEVPDB.prudential.com
+    username: utility
+    password: 123qwe
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+  config:
+    import: application.properties
+logging:
+  file: ${logging.path}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.path}/archive/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz

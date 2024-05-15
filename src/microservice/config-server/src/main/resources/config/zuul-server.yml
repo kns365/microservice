@@ -22,7 +22,7 @@ zuul:
   ignored-services: '*'
   routes:
     # Map path to auth service
-    auth-service:
+    auth-server:
       path: /auth/**
       # Exclude authorization from sensitive headers
       sensitive-headers: Cookie,Set-Cookie
@@ -36,6 +36,9 @@ zuul:
     gallery-service:
       path: /gallery/**
       service-id: gallery-service
+    auth-service:
+      path: /auth2/**
+      service-id: auth-service
 # timeout
   host:
     connect-timeout-millis: 30000
