@@ -1,6 +1,7 @@
 package com.kns.apps.microservice.zuulserver.security;
 
 import com.kns.apps.microservice.configserver.security.JwtConfig;
+import com.kns.apps.microservice.configserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -30,7 +31,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 		.and()
 		   // Add a filter to validate the tokens with every request
-		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig,jwtProvider), UsernamePasswordAuthenticationFilter.class)
+		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig, jwtProvider), UsernamePasswordAuthenticationFilter.class)
 		// authorization requests config
 		.authorizeRequests()
 		   // allow all who are accessing "auth" service
@@ -45,4 +46,9 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
   	public JwtConfig jwtConfig() {
     	   return new JwtConfig();
   	}
+	@Bean
+  	public JwtProvider jwtProvider() {
+    	   return new JwtProvider();
+  	}
+
 }

@@ -1,9 +1,9 @@
 package com.kns.apps.microservice.zuulserver.security;
 
 import com.kns.apps.microservice.configserver.security.JwtConfig;
+import com.kns.apps.microservice.configserver.security.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +22,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtConfig jwtConfig;
 
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
 
     public JwtTokenAuthenticationFilter(JwtConfig jwtConfig, JwtProvider jwtProvider) {
         this.jwtConfig = jwtConfig;

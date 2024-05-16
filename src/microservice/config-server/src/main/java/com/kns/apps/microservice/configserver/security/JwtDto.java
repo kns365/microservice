@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.zuulserver.security;
+package com.kns.apps.microservice.configserver.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

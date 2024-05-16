@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.zuulserver.security;
+package com.kns.apps.microservice.configserver.security;
 
 import com.kns.apps.microservice.configserver.application.helper.DateHelper;
 import io.jsonwebtoken.Claims;
