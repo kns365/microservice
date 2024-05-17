@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.web.security.handler;//package vn.com.kns.portalapi.web.security.handler;
+package com.kns.apps.microservice.zuulserver.security.handler;//package vn.com.kns.portalapi.web.security.handler;
 //
 //import org.springframework.security.access.AccessDeniedException;
 //import org.springframework.security.web.access.AccessDeniedHandler;

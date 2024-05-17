@@ -1,10 +1,10 @@
 package com.kns.apps.microservice.authservice.web.security;
 
-import com.kns.apps.microservice.authservice.web.security.JwtAuthenticationFilter;
 import com.kns.apps.microservice.configserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,17 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-//    @Autowired
-//    private JwtProvider jwtProvider;
     @Bean
     public JwtProvider jwtProvider() {
         return new JwtProvider();
     }
 
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilterBean() {
-        return new JwtAuthenticationFilter();
-    }
+//    @Bean
+//    public JwtAuthenticationFilter jwtAuthenticationFilterBean() {
+//        return new JwtAuthenticationFilter();
+//    }
 
 //    @Bean
 //    public UnauthorizedHandler unauthorizedHandler() throws Exception {
@@ -56,17 +54,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and()
+        httpSecurity
                 .csrf().disable()
 //                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler()).and()
 //                .exceptionHandling().accessDeniedHandler(forbiddenHandler()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// don't create session , session will be auto valid every request after first login
                 .authorizeRequests()
-                .antMatchers("/", "/getToken", "/refreshToken").permitAll()
+                .antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(HttpMethod.POST, "/getToken", "/refreshToken").permitAll()
                 .antMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
         ;
-        httpSecurity.addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class);
+//        httpSecurity.addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
