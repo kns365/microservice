@@ -17,8 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtConfig jwtConfig;
+	@Bean
+	public JwtConfig jwtConfig() {
+		return new JwtConfig();
+	}
 	@Autowired
 	private JwtProvider jwtProvider;
+	@Bean
+	public JwtProvider jwtProvider() {
+		return new JwtProvider();
+	}
 
 	@Override
   	protected void configure(HttpSecurity http) throws Exception {
@@ -42,13 +50,5 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 		   .anyRequest().authenticated();
 	}
 
-	@Bean
-  	public JwtConfig jwtConfig() {
-    	   return new JwtConfig();
-  	}
-	@Bean
-  	public JwtProvider jwtProvider() {
-    	   return new JwtProvider();
-  	}
 
 }

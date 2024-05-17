@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 @Slf4j
 public class JwtProvider {
 
@@ -35,12 +36,26 @@ public class JwtProvider {
     @Value("${jwt.expiration.time}")
     private Long jwtExpirationInMillis;
 
+
+//    check tai sao keystore phải để ở zuul server thì mới chạy dc, ko thì JwtProvider bị null
+
+//    public JwtProvider(){
+//        try {
+//            keyStore = KeyStore.getInstance("JKS");
+//            InputStream resourceAsStream = getClass().getResourceAsStream("/keystore/" + this.jwtAliasKey + ".jks");
+//            keyStore.load(resourceAsStream, this.jwtSecretKey.toCharArray());
+//        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
+//            throw new BaseException("Exception occured while loading keystore");
+//        }
+//    }
+
     @PostConstruct
     public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/keystore/" + this.jwtAliasKey + ".jks");
             keyStore.load(resourceAsStream, this.jwtSecretKey.toCharArray());
+            log.info("keyStore loaded");
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new BaseException("Exception occured while loading keystore");
         }

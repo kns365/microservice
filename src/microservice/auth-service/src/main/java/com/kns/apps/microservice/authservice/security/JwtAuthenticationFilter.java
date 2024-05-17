@@ -1,6 +1,7 @@
 package com.kns.apps.microservice.authservice.security;
 
 import com.kns.apps.microservice.authservice.application.service.auth.UserDetailsServiceImpl;
+import com.kns.apps.microservice.configserver.security.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

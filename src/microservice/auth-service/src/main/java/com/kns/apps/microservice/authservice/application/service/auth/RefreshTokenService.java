@@ -2,7 +2,7 @@ package com.kns.apps.microservice.authservice.application.service.auth;
 
 import com.kns.apps.microservice.authservice.core.entity.RefreshToken;
 import com.kns.apps.microservice.authservice.data.repository.RefreshTokenRepository;
-import com.kns.apps.microservice.authservice.security.exception.BaseException;
+import com.kns.apps.microservice.configserver.security.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

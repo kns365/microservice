@@ -1,6 +1,7 @@
 package com.kns.apps.microservice.authservice.web.config;
 
 import com.kns.apps.microservice.authservice.security.JwtAuthenticationFilter;
+import com.kns.apps.microservice.configserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtProvider jwtProvider;
+    @Bean
+    public JwtProvider jwtProvider() {
+        return new JwtProvider();
+    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilterBean() {
