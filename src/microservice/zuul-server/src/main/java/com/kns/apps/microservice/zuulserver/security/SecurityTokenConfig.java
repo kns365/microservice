@@ -1,6 +1,5 @@
 package com.kns.apps.microservice.zuulserver.security;
 
-import com.kns.apps.microservice.configserver.security.JwtConfig;
 import com.kns.apps.microservice.configserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity 	// Enable security config. This annotation denotes config for spring security.
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private JwtConfig jwtConfig;
-	@Bean
-	public JwtConfig jwtConfig() {
-		return new JwtConfig();
-	}
 	@Autowired
 	private JwtProvider jwtProvider;
 	@Bean
@@ -39,11 +32,11 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 		.and()
 		   // Add a filter to validate the tokens with every request
-		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig, jwtProvider), UsernamePasswordAuthenticationFilter.class)
+		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 		// authorization requests config
 		.authorizeRequests()
 		   // allow all who are accessing "auth" service
-		   .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+		   .antMatchers(HttpMethod.POST, jwtProvider.getUri()).permitAll()
 		   // must be an admin if trying to access admin area (authentication is also required here)
 		   .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
 		   // Any other request must be authenticated

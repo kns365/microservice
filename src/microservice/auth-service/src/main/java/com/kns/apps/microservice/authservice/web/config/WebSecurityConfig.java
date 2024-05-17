@@ -26,8 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtProvider jwtProvider;
+//    @Autowired
+//    private JwtProvider jwtProvider;
     @Bean
     public JwtProvider jwtProvider() {
         return new JwtProvider();

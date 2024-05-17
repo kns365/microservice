@@ -3,6 +3,7 @@ package com.kns.apps.microservice.configserver.security;
 import com.kns.apps.microservice.configserver.application.helper.DateHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -21,8 +22,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// To use this class outside. You have to
+// 1. Define it as a bean, either by adding @Component or use @Bean to instantiate an object from it
+// 2. Use the @Autowire to ask spring to auto create it for you, and inject all the values.
+
+// So, If you tried to create an instance manually (i.e. new JwtConfig()). This won't inject all the values.
+// Because you didn't ask Spring to do so (it's done by you manually!).
+// Also, if, at any time, you tried to instantiate an object that's not defined as a bean
+// Don't expect Spring will autowire the fields inside that class object.
+
 @Component
 @Slf4j
+@Getter
 public class JwtProvider {
 
     private KeyStore keyStore;
@@ -36,18 +47,20 @@ public class JwtProvider {
     @Value("${jwt.expiration.time}")
     private Long jwtExpirationInMillis;
 
+    @Value("${jwt.uri}")
+    private String Uri;
 
-//    check tai sao keystore phải để ở zuul server thì mới chạy dc, ko thì JwtProvider bị null
+    @Value("${jwt.header}")
+    private String header;
 
-//    public JwtProvider(){
-//        try {
-//            keyStore = KeyStore.getInstance("JKS");
-//            InputStream resourceAsStream = getClass().getResourceAsStream("/keystore/" + this.jwtAliasKey + ".jks");
-//            keyStore.load(resourceAsStream, this.jwtSecretKey.toCharArray());
-//        } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
-//            throw new BaseException("Exception occured while loading keystore");
-//        }
-//    }
+    @Value("${jwt.prefix}")
+    private String prefix;
+
+    @Value("${jwt.expiration}")
+    private int expiration;
+
+    @Value("${jwt.secret}")
+    private String secret;
 
     @PostConstruct
     public void init() {
@@ -58,6 +71,22 @@ public class JwtProvider {
             log.info("keyStore loaded");
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new BaseException("Exception occured while loading keystore");
+        }
+    }
+
+    private PrivateKey getPrivateKey() {
+        try {
+            return (PrivateKey) keyStore.getKey(this.jwtAliasKey, this.jwtSecretKey.toCharArray());
+        } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
+            throw new BaseException("Exception occured while retrieving public key from keystore");
+        }
+    }
+
+    private PublicKey getPublickey() {
+        try {
+            return keyStore.getCertificate(this.jwtAliasKey).getPublicKey();
+        } catch (KeyStoreException e) {
+            throw new BaseException("Exception occured while retrieving public key from keystore");
         }
     }
 
@@ -74,14 +103,6 @@ public class JwtProvider {
         return new JwtDto(token, "Bearer", DateHelper.getDateStr("yyyy-MM-dd HH:mm:ss", exp));
     }
 
-    private PrivateKey getPrivateKey() {
-        try {
-            return (PrivateKey) keyStore.getKey(this.jwtAliasKey, this.jwtSecretKey.toCharArray());
-        } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
-            throw new BaseException("Exception occured while retrieving public key from keystore");
-        }
-    }
-
     public Claims getClaims(String jwt) {
         return Jwts.parser().setSigningKey(getPublickey()).parseClaimsJws(jwt).getBody();
     }
@@ -89,14 +110,6 @@ public class JwtProvider {
     public boolean validateToken(String jwt) {
         Jwts.parser().setSigningKey(getPublickey()).parseClaimsJws(jwt);
         return true;
-    }
-
-    private PublicKey getPublickey() {
-        try {
-            return keyStore.getCertificate(this.jwtAliasKey).getPublicKey();
-        } catch (KeyStoreException e) {
-            throw new BaseException("Exception occured while retrieving public key from keystore");
-        }
     }
 
     public String getUsernameFromJWT(String token) {
@@ -122,4 +135,5 @@ public class JwtProvider {
     public Long getJwtExpirationInMillis() {
         return jwtExpirationInMillis;
     }
+
 }

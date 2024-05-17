@@ -1,6 +1,5 @@
 package com.kns.apps.microservice.zuulserver.security;
 
-import com.kns.apps.microservice.configserver.security.JwtConfig;
 import com.kns.apps.microservice.configserver.security.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +19,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtConfig jwtConfig;
-
     private final JwtProvider jwtProvider;
 
-    public JwtTokenAuthenticationFilter(JwtConfig jwtConfig, JwtProvider jwtProvider) {
-        this.jwtConfig = jwtConfig;
+    public JwtTokenAuthenticationFilter(JwtProvider jwtProvider) {
         this.jwtProvider = jwtProvider;
     }
 
@@ -33,10 +29,10 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
         // 1. get the authentication header. Tokens are supposed to be passed in the authentication header
-        String header = request.getHeader(jwtConfig.getHeader());
+        String header = request.getHeader(jwtProvider.getHeader());
 
         // 2. validate the header and check the prefix
-        if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
+        if (header == null || !header.startsWith(jwtProvider.getPrefix())) {
             chain.doFilter(request, response);        // If not valid, go to the next filter.
             return;
         }
@@ -48,16 +44,11 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         // And If user tried to access without access token, then he won't be authenticated and an exception will be thrown.
 
         // 3. Get the token
-        String token = header.replace(jwtConfig.getPrefix(), "");
+        String token = header.replace(jwtProvider.getPrefix(), "");
 
         try {    // exceptions might be thrown in creating the claims if for example the token is expired
 
             // 4. Validate the token
-//            Claims claims = Jwts.parser()
-//                    .setSigningKey(jwtConfig.getSecret().getBytes())
-//                    .parseClaimsJws(token)
-//                    .getBody();
-
             Claims claims = jwtProvider.getClaims(token);
 
             String username = claims.getSubject();
