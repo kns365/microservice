@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
+public class JwtGwAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
 
-    public JwtTokenAuthenticationFilter(JwtProvider jwtProvider) {
+    public JwtGwAuthenticationFilter(JwtProvider jwtProvider) {
         this.jwtProvider = jwtProvider;
     }
 

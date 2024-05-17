@@ -1,7 +1,7 @@
-package com.kns.apps.microservice.authservice.application.service.administration.privilege;
+package com.kns.apps.microservice.authservice.application.service.privilege;
 
-import com.kns.apps.microservice.authservice.application.service.administration.privilege.dto.PrivilegeDto;
-import com.kns.apps.microservice.authservice.application.service.administration.privilege.dto.PrivilegeInputDto;
+import com.kns.apps.microservice.authservice.application.service.privilege.dto.PrivilegeDto;
+import com.kns.apps.microservice.authservice.application.service.privilege.dto.PrivilegeInputDto;
 import com.kns.apps.microservice.configserver.core.model.PagingInput;
 import com.kns.apps.microservice.configserver.core.model.PagingOutput;
 

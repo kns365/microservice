@@ -1,10 +1,10 @@
-package com.kns.apps.microservice.authservice.application.service.administration.privilege;
+package com.kns.apps.microservice.authservice.application.service.privilege;
 
-import com.kns.apps.microservice.authservice.application.service.administration.privilege.dto.PrivilegeDto;
-import com.kns.apps.microservice.authservice.application.service.administration.privilege.dto.PrivilegeInputDto;
+import com.kns.apps.microservice.authservice.application.service.privilege.dto.PrivilegeDto;
+import com.kns.apps.microservice.authservice.application.service.privilege.dto.PrivilegeInputDto;
 import com.kns.apps.microservice.authservice.core.entity.Privilege;
 import com.kns.apps.microservice.authservice.data.repository.PrivilegeRepository;
-import com.kns.apps.microservice.authservice.data.specification.app.PrivilegeSpec;
+import com.kns.apps.microservice.authservice.data.specification.PrivilegeSpec;
 import com.kns.apps.microservice.configserver.core.model.FilterInput;
 import com.kns.apps.microservice.configserver.core.model.PagingInput;
 import com.kns.apps.microservice.configserver.core.model.PagingOutput;

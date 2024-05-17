@@ -1,7 +1,7 @@
-package com.kns.apps.microservice.authservice.application.service.administration.role;
+package com.kns.apps.microservice.authservice.application.service.role;
 
-import com.kns.apps.microservice.authservice.application.service.administration.role.dto.RoleDto;
-import com.kns.apps.microservice.authservice.application.service.administration.role.dto.RoleInputDto;
+import com.kns.apps.microservice.authservice.application.service.role.dto.RoleDto;
+import com.kns.apps.microservice.authservice.application.service.role.dto.RoleInputDto;
 import com.kns.apps.microservice.configserver.core.model.PagingInput;
 import com.kns.apps.microservice.configserver.core.model.PagingOutput;
 

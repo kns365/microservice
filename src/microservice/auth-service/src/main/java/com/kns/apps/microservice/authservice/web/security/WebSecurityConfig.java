@@ -1,6 +1,6 @@
-package com.kns.apps.microservice.authservice.web.config;
+package com.kns.apps.microservice.authservice.web.security;
 
-import com.kns.apps.microservice.authservice.security.JwtAuthenticationFilter;
+import com.kns.apps.microservice.authservice.web.security.JwtAuthenticationFilter;
 import com.kns.apps.microservice.configserver.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

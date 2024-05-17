@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.application.service.administration.role.dto;
+package com.kns.apps.microservice.authservice.application.service.role.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.security;
+package com.kns.apps.microservice.authservice.web.security;
 
 import com.kns.apps.microservice.authservice.application.service.auth.UserDetailsServiceImpl;
 import com.kns.apps.microservice.configserver.security.JwtProvider;
@@ -27,10 +27,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        Exception exception = null;
-//        Date execDurStart = new Date();
-//        HttpServletRequest resquestCacheWrapper = new MultiReadRequestWrapper((HttpServletRequest) request);
-//        HttpServletResponseCopier responseCopier = new HttpServletResponseCopier((HttpServletResponse) response);
         try {
             String jwt = getJwtFromRequest(request);
             if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
@@ -44,19 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (Exception ex) {
             log.error("Token invalid");
-//            exception = ex;
         }
         filterChain.doFilter(request, response);
-//        try {
-//            filterChain.doFilter(resquestCacheWrapper, responseCopier);
-//            responseCopier.flushBuffer();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            log.error(HttpStatus.INTERNAL_SERVER_ERROR.name());
-//            exception = ex;
-//        } finally {
-//            AuditLogHelper.create(resquestCacheWrapper, responseCopier, execDurStart, exception);
-//        }
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {

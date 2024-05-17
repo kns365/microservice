@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.data.specification.app;
+package com.kns.apps.microservice.authservice.data.specification;
 
 import com.kns.apps.microservice.authservice.core.entity.Privilege;
 import com.kns.apps.microservice.authservice.core.entity.Privilege_;

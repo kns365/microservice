@@ -1,12 +1,12 @@
-package com.kns.apps.microservice.authservice.application.service.administration.user;
+package com.kns.apps.microservice.authservice.application.service.user;
 
-import com.kns.apps.microservice.authservice.application.service.administration.user.dto.UserDto;
-import com.kns.apps.microservice.authservice.application.service.administration.user.dto.UserInputDto;
+import com.kns.apps.microservice.authservice.application.service.user.dto.UserDto;
+import com.kns.apps.microservice.authservice.application.service.user.dto.UserInputDto;
 import com.kns.apps.microservice.authservice.core.entity.Role;
 import com.kns.apps.microservice.authservice.core.entity.User;
 import com.kns.apps.microservice.authservice.data.repository.RoleRepository;
 import com.kns.apps.microservice.authservice.data.repository.UserRepository;
-import com.kns.apps.microservice.authservice.data.specification.app.UserSpec;
+import com.kns.apps.microservice.authservice.data.specification.UserSpec;
 import com.kns.apps.microservice.configserver.core.model.FilterInput;
 import com.kns.apps.microservice.configserver.core.model.PagingInput;
 import com.kns.apps.microservice.configserver.core.model.PagingOutput;

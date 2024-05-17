@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.web.config;
+package com.kns.apps.microservice.authservice.web.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

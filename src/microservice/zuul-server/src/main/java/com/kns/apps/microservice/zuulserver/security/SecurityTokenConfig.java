@@ -32,7 +32,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 		.and()
 		   // Add a filter to validate the tokens with every request
-		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+		   .addFilterAfter(new JwtGwAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 		// authorization requests config
 		.authorizeRequests()
 		   // allow all who are accessing "auth" service

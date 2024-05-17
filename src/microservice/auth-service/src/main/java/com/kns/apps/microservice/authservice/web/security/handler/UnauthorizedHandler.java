@@ -1,4 +1,4 @@
-package com.kns.apps.microservice.authservice.security.handler;//package vn.com.kns.portalapi.web.security.handler;
+package com.kns.apps.microservice.authservice.web.security.handler;//package vn.com.kns.portalapi.web.security.handler;
 //
 //import org.springframework.security.core.AuthenticationException;
 //import org.springframework.security.web.AuthenticationEntryPoint;

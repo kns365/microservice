@@ -1,6 +1,6 @@
-package com.kns.apps.microservice.authservice.application.service.administration.role.dto;
+package com.kns.apps.microservice.authservice.application.service.role.dto;
 
-import com.kns.apps.microservice.authservice.application.service.administration.privilege.dto.PrivilegeDto;
+import com.kns.apps.microservice.authservice.application.service.privilege.dto.PrivilegeDto;
 import com.kns.apps.microservice.configserver.core.model.BaseEntityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
