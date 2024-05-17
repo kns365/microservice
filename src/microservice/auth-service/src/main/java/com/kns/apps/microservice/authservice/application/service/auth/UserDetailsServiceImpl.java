@@ -31,10 +31,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 getAuthorities(user.getRoles()));
     }
 
-//    private Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles) {
-//            return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-//    }
-
     private Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles) {
         return getGrantedAuthorities(getPrivileges(roles));
     }

@@ -47,6 +47,9 @@ public class JwtProvider {
     @Value("${jwt.expiration.time}")
     private Long jwtExpirationInMillis;
 
+    @Value("${jwt.expiration.time-refresh}")
+    private Long jwtRefreshExpirationInMillis;
+
     @Value("${jwt.uri}")
     private String Uri;
 
@@ -55,12 +58,6 @@ public class JwtProvider {
 
     @Value("${jwt.prefix}")
     private String prefix;
-
-    @Value("${jwt.expiration}")
-    private int expiration;
-
-    @Value("${jwt.secret}")
-    private String secret;
 
     @PostConstruct
     public void init() {
