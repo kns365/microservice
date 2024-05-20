@@ -3,17 +3,24 @@ eureka:
     service-url:
       default-zone: http://localhost:8761/eureka
 server:
-  port: 8301
+  port: 8303
 spring:
   application:
-    name: order-service
+    name: email-service
   config:
     import: application.properties
   kafka:
-    producer:
+    consumer:
       bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      group-id: email
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
     topic:
       name: order_topics
 logging:

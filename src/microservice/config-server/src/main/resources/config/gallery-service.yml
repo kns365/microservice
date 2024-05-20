@@ -10,10 +10,11 @@ spring:
   config:
     import: application.properties
 logging:
-  file: ${logging.path}/${spring.application.name}.log
+  file:
+    name: ${logging.file.path}/${spring.application.name}.log
   logback:
     rollingpolicy:
-      file-name-pattern: ${logging.path}/archive/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
 hystrix:
   command:
     default:

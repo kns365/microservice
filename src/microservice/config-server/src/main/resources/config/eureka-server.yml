@@ -10,13 +10,8 @@ spring:
   config:
     import: application.properties
 logging:
-  file: ${logging.path}/${spring.application.name}.log
-#  level:
-#    root: info
+  file:
+    name: ${logging.file.path}/${spring.application.name}.log
   logback:
     rollingpolicy:
-      file-name-pattern: ${logging.path}/archive/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
-#      max-file-size: 10MB
-#      total-size-cap: 1000MB
-#      max-history: 90
-#      clean-history-on-start: false
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
