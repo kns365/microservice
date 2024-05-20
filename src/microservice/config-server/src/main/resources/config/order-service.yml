@@ -6,9 +6,16 @@ server:
   port: 8301
 spring:
   application:
-    name: stock-service
+    name: order-service
   config:
     import: application.properties
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topic:
+      name: order_topics
 logging:
   file: ${logging.path}/${spring.application.name}.log
   logback:
