@@ -40,6 +40,9 @@ zuul:
     auth-service:
       path: /auth/**
       service-id: auth-service
+    order-service:
+      path: /order/**
+      service-id: order-service
 # timeout
   host:
     connect-timeout-millis: 30000

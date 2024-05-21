@@ -12,6 +12,9 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.topic.name}")
     private String topicName;
 
+//    @Value(value = "${spring.kafka.bootstrap-servers}")
+//    private String bootstrapAddress;
+
     // spring bean for kafka topic
     @Bean
     public NewTopic topic(){
