@@ -1,5 +1,6 @@
 package com.kns.apps.microservice.zuulserver.security;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         // Link: https://stackoverflow.com/a/40791087
         String json = String.format("{\"message\": \"%s\"}", e.getMessage());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);       
     }

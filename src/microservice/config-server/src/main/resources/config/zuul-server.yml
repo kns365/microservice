@@ -9,6 +9,14 @@ spring:
     name: zuul-server
   config:
     import: application.properties
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.148.108.12:1521/DEVPDB.prudential.com
+    username: utility
+    password: 123qwe
+  jpa:
+    show-sql: true
+    open-in-view: false
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}.log
@@ -16,6 +24,9 @@ logging:
     rollingpolicy:
       file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
 zuul:
+  SendErrorFilter:
+    post:
+      disable: true
   # A prefix that can added to beginning of all requests.
 #  prefix: /api
   # Disable accessing services using service name (i.e. gallery-service).
@@ -43,6 +54,20 @@ zuul:
     order-service:
       path: /order/**
       service-id: order-service
+  ratelimit:
+    enabled: true
+    repository: JPA
+    policy-list:
+      auth-service:
+        - limit: 5 #optional - request number limit per refresh interval window
+          refresh-interval: 60 #default value (in seconds)
+          type:
+            - origin
+      order-service:
+        - limit: 100 #optional - request number limit per refresh interval window
+          refresh-interval: 60 #default value (in seconds)
+          type:
+            - origin
 # timeout
   host:
     connect-timeout-millis: 30000

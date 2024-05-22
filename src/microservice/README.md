@@ -6,23 +6,31 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
 ## The series of servers:
 
 - ### 1/ Config server-8760 (Spring security, common class)
-    - All other servers connect to it to receive config
-    - Required username/password to connect
-    - The class can imported by other module over pom file
-    - JwtConfig
-    - Model(ResponseDto,...)
+  - Define all config for client, need user/pass to connect
+  - Common dependency pom
+  - Common class/model/helper(ResponseDto,...) can imported by other module over pom fil
+  - JwtProvider to validate JWT (KeyStore)
 - ### 2/ Eureka server-8761 (Discovery, Registration)
+  - Discovery all service registry
 - ### 3/ Zuul server-8762 (API gateway, Spring security)
-    - Zuul removed by version cloud > Hoxton
-    - SecurityTokenConfig (WebSecurityConfigurerAdapter)
-    - JwtTokenAuthenticationFilter (OncePerRequestFilter)
+  - Routing
+  - Load balancing
+  - Spring security, filter each request and Validate token
+  - [Rate limit for anti ddos](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)
+    - Type: ORIGIN, USER, URL, URL_PATTERN, ROLE, HTTP_METHOD, HTTP_HEADER
+    - Repository: temp use JPA, after use REDIS 
 - ### 4/ Auth server-8763 (Spring security, Generation and Validation user/request by JWT)
-    - JwtUsernameAndPasswordAuthenticationFilter (UsernamePasswordAuthenticationFilter)
-    - SecurityCredentialsConfig (WebSecurityConfigurerAdapter)
-    - UserDetailsServiceImpl (UserDetailsService)
-    - JWT response in header
+  - Spring security, accept 2 url (getToken,refreshToken)
+  - Generate accessToken, refreshToken
+  - Connect DB for 3 table (User,Role,Privilege)
+- ### 5/ Kafka server-9092
+  - 
+  - 
+  - 
 
 ## The series of services:
+Hystrix to fast error
+Sleuth to tracking transaction log
 
 - ### 1/ Gallery service 1-8101
 - ### 2/ Gallery service 2-8102
