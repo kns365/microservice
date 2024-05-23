@@ -18,7 +18,7 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
   - Spring security, filter each request and Validate token
   - [Rate limit for anti ddos](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)
     - Type: ORIGIN, USER, URL, URL_PATTERN, ROLE, HTTP_METHOD, HTTP_HEADER
-    - Repository: temp use JPA, after use REDIS 
+    - Repository: REDIS, JPA 
 - ### 4/ Auth server-8763 (Spring security, Generation and Validation user/request by JWT)
   - Spring security, accept 2 url (getToken,refreshToken)
   - Generate accessToken, refreshToken

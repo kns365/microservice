@@ -1,0 +1,20 @@
+https://tubean.github.io/2018/12/microservice-springboot-eureka/
+https://tubean.github.io/2018/12/microservice-springboot-eureka-part2/
+https://tubean.github.io/2018/12/microservice-springboot-eureka-part3/
+https://tubean.github.io/2018/12/microservice-key-architectural-concepts/
+
+curl --location 'http://localhost:8762/auth' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "admin",
+    "password": "12345"
+}'
+
+curl --location 'http://localhost:8762/gallery' \
+--header 'Authorization: Bearer Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzE0Mzg2NzUwLCJleHAiOjE3MTQ0NzMxNTB9.8zj_Y2umvsIi2EHQ657-pD56PFTmb9N1qHjkyMlBFz53-PDlbXE7-pg7ZOQ-h2UTCVGy_A4gmH5mWxgumYVrLQ'
+
+curl --location 'http://localhost:8762/gallery' \
+--header 'Authorization: Bearer Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzE0Mzg2NzUwLCJleHAiOjE3MTQ0NzMxNTB9.8zj_Y2umvsIi2EHQ657-pD56PFTmb9N1qHjkyMlBFz53-PDlbXE7-pg7ZOQ-h2UTCVGy_A4gmH5mWxgumYVrLQ'
+
+curl --location 'http://localhost:8762/images'
+

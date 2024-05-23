@@ -9,14 +9,6 @@ spring:
     name: zuul-server
   config:
     import: application.properties
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@10.148.108.12:1521/DEVPDB.prudential.com
-    username: utility
-    password: 123qwe
-  jpa:
-    show-sql: true
-    open-in-view: false
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}.log
@@ -56,10 +48,10 @@ zuul:
       service-id: order-service
   ratelimit:
     enabled: true
-    repository: JPA
+    repository: REDIS # JPA
     policy-list:
       auth-service:
-        - limit: 5 #optional - request number limit per refresh interval window
+        - limit: 3 #optional - request number limit per refresh interval window
           refresh-interval: 60 #default value (in seconds)
           type:
             - origin
@@ -75,3 +67,6 @@ zuul:
 ribbon:
   ConnectTimeout: 30000
   ReadTimeout: 30000
+redis:
+  host: localhost
+  port: 6379
