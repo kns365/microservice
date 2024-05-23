@@ -1,3 +1,7 @@
+Mở redis-cli
+Gõ lệnh: monitor
+
+
 https://tubean.github.io/2018/12/microservice-springboot-eureka/
 https://tubean.github.io/2018/12/microservice-springboot-eureka-part2/
 https://tubean.github.io/2018/12/microservice-springboot-eureka-part3/
