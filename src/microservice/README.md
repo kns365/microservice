@@ -19,14 +19,18 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
   - [Rate limit for anti ddos](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)
     - Type: ORIGIN, USER, URL, URL_PATTERN, ROLE, HTTP_METHOD, HTTP_HEADER
     - Repository: REDIS, JPA 
-- ### 4/ Auth server-8763 (Spring security, Generation and Validation user/request by JWT)
+- ### 4/ Auth service-8763 (Spring security, Generation and Validation user/request by JWT)
   - Spring security, accept 2 url (getToken,refreshToken)
   - Generate accessToken, refreshToken
   - Connect DB for 3 table (User,Role,Privilege)
-- ### 5/ Kafka server-9092
+- ### 5/ Board service-8764 (Spring boot admin server)
   - 
   - 
+  -
+- ### 6/ Kafka server-9092
   - 
+  -
+  -
 
 ## The series of services:
 Hystrix to fast error

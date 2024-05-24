@@ -65,7 +65,6 @@ public class JwtProvider {
             keyStore = KeyStore.getInstance("JKS");
             InputStream resourceAsStream = getClass().getResourceAsStream("/keystore/" + this.jwtAliasKey + ".jks");
             keyStore.load(resourceAsStream, this.jwtSecretKey.toCharArray());
-            log.info("keyStore loaded");
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new BaseException("Exception occured while loading keystore");
         }
