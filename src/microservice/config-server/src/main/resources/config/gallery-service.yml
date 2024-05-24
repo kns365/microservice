@@ -18,3 +18,5 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
+  dashboard:
+    proxy-stream-allow-list: localhost

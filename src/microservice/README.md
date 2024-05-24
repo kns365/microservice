@@ -37,6 +37,7 @@ Hystrix to fast error
 Sleuth to tracking transaction log
 
 - ### 1/ Gallery service 1-8101
+  - Add Hystrix Dashboard
 - ### 2/ Gallery service 2-8102
 - ### 3/ Image service 1-8201
 - ### 4/ Image service 2-8202
