@@ -37,6 +37,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		   // allow all who are accessing "auth" service
 		   .antMatchers(jwtProvider.getUri()).permitAll()
+		   .antMatchers("/actuator/**").permitAll()
 		   // must be an admin if trying to access admin area (authentication is also required here)
 		   .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
 		   // Any other request must be authenticated

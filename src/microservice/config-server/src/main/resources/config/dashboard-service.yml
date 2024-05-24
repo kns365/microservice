@@ -1,20 +1,16 @@
 server:
-  port: 8101
+  port: 8764
 spring:
   application:
-    name: gallery-service
+    name: dashboard-service
   config:
     import: application.properties
+#  boot:
+#    admin:
+#      context-path: dashboard
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
   logback:
     rollingpolicy:
       file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 30000
