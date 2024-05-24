@@ -4,7 +4,7 @@
     <toRun name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="DashboardServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
     <method v="2" />
   </configuration>
 </component>

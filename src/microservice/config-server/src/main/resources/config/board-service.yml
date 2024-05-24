@@ -2,7 +2,7 @@ server:
   port: 8764
 spring:
   application:
-    name: dashboard-service
+    name: board-service
   config:
     import: application.properties
 #  boot:

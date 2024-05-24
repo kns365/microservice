@@ -1,10 +1,10 @@
-package com.kns.apps.microservice.dashboardservice;
+package com.kns.apps.microservice.boardservice;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DashboardServiceApplicationTests {
+class BoardServiceApplicationTests {
 
     @Test
     void contextLoads() {
