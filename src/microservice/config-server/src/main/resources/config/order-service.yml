@@ -7,7 +7,7 @@ spring:
     import: application.properties
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: 10.148.50.96:9092 # localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     topic:
@@ -16,7 +16,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: 10.148.50.96:9092 # localhost:9092
       bindings:
         hystrixStreamOutput:
           destination: turbineStreamTopic

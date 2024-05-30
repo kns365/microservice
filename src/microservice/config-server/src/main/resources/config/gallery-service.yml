@@ -9,7 +9,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: 10.148.50.96:9092 # localhost:9092
       bindings:
         hystrixStreamOutput:
           destination: turbineStreamTopic
