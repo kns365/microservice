@@ -1,0 +1,47 @@
+cd C:\WORK\app\apache-kafka
+
+1-start-zookeeper
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+2-start-kafka
+bin\windows\kafka-server-start.bat config/server.properties
+
+3-create-topic
+bin\windows\kafka-topics.bat --create --topic quickstart-events --bootstrap-server localhost:9092
+bin\windows\kafka-topics.bat --create --topic turbine_stream_topics --bootstrap-server localhost:9092
+bin\windows\kafka-topics.bat --create --topic order_topics --bootstrap-server localhost:9092
+bin\windows\kafka-topics.bat --create --topic hystrixStream --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+bin\windows\kafka-topics.bat --create --topic turbineStream --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+bin\windows\kafka-topics.bat --create --topic turbineStreamTopic --bootstrap-server localhost:9092
+
+--list all topic
+bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+4-start-producer-console
+bin\windows\kafka-console-producer.bat --topic quickstart-events --bootstrap-server localhost:9092
+
+5-start-consumer-console
+bin\windows\kafka-console-consumer.bat --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic turbine_stream_topics --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic hystrixStream --from-beginning --bootstrap-server localhost:9092
+
+bin\windows\kafka-console-consumer.bat --topic hystrixStreamOutput --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic turbineStreamInput --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic output --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic springCloudHystrixStream --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic testStream --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic turbineStream --from-beginning --bootstrap-server localhost:9092
+bin\windows\kafka-console-consumer.bat --topic springCloudHystrixStream--from-beginning --bootstrap-server localhost:9092
+
+springCloudHystrixStream
+
+hystrixStreamOutput -yes
+output -no
+turbineStreamInput -no
+springCloudHystrixStream -yes
+
+6-stop-zookeeper
+bin\windows\zookeeper-server-stop.bat
+
+7-stop-kafka
+bin\windows\kafka-server-stop.bat

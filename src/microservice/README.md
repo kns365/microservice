@@ -26,10 +26,7 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
 - ### 5/ Board Admin service-8764 (Spring boot admin server)
   - 
 - ### 6/ Board Hystrix service-8765
-  - 
-- ### 7/ Turbine stream service-8766
-  - Kafka default topic: springCloudHystrixStream
-  - No need config 
+  - Turbine stream on Kafka stream, combine all hystrix stream into one
   
   
 tim hiểu cách add hystrix dashboard cho 1 page lớn ko lẻ tẻ
