@@ -19,8 +19,8 @@ spring:
           brokers: localhost:9092
       bindings:
         hystrixStreamOutput:
-          destination: turbineStream
-          group: turbine-group
+          destination: turbineStreamTopic
+          group: turbine-stream-group
 #            content-type: application/json
           producer:
             key-serializer: org.apache.kafka.common.serialization.StringSerializer

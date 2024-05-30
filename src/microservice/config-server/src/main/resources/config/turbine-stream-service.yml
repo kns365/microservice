@@ -16,8 +16,8 @@ spring:
           brokers: localhost:9092
       bindings:
         turbineStreamInput:
-          destination: turbineStream
-          group: turbine-group
+          destination: turbineStreamTopic
+          group: turbine-stream-group
 #          content-type: application/json
 #  rabbitmq:
 #    host: 10.148.50.84
