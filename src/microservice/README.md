@@ -10,7 +10,7 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
   - Common dependency pom
   - Common class/model/helper(ResponseDto,...) can imported by other module over pom fil
   - JwtProvider to validate JWT (KeyStore)
-- ### 2/ Eureka server-8761 (Discovery, Registration)
+- ### 2/ [Eureka server-8761 (Discovery, Registration)](http://localhost:8761/)
   - Discovery all service registry
 - ### 3/ Zuul server-8762 (API gateway, Spring security)
   - Routing
@@ -23,15 +23,17 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
   - Spring security, accept 2 url (getToken,refreshToken)
   - Generate accessToken, refreshToken
   - Connect DB for 3 table (User,Role,Privilege)
-- ### 5/ Board Admin service-8764 (Spring boot admin server)
-  - 
-- ### 6/ Board Hystrix service-8765
-  - Turbine stream on Kafka stream, combine all hystrix stream into one
-  
-  
-tim hiểu cách add hystrix dashboard cho 1 page lớn ko lẻ tẻ
+- ### 5/ Board service-8764
+  - [Spring Admin server](http://localhost:8764/admin)
+  - [Hystrix dashboard](http://localhost:8764/hystrix/monitor?stream=http://localhost:8764)
+  - [Turbine stream](http://localhost:8764)
+    - Kafka stream, combine all hystrix stream into one
+    
+## Required server:
+Kakfa: localhost:9092
+Redis: localhost:6379
+
 ## The series of services:
-Hystrix to fast error, response default when service error
 Sleuth to tracking transaction log
 
 - ### 1/ Gallery service 1-8101
