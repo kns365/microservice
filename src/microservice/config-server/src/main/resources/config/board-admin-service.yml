@@ -2,7 +2,7 @@ server:
   port: 8764
 spring:
   application:
-    name: board-service
+    name: board-admin-service
   config:
     import: application.properties
 #  boot:

@@ -1,9 +1,5 @@
 server:
   port: 8766
-#eureka:
-#  client:
-#    fetch-registry: false
-#    register-with-eureka: false
 spring:
   application:
     name: turbine-stream-service

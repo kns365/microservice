@@ -1,10 +1,10 @@
-package com.kns.apps.microservice.boardservice;
+package com.kns.apps.microservice.boardadminservice;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BoardServiceApplicationTests {
+class BoardAdminServiceApplicationTests {
 
     @Test
     void contextLoads() {

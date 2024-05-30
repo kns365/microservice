@@ -21,7 +21,6 @@ spring:
         hystrixStreamOutput:
           destination: turbineStreamTopic
           group: turbine-stream-group
-#            content-type: application/json
           producer:
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.apache.kafka.common.serialization.StringSerializer
