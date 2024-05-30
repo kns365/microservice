@@ -1,0 +1,46 @@
+server:
+  port: 8766
+#eureka:
+#  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+spring:
+  application:
+    name: turbine-stream-service
+  config:
+    import: application.properties
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        turbineStreamInput:
+          destination: turbineStream
+          group: turbine-group
+#          content-type: application/json
+#  rabbitmq:
+#    host: 10.148.50.84
+#    port: 5672
+#    username: admin
+#    password: admin
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
+#turbine:
+###  stream:
+###    kafka:
+###      topic: turbine_stream_topics
+##      topic: hystrixStreamOutput
+#  aggregator:
+#    clusterConfig: default
+#  appConfig: gallery-service,order-service
+##  clusterNameExpression: "'default'"
+#  combine-host-port: true
+##  instanceUrlSuffix:
+##    default: actuator/hystrix.stream
+#  stream:
+#    port: 8766

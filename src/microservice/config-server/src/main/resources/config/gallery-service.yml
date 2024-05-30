@@ -5,6 +5,19 @@ spring:
     name: gallery-service
   config:
     import: application.properties
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        hystrixStreamOutput:
+          destination: turbineStream
+          group: turbine-group
+#            content-type: application/json
+          producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
@@ -18,5 +31,3 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-  dashboard:
-    proxy-stream-allow-list: localhost

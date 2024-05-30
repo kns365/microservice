@@ -23,17 +23,18 @@ Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
   - Spring security, accept 2 url (getToken,refreshToken)
   - Generate accessToken, refreshToken
   - Connect DB for 3 table (User,Role,Privilege)
-- ### 5/ Board service-8764 (Spring boot admin server)
+- ### 5/ Board Admin service-8764 (Spring boot admin server)
   - 
+- ### 6/ Board Hystrix service-8765
   - 
-  -
-- ### 6/ Kafka server-9092
-  - 
-  -
-  -
-
+- ### 7/ Turbine stream service-8766
+  - Kafka default topic: springCloudHystrixStream
+  - No need config 
+  
+  
+tim hiểu cách add hystrix dashboard cho 1 page lớn ko lẻ tẻ
 ## The series of services:
-Hystrix to fast error
+Hystrix to fast error, response default when service error
 Sleuth to tracking transaction log
 
 - ### 1/ Gallery service 1-8101

@@ -5,6 +5,7 @@
     <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="BoardHystrixServiceApplication" type="SpringBootApplicationConfigurationType" />
     <method v="2" />
   </configuration>
 </component>

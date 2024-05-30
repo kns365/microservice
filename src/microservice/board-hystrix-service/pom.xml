@@ -5,18 +5,18 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.12.RELEASE</version> <!--<version>2.1.3.RELEASE</version>-->
+        <version>2.3.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.kns.apps.microservice</groupId>
-    <artifactId>order-service</artifactId>
+    <artifactId>board-hystrix-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>order-service</name>
-    <description>order-service</description>
+    <name>board-hystrix-service</name>
+    <description>board-hystrix-service</description>
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR12</spring-cloud.version><!--<spring-cloud.version>Greenwich.SR3</spring-cloud.version>-->
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -25,20 +25,8 @@
             <version>0.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -1,11 +1,14 @@
 package com.kns.apps.microservice.galleryservice.controller;
 
+import com.kns.apps.microservice.configserver.core.model.ResponseDto;
 import com.kns.apps.microservice.galleryservice.entity.Gallery;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +28,7 @@ public class HomeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
+    @HystrixCommand(fallbackMethod = "fallbackHome")
     @RequestMapping("/")
     public String home() {
         // This is useful for debugging
@@ -33,7 +37,11 @@ public class HomeController {
         return "Hello from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 
-    @HystrixCommand(fallbackMethod = "fallback")
+    public String fallbackHome() {
+        return "The service is unavailable";
+    }
+
+    /*@HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping("/{id}")
     public Gallery getGallery(@PathVariable final int id) {
         LOGGER.info("Creating gallery object ... ");
@@ -48,6 +56,32 @@ public class HomeController {
 
         LOGGER.info("Returning images ... ");
         return gallery;
+    }*/
+
+    @HystrixCommand(fallbackMethod = "fallback")
+    @RequestMapping("/{id}")
+    public ResponseEntity<?> getGallery(@PathVariable final int id) {
+        LOGGER.info("Creating gallery object ... ");
+        // create gallery object
+        Gallery gallery = new Gallery();
+        gallery.setId(id);
+
+        // get list of available images
+//        @SuppressWarnings("unchecked")    // we'll throw an exception from image service to simulate a failure
+        List<Object> images = restTemplate.getForObject("http://image-service/images/", List.class);
+        gallery.setImages(images);
+
+        LOGGER.info("Returning images ... ");
+        ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, gallery);
+        return new ResponseEntity(res, HttpStatus.OK);
+    }
+    public ResponseEntity<?> fallback(int galleryId, Throwable hystrixCommand) {
+        LOGGER.info("fallback ... ");
+        List<Object> list = new ArrayList<>();
+        Gallery temp = new Gallery(503, "The service is unavailable");
+        list.add(temp);
+        ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, new Gallery(503, list));
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     // -------- Admin Area --------
@@ -59,12 +93,12 @@ public class HomeController {
     }
 
     // a fallback method to be called if failure happened
-    public Gallery fallback(int galleryId, Throwable hystrixCommand) {
+   /* public Gallery fallback(int galleryId, Throwable hystrixCommand) {
         LOGGER.info("fallback ... ");
         List<Object> list = new ArrayList<>();
         Gallery temp = new Gallery(503, "The service is unavailable");
         list.add(temp);
         return new Gallery(503, list);
-    }
+    }*/
 }
 
