@@ -1,33 +1,36 @@
 # Microservices with Spring Boot
 Attention version: Do not upgrade version
-Spring boot: 2.1.3.RELEASE
-Spring cloud: Greenwich.SR3 (higher Hoxton not support Zuul server)
+Spring boot: 2.3.12.RELEASE
+Spring cloud: Hoxton.SR12 (higher Hoxton not support Zuul 1)
+Spring admin: 2.3.1
 
 ## The series of servers:
 
-- ### 1/ Config server-8760 (Spring security, common class)
+- ### 1/ Config service-8760 (Spring: web, eureka-client, sleuth, config-client, aop & retry, actuator, admin-client ; optional: security, config-server)
   - Define all config for client, need user/pass to connect
   - Common dependency pom
   - Common class/model/helper(ResponseDto,...) can imported by other module over pom fil
   - JwtProvider to validate JWT (KeyStore)
-- ### 2/ [Eureka server-8761 (Discovery, Registration)](http://localhost:8761/)
+- ### 2/ [Eureka server-8761 (Discovery, Registration)](http://localhost:8761/) (Config service ignore eureka-client, eureka-server)
   - Discovery all service registry
-- ### 3/ Zuul server-8762 (API gateway, Spring security)
+- ### 3/ Zuul1 server-8762 (Config service, Spring security, Zuul, zuul-ratelimit, data-redis)
+  - API gateway
   - Routing
-  - Load balancing
-  - Spring security, filter each request and Validate token
+  - Load balancing by ribbon
+  - Rate limit
+  - Validate JWT
   - [Rate limit for anti ddos](https://github.com/marcosbarbero/spring-cloud-zuul-ratelimit)
     - Type: ORIGIN, USER, URL, URL_PATTERN, ROLE, HTTP_METHOD, HTTP_HEADER
-    - Repository: REDIS, JPA 
-- ### 4/ Auth service-8763 (Spring security, Generation and Validation user/request by JWT)
-  - Spring security, accept 2 url (getToken,refreshToken)
-  - Generate accessToken, refreshToken
-  - Connect DB for 3 table (User,Role,Privilege)
-- ### 5/ Board service-8764
-  - [Spring Admin server](http://localhost:8764/admin)
-  - [Hystrix dashboard](http://localhost:8764/hystrix/monitor?stream=http://localhost:8764)
-  - [Turbine stream](http://localhost:8764)
-    - Kafka stream, combine all hystrix stream into one
+    - Repository: REDIS, JPA
+- ### 4/ Board service-8763 (Config service ignore admin-client, admin-server, hystrix-dashboard, turbine-stream, stream-kafka)
+  - [Spring Admin server](http://localhost:8763/admin)
+  - [Hystrix dashboard](http://localhost:8763/hystrix/monitor?stream=http://localhost:8763)
+  - [Turbine stream](http://localhost:8763) Kafka stream, combine all hystrix stream into one
+  -
+- ### 5/ Auth service-8764 (Config service, Spring security)
+  - Accept 2 url: getToken, refreshToken
+  - Generate JWT
+  - Connect DB: User, Role, Privilege
     
 ## Required server:
 Kakfa: localhost:9092

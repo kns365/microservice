@@ -1,0 +1,32 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: gallery-service
+  config:
+    import: application.properties
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ${server.kafka.host}:${server.kafka.port}
+      bindings:
+        hystrixStreamOutput:
+          destination: turbineStreamTopic
+          group: turbine-stream-group
+          producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000

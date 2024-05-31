@@ -1,0 +1,32 @@
+server:
+  port: 8301
+spring:
+  application:
+    name: order-service
+  config:
+    import: application.properties
+  kafka:
+    producer:
+      bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topic:
+      name: order_topics
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ${server.kafka.host}:${server.kafka.port}
+      bindings:
+        hystrixStreamOutput:
+          destination: turbineStreamTopic
+          group: turbine-stream-group
+          producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz

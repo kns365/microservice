@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Only Server" type="CompoundRunConfigurationType">
+    <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="GatewayServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />
     <method v="2" />
   </configuration>
 </component>

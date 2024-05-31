@@ -1,14 +1,15 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Microservice" type="CompoundRunConfigurationType">
-    <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType"/>
-    <toRun name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="ImageServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
+
     <toRun name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="GalleryServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="ImageServiceApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="EmailServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="GalleryServiceApplication" type="SpringBootApplicationConfigurationType" />
     <toRun name="StockServiceApplication" type="SpringBootApplicationConfigurationType" />
     <method v="2" />
   </configuration>
