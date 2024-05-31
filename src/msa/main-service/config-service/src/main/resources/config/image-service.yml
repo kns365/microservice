@@ -1,0 +1,13 @@
+server:
+  port: 8201
+spring:
+  application:
+    name: image-service
+  config:
+    import: application.properties
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz

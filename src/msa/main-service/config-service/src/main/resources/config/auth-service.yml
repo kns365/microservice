@@ -1,0 +1,26 @@
+server:
+  port: 8764
+spring:
+  application:
+    name: auth-service
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: ${auth-service.db.url}
+    username: ${auth-service.db.username}
+    password: ${auth-service.db.password}
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+  config:
+    import: application.properties
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
