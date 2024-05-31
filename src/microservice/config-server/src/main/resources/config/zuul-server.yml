@@ -61,12 +61,20 @@ zuul:
           type:
             - origin
 # timeout
-  host:
-    connect-timeout-millis: 30000
-    socket-timeout-millis: 30000
+#  host:
+#    connect-timeout-millis: 5000
+#    socket-timeout-millis: 10000
+#    max-per-route-connections: 50
+#    max-total-connections: 200
 ribbon:
-  ConnectTimeout: 30000
-  ReadTimeout: 30000
+  ConnectTimeout: 1000
+  ReadTimeout: 10000
+#  MaxAutoRetries: 1
+#  MaxAutoRetriesNextServer: 1
+#  OkToRetryOnAllOperations: true
 redis:
   host: localhost
   port: 6379
+springdoc:
+  swagger-ui:
+    path: /swagger
