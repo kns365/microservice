@@ -95,7 +95,7 @@ public class JwtProvider {
                 .setExpiration(exp)
                 .signWith(getPrivateKey())
                 .compact();
-        return new JwtDto(token, "Bearer", DateHelper.getDateStr("yyyy-MM-dd HH:mm:ss", exp));
+        return new JwtDto(token, "Bearer", jwtExpirationInMillis.toString());
     }
 
     public Claims getClaims(String jwt) {

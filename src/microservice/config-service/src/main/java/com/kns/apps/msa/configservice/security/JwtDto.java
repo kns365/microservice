@@ -10,19 +10,20 @@ import lombok.NoArgsConstructor;
 public class JwtDto {
     private String accessToken;
     private String tokenType = "Bearer";
-    private String expiresAt;
+    private String expiresIn;
+//    private String expiresAt; //DateHelper.getDateStr("yyyy-MM-dd HH:mm:ss", exp)
     private String refreshToken;
 
-    public JwtDto(String accessToken, String tokenType, String expiresAt) {
+    public JwtDto(String accessToken, String tokenType, String expiresIn) {
         this.accessToken = accessToken;
         this.tokenType = tokenType;
-        this.expiresAt = expiresAt;
+        this.expiresIn = expiresIn;
     }
 
-    public JwtDto(JwtDto jwt, String refreshToken) {
+    public JwtDto(JwtDto jwt, String refreshToken, String expiresIn) {
         this.accessToken = jwt.getAccessToken();
         this.tokenType = jwt.getTokenType();
-        this.expiresAt = jwt.getExpiresAt();
+        this.expiresIn = expiresIn;
         this.refreshToken = refreshToken;
     }
 }

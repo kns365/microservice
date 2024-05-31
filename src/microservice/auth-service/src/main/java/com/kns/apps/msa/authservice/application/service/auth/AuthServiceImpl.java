@@ -34,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword()));
         JwtDto getToken = jwtProvider.generateToken(auth);
         RefreshToken refreshToken = generateRefreshToken(input.getUsername());
-        return new JwtDto(getToken, refreshToken.getRefreshToken());
+        return new JwtDto(getToken, refreshToken.getRefreshToken(), jwtProvider.getJwtExpirationInMillis().toString());
     }
 
     public JwtDto refreshToken(RefreshTokenInput input) throws Exception {
@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
         JwtDto getToken = jwtProvider.generateToken(auth);
-        return new JwtDto(getToken, input.getRefreshToken());
+        return new JwtDto(getToken, input.getRefreshToken(), jwtProvider.getJwtExpirationInMillis().toString());
     }
 
     private RefreshToken generateRefreshToken(String username) {

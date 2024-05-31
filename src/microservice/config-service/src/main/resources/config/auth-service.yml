@@ -5,9 +5,9 @@ spring:
     name: auth-service
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@10.148.108.12:1521/DEVPDB.prudential.com
-    username: utility
-    password: 123qwe
+    url: ${auth-service.db.url}
+    username: ${auth-service.db.username}
+    password: ${auth-service.db.password}
   jpa:
     generate-ddl: true
     hibernate:
