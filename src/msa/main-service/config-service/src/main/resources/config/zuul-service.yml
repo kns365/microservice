@@ -77,4 +77,12 @@ redis:
   port: ${server.redis.port}
 springdoc:
   swagger-ui:
-    path: /swagger
+    urls:
+      - name: zuul-service
+        url: /v3/api-docs
+      - name: gallery-service
+        url: /gallery/v3/api-docs
+      - name: image-service
+        url: /image/v3/api-docs
+      - name: order-service
+        url: /order/v3/api-docs
