@@ -4,6 +4,7 @@ import com.kns.apps.msa.imageservice.entity.Image;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,13 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
 @Slf4j
 public class ImageController {
     @Autowired
     private Environment env;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
         // This is useful for debugging
         // When having multiple instance of image service running at different ports.
@@ -25,7 +25,7 @@ public class ImageController {
         return "Hello from Image Service running at port: " + env.getProperty("local.server.port");
     }
 
-    @RequestMapping("/images")
+    @GetMapping("/images")
     public List<Image> getImages() throws InterruptedException {
         System.out.println("getImages " + env.getProperty("local.server.port"));
         List<Image> images = Arrays.asList(

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
 @Slf4j
 public class GalleryController {
     @Autowired
@@ -31,7 +31,7 @@ public class GalleryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GalleryController.class);
 
     @HystrixCommand(fallbackMethod = "fallbackHome")
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
         // This is useful for debugging
         // When having multiple instance of gallery service running at different ports.
@@ -74,7 +74,7 @@ public class GalleryController {
     // -------- Admin Area --------
     // This method should only be accessed by users with role of 'admin'
     // We'll add the logic of role based auth later
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String homeAdmin() {
         return "This is the admin area of Gallery service running at port: " + env.getProperty("local.server.port");
     }
@@ -85,7 +85,7 @@ public class GalleryController {
 
 
     @HystrixCommand(fallbackMethod = "fallback")
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getGallery(@PathVariable final int id) {
 //        LOGGER.info("Creating gallery object ... ");
         // create gallery object

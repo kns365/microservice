@@ -2,7 +2,7 @@ server:
   port: 8762
 spring:
   application:
-    name: zuul-server
+    name: zuul-service
   config:
     import: application.properties
   security:
@@ -40,6 +40,9 @@ zuul:
     gallery-service:
       path: /gallery/**
       service-id: gallery-service
+    image-service:
+      path: /image/**
+      service-id: image-service
     auth-service:
       path: /auth/**
       service-id: auth-service
