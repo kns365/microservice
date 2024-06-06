@@ -8,6 +8,10 @@ spring:
   boot:
     admin:
       context-path: /admin
+  security:
+    user:
+      name: ${account.board-service.username}
+      password: ${account.board-service.password}
   cloud:
     stream:
       kafka:
