@@ -1,4 +1,4 @@
-package com.kns.apps.msa.configservice.security;
+package com.kns.apps.msa.eurekaservice.web.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,25 +12,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .httpBasic().and()// Use Basic Authentication
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/actuator/**", "/eureka/**").permitAll()
                 .anyRequest().authenticated()
-
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .defaultSuccessUrl("/", true)
-//
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login")
-//                .invalidateHttpSession(true)
-//                .deleteCookies("JSESSIONID")
-
-//                .and()
-//                .rememberMe().tokenRepository(this.persistentTokenRepository())
-//                .tokenValiditySeconds(Math.toIntExact(jwtProvider().getJwtExpirationInMillis()) / 1000)
         ;
     }
 }

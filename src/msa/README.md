@@ -11,8 +11,10 @@ Spring admin: 2.3.1
   - Common dependency pom
   - Common class/model/helper(ResponseDto,...) can imported by other module over pom fil
   - JwtProvider to validate JWT (KeyStore)
+  - Secure frontend
 - ### 2/ [Eureka server-8761 (Discovery, Registration)](http://localhost:8761/) (Config service ignore eureka-client, eureka-server)
   - Discovery all service registry
+  - Secure frontend
 - ### 3/ Zuul1 server-8762 (Config service, Spring security, Zuul, zuul-ratelimit, data-redis, springdoc)
   - API gateway
   - Routing
@@ -27,7 +29,7 @@ Spring admin: 2.3.1
   - [Spring Admin server](http://localhost:8763/admin)
   - [Hystrix dashboard](http://localhost:8763/hystrix/monitor?stream=http://localhost:8763)
   - [Turbine stream](http://localhost:8763) Kafka stream, combine all hystrix stream into one
-  -
+  - Secure frontend
 - ### 5/ Auth service-8764 (Config service, Spring security)
   - Accept 2 url: getToken, refreshToken
   - Generate JWT

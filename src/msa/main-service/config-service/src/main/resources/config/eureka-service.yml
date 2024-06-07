@@ -2,6 +2,8 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+  server:
+    enable-self-preservation: false
 server:
   port: 8761
 spring:
@@ -9,6 +11,10 @@ spring:
     name: eureka-service
   config:
     import: application.properties
+  security:
+    user:
+      name: ${account.eureka-service.username}
+      password: ${account.eureka-service.password}
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
