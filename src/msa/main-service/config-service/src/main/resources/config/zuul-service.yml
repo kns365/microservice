@@ -49,6 +49,9 @@ zuul:
     order-service:
       path: /order/**
       service-id: order-service
+    portalapi-service:
+      path: /portalapi/**
+      service-id: portalapi-service
   ratelimit:
     enabled: true
     repository: REDIS # JPA
@@ -89,3 +92,5 @@ springdoc:
         url: /image/v3/api-docs
       - name: order-service
         url: /order/v3/api-docs
+      - name: portalapi-service
+        url: /portalapi/v3/api-docs

@@ -1,0 +1,51 @@
+#server:
+#  port: 4320
+#spring:
+#  application:
+#    name: portalapi
+#  datasource:
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: ${db.url}
+#    username: ${db.username}
+#    password: ${db.password}
+#  jpa:
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#  servlet:
+#    multipart:
+#      enabled: true
+#      file-size-threshold: 2KB
+#      max-file-size: 2MB
+#      max-request-size: 2MB
+#  sql:
+#    init:
+#      mode: never
+#      data-locations: classpath:seed/data.sql
+#springdoc:
+#  swagger-ui:
+#    path: /swagger
+#logging:
+#  file:
+#    name: ${catalina.base}/logs/portalapi/portalapi-app.log
+#  level:
+#    root: info
+#  logback:
+#    rollingpolicy:
+#      file-name-pattern: ${catalina.base}/logs/portalapi/portalapi-app.%d{yyyy-MM-dd}.%i.log.gz
+#      max-file-size: 10MB
+#      total-size-cap: 1000MB
+#      max-history: 90
+#      clean-history-on-start: false
+#jwt:
+#  keystore:
+#    secret: 123qwe
+#    alias: portalkeystore
+#  expiration:
+#    time: 28800000
+#    time-refresh: 57600000
+#jasypt:
+#  encryptor:
+#    algorithm: PBEWithMD5AndDES
+#    password: mySecretKeys
+#

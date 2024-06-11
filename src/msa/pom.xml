@@ -24,6 +24,8 @@
 		<module>app-service/order-service</module>
 		<module>app-service/stock-service</module>
 		<module>app-service/email-service</module>
+
+		<module>web-service/portalapi</module>
 	</modules>
 
 </project>
