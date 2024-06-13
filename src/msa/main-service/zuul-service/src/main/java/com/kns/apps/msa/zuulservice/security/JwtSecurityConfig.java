@@ -24,7 +24,10 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()//ensure use JwtWebMvcConfig
                 .csrf().disable()
+                .logout().disable()
+                .formLogin().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -39,7 +42,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(jwtProvider.getUri()).permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                .antMatchers("/gallery/v3/api-docs/**", "/order/v3/api-docs/**", "/image/v3/api-docs/**").permitAll()
+                .antMatchers("/gallery/v3/api-docs/**", "/order/v3/api-docs/**", "/image/v3/api-docs/**", "/portalapi/v3/api-docs/**").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
                 .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
                 // Any other request must be authenticated

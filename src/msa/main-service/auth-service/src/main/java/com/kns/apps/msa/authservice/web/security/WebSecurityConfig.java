@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// don't create session , session will be auto valid every request after first login
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/getToken", "/refreshToken").permitAll()
+                .antMatchers(HttpMethod.GET, "/clearToken").permitAll()
                 .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
         ;

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,19 @@ public class AuthController {
         } catch (Exception e) {
             log.error("Error refreshToken: {}", e.getMessage());
             res = new ResponseDto(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), null, null);
+        }
+        return new ResponseEntity(res, HttpStatus.OK);
+    }
+
+    @GetMapping("/clearToken")
+    public ResponseEntity<ResponseDto> clearToken(Authentication authentication) {
+        ResponseDto res = new ResponseDto();
+        try {
+            authService.clearToken(authentication);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
+        } catch (Exception e) {
+            log.error("Error clearToken: {}", e.getMessage());
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null, null);
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }

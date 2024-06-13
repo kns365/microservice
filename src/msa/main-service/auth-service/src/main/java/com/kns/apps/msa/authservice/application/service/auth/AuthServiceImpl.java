@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,19 @@ public class AuthServiceImpl implements AuthService {
 
     private void deleteAllRefreshTokenByUsername(String username) {
         refreshTokenRepository.deleteAllByUsername(username);
+    }
+
+    public void clearToken(Authentication authentication) {
+        SecurityContextHolder.clearContext();
+        try {
+            if (authentication != null) {
+                log.info("Logout: " + authentication.getName());
+                deleteAllRefreshTokenByUsername(authentication.getName());
+            } else {
+                log.info("Authentication null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

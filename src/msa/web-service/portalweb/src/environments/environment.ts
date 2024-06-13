@@ -11,8 +11,7 @@
 export const environment = {
   production: false,
   // API_ENDPOINT: 'http://localhost:4320',
+  SERVER_URL: 'http://localhost:8762', //microservice
   API_ENDPOINT: 'http://localhost:8762/portalapi', //microservice
-  API_AUTH_ENDPOINT: 'http://localhost:8762', //microservice
   connectWebSocket: false,
-  // API_ENDPOINT: 'http://10.148.50.12:8098/cqpapi', //UAT
 };

@@ -52,6 +52,7 @@ zuul:
     portalapi-service:
       path: /portalapi/**
       service-id: portalapi-service
+      sensitive-headers: Cookie,Set-Cookie #Exclude authorization from sensitive headers
   ratelimit:
     enabled: true
     repository: REDIS # JPA

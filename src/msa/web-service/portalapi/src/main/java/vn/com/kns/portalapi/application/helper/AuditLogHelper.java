@@ -39,7 +39,7 @@ public class AuditLogHelper {
             AuditLogInputDto logClientInfo = getClientInfo(request, response, exception);
             AuditLogInputDto auditLogInput = new AuditLogInputDto(logClientInfo, execDurStart);
             log.debug("{}", auditLogInput);
-            if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat"}).anyMatch(auditLogInput.getPath()::contains)) {
+            if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"}).anyMatch(auditLogInput.getPath()::contains)) {
                 auditLogService.createOrEdit(auditLogInput);
             }
         } catch (Exception e) {

@@ -119,7 +119,8 @@ export class RoleProvider extends NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          return token.isValid() ? token['payload'].roles : 'anonymous';
+          // return token.isValid() ? token['payload'].roles : 'anonymous';
+          return token.isValid() ? token['payload'].authorities : 'anonymous';
         }),
       );
   }
@@ -137,7 +138,7 @@ export const NB_CORE_PROVIDERS = [
       // }),
       NbPasswordAuthStrategy.setup({
         name: 'email',
-        baseEndpoint: environment.API_AUTH_ENDPOINT,
+        baseEndpoint: environment.SERVER_URL,
         login: {
           endpoint: '/auth/getToken',
           method: "post",
@@ -148,7 +149,7 @@ export const NB_CORE_PROVIDERS = [
           requireValidToken: true,
         },
         logout: {
-          endpoint: '/auth/logout',
+          endpoint: '/auth/clearToken',
           method: 'get',
           redirect: {
             success: '/auth/login',
