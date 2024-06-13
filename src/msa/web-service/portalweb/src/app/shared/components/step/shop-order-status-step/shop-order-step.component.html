@@ -1,0 +1,43 @@
+<nb-card [nbSpinner]="loading" [hidden]="hide">
+  <nb-card-body>
+    <nb-stepper (stepChange)="stepChange($event)" [(selectedIndex)]="stepIndex" orientation="horizontal" disableStepNavigation="true">
+      <nb-step *ngFor="let step of steps; let index = index; let first = first ;let last = last;" [label]="step.label" [completed]="stepIndex > index ? true : false">
+        <div *ngIf="!last">
+          <button *nbIsGranted="['view', step.role]" nbStepperNext class="btn btn-outline-info" [nbSpinner]="loading" [disabled]="loading">
+            <i class="fa fa-check-circle" aria-hidden="true"></i> {{step.label}} to Next step
+          </button>
+        </div>
+        <div *ngIf="last">
+          <h3 *ngIf="last">Completed!</h3>
+        </div>
+<!--        <button *nbIsGranted="['view', step.role]" nbStepperNext class="btn btn-outline-info" [nbSpinner]="loading" [disabled]="loading">-->
+<!--          <i class="fa fa-check-circle" aria-hidden="true"></i> {{step.label}} to Next step-->
+<!--        </button>-->
+      </nb-step>
+<!--      <nb-step [hidden]="true" *nbIsGranted="['view', steps[5].role]" label="IMPORTED" [nbSpinner]="loading" [disabled]="loading">-->
+<!--        <div class="step-container">-->
+<!--          <h3>Completed!</h3>-->
+<!--        </div>-->
+<!--      </nb-step>-->
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+
+<!--<div class="steppers-container row" [hidden]="hide">-->
+<!--  <div class="col-md-12">-->
+<!--    <nb-card [nbSpinner]="loading">-->
+<!--      <nb-card-body>-->
+<!--        <nb-stepper (stepChange)="stepChange($event)" [(selectedIndex)]="stepIndex" orientation="horizontal" disableStepNavigation="true">-->
+<!--          <nb-step *ngFor="let step of steps; let index = index; let first = first ;let last = last;"-->
+<!--                   [label]="step.label" [completed]="stepIndex > index ? true : false">-->
+<!--            <div *ngIf="!last">-->
+<!--              <button *nbIsGranted="['view', step.role]" nbButton nbStepperNext>next</button>-->
+<!--            </div>-->
+<!--            <h3 *ngIf="last">Completed!</h3>-->
+<!--          </nb-step>-->
+<!--        </nb-stepper>-->
+<!--      </nb-card-body>-->
+<!--    </nb-card>-->
+<!--  </div>-->
+<!--</div>-->

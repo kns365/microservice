@@ -1,0 +1,90 @@
+<nb-card [nbSpinner]="loading">
+  <nb-card-header>Audit Log {{create.id}}
+    <button class="btn btn-xs btn-light shadow-none border-0 float-right" title="Close modal" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nb-card-header>
+  <nb-card-body>
+    <form autocomplete="off" #createModal="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="createdBy" class="label">Create by</label>
+            <input type="text" value="{{create.createdBy}}" nbInput fullWidth id="createdBy">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="clientName" class="label">Client name</label>
+            <input type="text" value="{{create.clientName}}" nbInput fullWidth id="clientName">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="clientIpAddress" class="label">Client ip address</label>
+            <input type="text" value="{{create.clientIpAddress}}" nbInput fullWidth id="clientIpAddress">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="browserInfo" class="label">Browser info</label>
+            <input type="text" value="{{create.browserInfo}}" nbInput fullWidth id="browserInfo">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="path" class="label">Path</label>
+            <input type="text" value="{{create.path}}" nbInput fullWidth id="path">
+          </div>
+        </div>
+        <div class="col-md-3 form-inline">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="httpStatus" class="label">Http status</label>
+                <input type="text" value="{{create.httpStatus}}" nbInput fullWidth id="httpStatus">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="execDuration" class="label">Exec dur(ms)</label>
+                <input type="text" value="{{create.execDuration}}" nbInput fullWidth id="execDuration">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="createdDate" class="label">Created date</label>
+            <input type="text" value="{{create.createdDate | date:'dd/MM/yyyy HH:mm:ss SSS'}}" nbInput fullWidth id="createdDate">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="input" class="label">Input</label>
+            <textarea nbInput fullWidth id="input" rows="6">{{create.input}}</textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="output" class="label">Output</label>
+            <textarea nbInput fullWidth id="output" rows="6">{{create.output}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="exception" class="label">Exception</label>
+            <textarea nbInput fullWidth id="exception" rows="6">{{create.exception}}</textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-secondary" (click)="cancel()" title="Close modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+  </nb-card-footer>
+</nb-card>

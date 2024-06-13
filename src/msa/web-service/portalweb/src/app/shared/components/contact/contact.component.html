@@ -1,0 +1,46 @@
+<nb-accordion multi>
+  <nb-accordion-item [expanded]="contacts.length > 0">
+    <nb-accordion-item-header>
+      <button class="btn btn-outline-primary" (click)="addContact($event)" title="Add new"><i class="fa fa-plus" aria-hidden="true"></i></button> Contacts
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <div class="row" *ngFor="let contact of contacts; let index = index">
+        <div class="col-md-1">
+          <ngx-alias-select [(ngModel)]="contact.alias" [selectedAliasId]="contact.alias" ngDefaultControl id="alias{{index}}" name="alias{{index}}"></ngx-alias-select>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="name{{index}}" class="label">Name</label>
+            <input nbInput type="text" [(ngModel)]="contact.name" id="name{{index}}" name="name{{index}}" placeholder="Name" fullWidth required minlength="3">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="email{{index}}" class="label">Email</label>
+            <input nbInput type="email" [(ngModel)]="contact.email" id="email{{index}}" name="email{{index}}" placeholder="Email" fullWidth>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <ngx-contact-type-select [(ngModel)]="contact.contactType" [selectedContactTypeId]="contact.contactType" ngDefaultControl id="contactType{{index}}" name="contactType{{index}}"></ngx-contact-type-select>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="title{{index}}" class="label">Title</label>
+            <input nbInput type="text" [(ngModel)]="contact.title" id="title{{index}}" name="title{{index}}" placeholder="Title" fullWidth>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="phone{{index}}" class="label">Phone</label>
+            <input nbInput type="text" [(ngModel)]="contact.phone" id="phone{{index}}" name="phone{{index}}" placeholder="Phone" fullWidth>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <br>
+          <button class="btn btn-outline-danger btn-delete" title="Delete contact" (click)="deleteContact(index,contact)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>
+

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
+// themes - our custom or/and out of the box themes
+@import 'themes';
+
+// framework component themes (styles tied to theme variables)
+@import '@nebular/theme/styles/globals';
+@import '@nebular/auth/styles/globals';
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/grid';
+
+// loading progress bar theme
+@import './pace.theme';
+
+@import './layout';
+@import './overrides';
+
+// install the framework and custom global styles
+@include nb-install() {
+
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  // loading progress bar
+  @include ngx-pace-theme();
+
+  @include nb-overrides();
+}
+
+;
+
+//-- add btn-xs
+.btn-group-xs > .btn, .btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+
+//datatable, filter input header
+table tfoot {
+  display: table-header-group;
+}
+
+table th input {
+  width: 100% !important;
+  box-sizing: border-box;
+  display: block !important;
+  margin: 0;
+  border: 0 !important;
+}
+
+table th div select {
+  width: 100% !important;
+  box-sizing: border-box;
+  display: block !important;
+  margin: 0;
+  border: 0 !important;
+}
+
+table .form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+table .btn-group .btn:first-child {
+  margin-right: 0.5rem;
+}
+
+table.dataTable tbody td.wrap {
+  word-break: break-word;
+  word-break: break-all;
+  white-space: normal;
+}
+
+
+//modal, input validate, button footer
+nb-card-footer .btn {
+  float: right;
+  margin-right: 1rem;
+  width: 6rem;
+}
+
+.form-group nb-icon {
+  position: absolute;
+  right: 1rem;
+}
+
+//
+

@@ -1,0 +1,7 @@
+<div [nbSpinner]="loading">
+  <label for="shopOrderStepSelect" class="label" [hidden]="hideLabel">ShopOrderStep ({{items.length}})</label>
+  <select class="form-select" placeholder="step" [(ngModel)]="selectedShopOrderStepId" (ngModelChange)="onShopOrderStepChange()" id="shopOrderStepSelect">
+    <option value="-1" selected>ALL STEP</option>
+    <option *ngFor="let item of items | enumToArray" [value]="item.key">{{item.value}}</option>
+  </select>
+</div>

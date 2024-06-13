@@ -1,0 +1,9 @@
+<div [nbSpinner]="loading">
+  <label for="district" class="label" [hidden]="hideLabel">District ({{districts.length}})</label>
+  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideAdd" (click)="openModal(null)" title="Create new district">
+    <i class="fa fa-plus" aria-hidden="true"></i></button>
+  <nb-select [disabled]="disabled" [(selected)]="selectedDistrict.id" id="district" placeholder="Select district" fullWidth>
+    <nb-option *ngFor="let district of districts" [value]="district.id" (selectionChange)="onSelectedDistrictChange(district)">{{ district.name}}</nb-option>
+  </nb-select>
+  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
+</div>

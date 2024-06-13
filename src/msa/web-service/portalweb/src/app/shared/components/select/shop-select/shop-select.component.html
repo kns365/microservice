@@ -1,0 +1,10 @@
+<div [nbSpinner]="loading">
+  <label for="shop" class="label" [hidden]="hideLabel">Shop ({{shops.length}})</label>
+  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideEdit" (click)="openDetailNewTab(null)" title="Create new shop">
+    <i class="fa fa-plus" aria-hidden="true"></i></button>
+  <nb-select *ngIf="!hideEdit" [disabled]="disabled" [(selected)]="selectedShop.id" id="shop" placeholder="Select shop" fullWidth>
+    <nb-option *ngFor="let shop of shops" [value]="shop.id" (selectionChange)="onSelectedShopChange(shop)">{{ shop.code}}-{{ shop.name}}</nb-option>
+  </nb-select>
+  <input type="text" *ngIf="hideEdit" [readOnly]="true" value="{{selectedShop.code}}-{{selectedShop.name}}" nbInput fullWidth name="shop" placeholder="Shop name">
+  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
+</div>
