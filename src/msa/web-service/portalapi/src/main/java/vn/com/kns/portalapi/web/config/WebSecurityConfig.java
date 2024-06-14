@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .exceptionHandling().accessDeniedHandler(forbiddenHandler()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// don't create session , session will be auto valid every request after first login
                 .authorizeRequests()
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/", "/auth/**").permitAll()
                 .antMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/ws/**", "/testchat/**").permitAll()

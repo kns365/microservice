@@ -1,5 +1,7 @@
 package vn.com.kns.portalapi.web.controller.app;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import vn.com.kns.portalapi.core.model.ResponseDto;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,6 +43,7 @@ public class UserController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
+    @HystrixCommand(defaultFallback = "defaultFallback")
     @PreAuthorize(HasPrivilegeConst.USER)
     @PostMapping("/getAllUserPaging")
     public ResponseEntity<ResponseDto> getAllUserPaging(@RequestBody DataTablesInput input) {
@@ -53,6 +57,12 @@ public class UserController {
             response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
         }
         return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    public ResponseEntity<ResponseDto> defaultFallback() {
+        log.info("fallbackGetAllUserPaging ... ");
+        com.kns.apps.msa.configservice.core.model.ResponseDto res = new com.kns.apps.msa.configservice.core.model.ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.USER)

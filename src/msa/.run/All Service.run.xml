@@ -1,24 +1,21 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Service" type="CompoundRunConfigurationType">
     <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="ZuulServerApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
 
-    <toRun name="EmailServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="ImageServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="GalleryServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="StockServiceApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="PortalapiApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="Angular CLI Server" type="js.build_tools.npm" />
-    <method v="2" />
+  <toRun name="EmailServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="ImageServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="GalleryServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="StockServiceApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="PortalapiApplication" type="SpringBootApplicationConfigurationType" />
+  <toRun name="Angular CLI Server" type="js.build_tools.npm" />
+  <method v="2" />
   </configuration>
-</component>
-
-
-<!--<component name="ProjectRunConfigurationManager">
+</component><!--<component name="ProjectRunConfigurationManager">
 <configuration default="false" name="All Service" type="CompoundRunConfigurationType">
   <toRun name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" />
   <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />

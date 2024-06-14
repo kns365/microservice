@@ -30,46 +30,14 @@ public class GalleryController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GalleryController.class);
 
-    @HystrixCommand(fallbackMethod = "fallbackHome")
     @GetMapping("/")
+    @HystrixCommand(defaultFallback = "defaultFallback")
     public String home() {
         // This is useful for debugging
         // When having multiple instance of gallery service running at different ports.
         // We load balance among them, and display which instance received the request.
         return "Hello from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
-
-    public String fallbackHome() {
-        return "The service is unavailable";
-    }
-
-    /*@HystrixCommand(fallbackMethod = "fallback")
-    @RequestMapping("/{id}")
-    public Gallery getGallery(@PathVariable final int id) {
-        LOGGER.info("Creating gallery object ... ");
-        // create gallery object
-        Gallery gallery = new Gallery();
-        gallery.setId(id);
-
-        // get list of available images
-//        @SuppressWarnings("unchecked")    // we'll throw an exception from image service to simulate a failure
-        List<Object> images = restTemplate.getForObject("http://image-service/images/", List.class);
-        gallery.setImages(images);
-
-        LOGGER.info("Returning images ... ");
-        return gallery;
-    }
-
-    // a fallback method to be called if failure happened
-    public Gallery fallback(int galleryId, Throwable hystrixCommand) {
-        LOGGER.info("fallback ... ");
-        List<Object> list = new ArrayList<>();
-        Gallery temp = new Gallery(503, "The service is unavailable");
-        list.add(temp);
-        return new Gallery(503, list);
-    }*/
-
-
 
     // -------- Admin Area --------
     // This method should only be accessed by users with role of 'admin'
@@ -79,15 +47,10 @@ public class GalleryController {
         return "This is the admin area of Gallery service running at port: " + env.getProperty("local.server.port");
     }
 
-
-
-
-
-
-    @HystrixCommand(fallbackMethod = "fallback")
     @GetMapping("/{id}")
+    @HystrixCommand(defaultFallback = "defaultFallback")
     public ResponseEntity<?> getGallery(@PathVariable final int id) {
-//        LOGGER.info("Creating gallery object ... ");
+        log.info("Creating gallery object ... ");
         // create gallery object
         Gallery gallery = new Gallery();
         gallery.setId(id);
@@ -97,17 +60,14 @@ public class GalleryController {
         List<Object> images = restTemplate.getForObject("http://image-service/images/", List.class);
         gallery.setImages(images);
 
-//        LOGGER.info("Returning images ... ");
         log.info("Returning images ... ");
         ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, gallery);
         return new ResponseEntity(res, HttpStatus.OK);
     }
-    public ResponseEntity<?> fallback(int galleryId, Throwable hystrixCommand) {
-        log.info("fallback ... ");
-        List<Object> list = new ArrayList<>();
-        Gallery temp = new Gallery(503, "The service is unavailable");
-        list.add(temp);
-        ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, new Gallery(503, list));
+
+    public ResponseEntity<?> defaultFallback() {
+        log.info("defaultFallback ... ");
+        ResponseDto res = new ResponseDto(HttpStatus.SERVICE_UNAVAILABLE.value(), HttpStatus.SERVICE_UNAVAILABLE.name(), null, null);
         return new ResponseEntity(res, HttpStatus.OK);
     }
 }

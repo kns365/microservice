@@ -6,7 +6,7 @@ Spring admin: 2.3.1
 
 ## The series of servers:
 
-- ### 1/ Config service-8760 (Spring: web, eureka-client, sleuth, config-client, aop & retry, actuator, admin-client ; optional: Security, config-server)
+- ### 1/ Config service-8760 (Spring: web, eureka-client, sleuth, config-client, aop & retry, actuator, admin-client, hystrix ; optional: Security, config-server)
   - Define all config for client, need user/pass to connect
   - Common dependency pom
   - Common class/model/helper(ResponseDto,...) can imported by other module over pom fil
@@ -44,6 +44,7 @@ Check swagger gallery, show ra nhiều url không đúng
 
 ## The series of services:
 Sleuth to tracking transaction log
+Spring AOP: add HystrixCommand for all rest controller (not working)
 
 - ### 1/ Gallery service 1-8101
 - ### 2/ Gallery service 2-8102
