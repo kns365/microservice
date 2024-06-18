@@ -1,9 +1,0 @@
-<div [nbSpinner]="loading">
-  <label for="province" class="label" [hidden]="hideLabel">Province ({{provinces.length}})</label>
-  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideAdd" (click)="openModal(null)" title="Create new province">
-    <i class="fa fa-plus" aria-hidden="true"></i></button>
-  <nb-select [disabled]="disabled" [(selected)]="selectedProvince.id" id="province" placeholder="Select province" fullWidth>
-    <nb-option *ngFor="let province of provinces" [value]="province.id" (selectionChange)="onSelectedProvinceChange(province)">{{ province.name}}</nb-option>
-  </nb-select>
-  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
-</div>

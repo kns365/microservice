@@ -1,9 +1,0 @@
-<div [nbSpinner]="loading">
-  <label for="country" class="label" [hidden]="hideLabel">Country</label>
-  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideAdd" (click)="openModal(null)" title="Create new country">
-    <i class="fa fa-plus" aria-hidden="true"></i></button>
-  <nb-select [disabled]="disabled" [(selected)]="selectedCountry.id" id="country" placeholder="Select country" fullWidth>
-    <nb-option *ngFor="let country of countries" [value]="country.id" (selectionChange)="onSelectedCountryChange(country)">{{ country.code}}-{{ country.name}}</nb-option>
-  </nb-select>
-  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
-</div>

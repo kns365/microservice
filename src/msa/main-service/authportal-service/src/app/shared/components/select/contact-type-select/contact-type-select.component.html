@@ -1,7 +1,0 @@
-<div [nbSpinner]="loading">
-  <label for="contactType" class="label" [hidden]="hideLabel">Contact type ({{items.length}})</label>
-  <nb-select placeholder="Select contactType" [(ngModel)]="selectedContactTypeId" (ngModelChange)="onContactTypeChange($event)" id="contactType" fullWidth>
-    <nb-option *ngFor="let item of items" [value]="item">{{ item}}</nb-option>
-  </nb-select>
-</div>
-
