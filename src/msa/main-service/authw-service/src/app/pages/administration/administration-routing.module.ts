@@ -16,7 +16,7 @@ const routes: Routes = [{
       component: UserComponent,
       canActivate: [AuthGuard],
       data: {
-        hasRoles: [PrivilegeConst.USER]
+        hasRoles: [PrivilegeConst.USER],
       },
     },
     {
@@ -24,7 +24,7 @@ const routes: Routes = [{
       component: RoleComponent,
       canActivate: [AuthGuard],
       data: {
-        hasRoles: [PrivilegeConst.ROLE]
+        hasRoles: [PrivilegeConst.ROLE],
       },
     },
     {
@@ -32,7 +32,7 @@ const routes: Routes = [{
       component: PrivilegeComponent,
       canActivate: [AuthGuard],
       data: {
-        hasRoles: [PrivilegeConst.PRIVILEGE]
+        hasRoles: [PrivilegeConst.PRIVILEGE],
       },
     },
   ],
@@ -40,7 +40,7 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AdministrationRoutingModule {
 }

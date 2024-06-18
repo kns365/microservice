@@ -13,7 +13,7 @@ import {ResponseDto} from '../../../../shared/models/response-dto';
 @Component({
   selector: 'ngx-user-modal',
   templateUrl: './user-modal.component.html',
-  styleUrls: ['./user-modal.component.scss']
+  styleUrls: ['./user-modal.component.scss'],
 })
 
 export class UserModalComponent implements OnInit {
@@ -28,7 +28,7 @@ export class UserModalComponent implements OnInit {
   constructor(protected dialogRef: NbDialogRef<UserModalComponent>
     , private roleService: RoleService
     , private userService: UserService
-    , private toastrService: NbToastrService
+    , private toastrService: NbToastrService,
   ) {
   }
 
@@ -57,9 +57,9 @@ export class UserModalComponent implements OnInit {
         },
         complete: () => {
           this.loading = false;
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
   getAllRole(): void {
@@ -80,14 +80,14 @@ export class UserModalComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-      }
-    })
+      },
+    });
   }
 
   setInitialRolesStatus(): void {
     _.map(this.roles, item => {
       this.checkedRolesMap[item.name] = this.isRoleChecked(
-        item.name
+        item.name,
       );
     });
   }
@@ -124,7 +124,7 @@ export class UserModalComponent implements OnInit {
 
   save(user: UserDto) {
     this.loading = true;
-    user.rolesString = this.getCheckedRoles();// ['ROLE_USER'];
+    user.rolesString = this.getCheckedRoles(); // ['ROLE_USER'];
     console.error('save user', user);
     this.userService.createOrEditUser(user).subscribe({
         next: (res: ResponseDto) => {
@@ -142,9 +142,9 @@ export class UserModalComponent implements OnInit {
         complete: () => {
           this.loading = false;
           this.dialogRef.close({event: 'save'});
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
 

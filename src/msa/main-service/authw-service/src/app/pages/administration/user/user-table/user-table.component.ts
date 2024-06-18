@@ -23,10 +23,6 @@ export class UserTableComponent implements OnInit, AfterViewInit {
   @ViewChild(DataTableDirective, {static: false})
   dtEle: DataTableDirective;
   dtOptions: DataTables.Settings = {};
-  rangePickerDate = {
-    start: moment().add(-365, 'days'),
-    end: moment(),
-  };
 
   constructor(private userService: UserService
     , private dialogService: NbDialogService
@@ -43,6 +39,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
     this.dtEle.dtInstance.then((dtInstance: DataTables.Api) => {
       dtInstance.columns().every(function () {
         const that = this;
+        // tslint:disable-next-line:ban
         $('input', this.footer()).on('keyup change', function (e) {
           if (e.keyCode === 13) {
             if (that.search() !== this['value']) {
@@ -62,12 +59,6 @@ export class UserTableComponent implements OnInit, AfterViewInit {
       serverSide: true,
       order: [[1, 'desc']],
       ajax: (dataTablesParameters: any, callback) => {
-        if (this.rangePickerDate) {
-          dataTablesParameters.filter = {
-            fromDate: this.rangePickerDate ? moment(this.rangePickerDate.start).format('YYYYMMDD') : null,
-            toDate: this.rangePickerDate ? moment(this.rangePickerDate.end).format('YYYYMMDD') : null,
-          };
-        }
         this.userService.getAllUserPaging(dataTablesParameters)
           .subscribe({
             next: (res: ResponseDto) => {
@@ -117,22 +108,16 @@ export class UserTableComponent implements OnInit, AfterViewInit {
           data: 'rolesString',
           orderable: false,
         },
-        {
-          title: 'Created date',
-          data: 'createdDate',
-          render: function (data, type, row, meta) {
-            const val = data ? moment(data).format('DD/MM/YYYY') : '';
-            return val;
-          },
-          orderable: false,
-        },
       ],
       rowCallback: (row: Node, data: any[] | Object, index: number) => {
         const self = this;
+        // tslint:disable-next-line:ban
         $('td', row).off('click');
+        // tslint:disable-next-line:ban
         $('td .btn-edit', row).on('click', () => {
           self.openModal(data['id']);
         });
+        // tslint:disable-next-line:ban
         $('td .btn-delete', row).on('click', () => {
           self.delete(<UserDto>data);
         });

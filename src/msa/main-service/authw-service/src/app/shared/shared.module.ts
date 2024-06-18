@@ -16,7 +16,7 @@ import {
   NbSelectModule,
   NbSpinnerModule,
   NbStepperModule,
-  NbTooltipModule
+  NbTooltipModule,
 } from '@nebular/theme';
 import {FormatNumberDirective} from './directives/format-number.directive';
 import {NgxBarcode6Module} from 'ngx-barcode6';
@@ -25,11 +25,11 @@ import {EnumToArrayPipe} from './pipes/enum-to-array-pipe';
 
 const PIPES = [
   // LocalizePipe
-  EnumToArrayPipe
+  EnumToArrayPipe,
 ];
 
 const DIRECTIVES = [
-  FormatNumberDirective
+  FormatNumberDirective,
 ];
 
 const COMPONENTS = [
@@ -56,7 +56,7 @@ const MODULES = [
   NgxBarcode6Module,
   NbStepperModule,
   ReactiveFormsModule,
-  NbSecurityModule
+  NbSecurityModule,
 ];
 
 @NgModule({
@@ -66,14 +66,14 @@ const MODULES = [
     ...PIPES,
   ],
   imports: [
-    ...MODULES
+    ...MODULES,
   ],
   exports: [
     ...MODULES,
     ...COMPONENTS,
     ...DIRECTIVES,
     ...PIPES,
-  ]
+  ],
 })
 export class SharedModule {
 }

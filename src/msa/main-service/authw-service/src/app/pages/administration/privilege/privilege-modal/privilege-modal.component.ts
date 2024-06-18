@@ -12,7 +12,7 @@ import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
 @Component({
   selector: 'ngx-privilege-modal',
   templateUrl: './privilege-modal.component.html',
-  styleUrls: ['./privilege-modal.component.scss']
+  styleUrls: ['./privilege-modal.component.scss'],
 })
 
 export class PrivilegeModalComponent implements OnInit {
@@ -27,7 +27,7 @@ export class PrivilegeModalComponent implements OnInit {
   constructor(protected dialogRef: NbDialogRef<PrivilegeModalComponent>
     , private roleService: RoleService
     , private privilegeService: PrivilegeService
-    , private toastrService: NbToastrService
+    , private toastrService: NbToastrService,
   ) {
   }
 
@@ -57,9 +57,9 @@ export class PrivilegeModalComponent implements OnInit {
         },
         complete: () => {
           this.loading = false;
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
   getAllRole(): void {
@@ -80,14 +80,14 @@ export class PrivilegeModalComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-      }
-    })
+      },
+    });
   }
 
   setInitialRolesStatus(): void {
     _.map(this.roles, item => {
       this.checkedRolesMap[item.name] = this.isRoleChecked(
-        item.name
+        item.name,
       );
     });
   }
@@ -124,7 +124,7 @@ export class PrivilegeModalComponent implements OnInit {
 
   save(privilege: PrivilegeDto) {
     this.loading = true;
-    privilege.privilegesString = this.getCheckedRoles();// ['ROLE_USER'];
+    privilege.privilegesString = this.getCheckedRoles(); // ['ROLE_USER'];
     console.error('save privilege', privilege);
     this.privilegeService.createOrEditPrivilege(privilege).subscribe({
         next: (res: ResponseDto) => {
@@ -132,7 +132,7 @@ export class PrivilegeModalComponent implements OnInit {
             this.toastrService.success('Saved successfully', PrivilegeConst.PRIVILEGE);
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.PRIVILEGE);
-            console.log(res);
+            console.error(res);
           }
         },
         error: (err: any) => {
@@ -142,9 +142,9 @@ export class PrivilegeModalComponent implements OnInit {
         complete: () => {
           this.loading = false;
           this.dialogRef.close({event: 'save'});
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
 

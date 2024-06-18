@@ -7,14 +7,14 @@ export class AppConsts {
     static localeMappings: any = [];
 
     static readonly userManagement = {
-        defaultAdminUserName: 'admin'
+        defaultAdminUserName: 'admin',
     };
 
     static readonly localization = {
-        defaultLocalizationSourceName: 'demoAngularAsp'
+        defaultLocalizationSourceName: 'demoAngularAsp',
     };
 
     static readonly authorization = {
-        encryptedAuthTokenName: 'enc_auth_token'
+        encryptedAuthTokenName: 'enc_auth_token',
     };
 }

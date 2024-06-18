@@ -26,12 +26,12 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
   ],
   imports: [
     SharedModule,
     AdministrationRoutingModule,
-  ]
+  ],
 })
 export class AdministrationModule {
 }

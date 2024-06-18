@@ -26,7 +26,7 @@ export class PagesComponent {
   menu = [];
 
   constructor(private authService: NbAuthService,
-              private roleProvider: NbRoleProvider
+              private roleProvider: NbRoleProvider,
   ) {
     this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
       if (token.isValid()) {
@@ -36,7 +36,7 @@ export class PagesComponent {
 
         this.roleProvider.getRole().subscribe((roles: string[]) => {
           this.authRoles = roles;
-        })
+        });
       }
     });
 
@@ -73,7 +73,7 @@ export class PagesComponent {
   }
 
   isHidden(hasRoles: string[], authRoles: any) {
-    if (!hasRoles || hasRoles.length == 0 || authRoles.indexOf(RoleConst.ROLE_ADMIN) >= 0) {
+    if (!hasRoles || hasRoles.length === 0 || authRoles.indexOf(RoleConst.ROLE_ADMIN) >= 0) {
       return false;
     } else {
       return hasRoles.every((value) => authRoles.indexOf(value) >= 0 ? false : true);

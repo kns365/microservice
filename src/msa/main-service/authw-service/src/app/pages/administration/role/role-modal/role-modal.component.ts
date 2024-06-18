@@ -12,7 +12,7 @@ import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
 @Component({
   selector: 'ngx-role-modal',
   templateUrl: './role-modal.component.html',
-  styleUrls: ['./role-modal.component.scss']
+  styleUrls: ['./role-modal.component.scss'],
 })
 
 export class RoleModalComponent implements OnInit {
@@ -28,7 +28,7 @@ export class RoleModalComponent implements OnInit {
   constructor(protected dialogRef: NbDialogRef<RoleModalComponent>
     , private roleService: RoleService
     , private privilegeService: PrivilegeService
-    , private toastrService: NbToastrService
+    , private toastrService: NbToastrService,
   ) {
   }
 
@@ -57,9 +57,9 @@ export class RoleModalComponent implements OnInit {
         },
         complete: () => {
           this.loading = false;
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
   getAllPrivilege(): void {
@@ -80,14 +80,14 @@ export class RoleModalComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-      }
-    })
+      },
+    });
   }
 
   setInitialPrivilegesStatus(): void {
     _.map(this.privileges, item => {
       this.checkedPrivilegesMap[item.name] = this.isPrivilegeChecked(
-        item.name
+        item.name,
       );
     });
     this.privilegesChecked = this.getCheckedPrivileges();
@@ -132,7 +132,7 @@ export class RoleModalComponent implements OnInit {
 
   save(role: RoleDto) {
     this.loading = true;
-    role.privilegesString = this.getCheckedPrivileges();// ['ROLE_USER'];
+    role.privilegesString = this.getCheckedPrivileges(); // ['ROLE_USER'];
     this.roleService.createOrEditRole(role).subscribe({
         next: (res: ResponseDto) => {
           if (res && res.status === HttpStatusCode.Ok) {
@@ -149,14 +149,14 @@ export class RoleModalComponent implements OnInit {
         complete: () => {
           this.loading = false;
           this.dialogRef.close({event: 'save'});
-        }
-      }
-    )
+        },
+      },
+    );
   }
 
   copy(role: RoleDto) {
-    let res = prompt("Enter name: ", role.name);
-    if (prompt("Enter name: ", role.name)) {
+    const res = prompt('Enter name: ', role.name);
+    if (prompt('Enter name: ', role.name)) {
       if (confirm('Are you sure copy ' + role.name + ' to ' + res + ' ?')) {
         if (res !== role.name) {
           role.name = res;

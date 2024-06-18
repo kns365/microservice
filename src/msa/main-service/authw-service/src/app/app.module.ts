@@ -11,8 +11,17 @@ import {CoreModule} from './@core/core.module';
 import {ThemeModule} from './@theme/theme.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {NbChatModule, NbDatepickerModule, NbDialogModule, NbGlobalLogicalPosition, NbMenuModule, NbSidebarModule, NbToastrModule, NbWindowModule,} from '@nebular/theme';
-import {NB_AUTH_TOKEN_INTERCEPTOR_FILTER, NbAuthJWTInterceptor} from './@theme/components/auth/public_api'; //'@nebular/auth';
+import {
+  NbChatModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbGlobalLogicalPosition,
+  NbMenuModule,
+  NbSidebarModule,
+  NbToastrModule,
+  NbWindowModule,
+} from '@nebular/theme';
+import {NB_AUTH_TOKEN_INTERCEPTOR_FILTER, NbAuthJWTInterceptor} from './@theme/components/auth/public_api'; // '@nebular/auth';
 import {APP_BASE_HREF} from '@angular/common';
 import {AuthGuard} from './@theme/components/auth/components/auth-guard.service';
 
@@ -30,7 +39,7 @@ import {AuthGuard} from './@theme/components/auth/components/auth-guard.service'
       hasBackdrop: true,
       closeOnBackdropClick: false,
       closeOnEsc: true,
-      hasScroll: true
+      hasScroll: true,
     }),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot({
