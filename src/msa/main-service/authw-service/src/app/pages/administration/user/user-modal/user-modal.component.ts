@@ -48,7 +48,7 @@ export class UserModalComponent implements OnInit {
             this.setInitialRolesStatus();
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
-            console.log('getUserById ', res);
+            console.error('getUserById ', res);
           }
         },
         error: (err: any) => {
@@ -71,7 +71,7 @@ export class UserModalComponent implements OnInit {
           this.setInitialRolesStatus();
         } else {
           this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
-          console.log('getAllRole ', res);
+          console.error('getAllRole ', res);
         }
       },
       error: (err: any) => {
@@ -105,7 +105,7 @@ export class UserModalComponent implements OnInit {
 
   onRoleChange(input: RoleDto, $event: any) {
     this.checkedRolesMap[input.name] = $event.target.checked;
-    console.log('this.checkedRolesMap ', this.checkedRolesMap);
+    console.error('this.checkedRolesMap ', this.checkedRolesMap);
   }
 
   getCheckedRoles(): string[] {
@@ -125,14 +125,14 @@ export class UserModalComponent implements OnInit {
   save(user: UserDto) {
     this.loading = true;
     user.rolesString = this.getCheckedRoles();// ['ROLE_USER'];
-    console.log('save user', user);
+    console.error('save user', user);
     this.userService.createOrEditUser(user).subscribe({
         next: (res: ResponseDto) => {
           if (res && res.status === HttpStatusCode.Ok) {
             this.toastrService.success('Saved successfully', PrivilegeConst.USER);
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
-            console.log('createOrEditUser ', res);
+            console.error('createOrEditUser ', res);
           }
         },
         error: (err: any) => {

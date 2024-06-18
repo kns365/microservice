@@ -19,21 +19,6 @@ const routes: Routes = [{
         .then(m => m.AdministrationModule),
     },
     {
-      path: 'category',
-      loadChildren: () => import('./category/category.module')
-        .then(m => m.CategoryModule),
-    },
-    {
-      path: 'shop',
-      loadChildren: () => import('./shop/shop.module')
-        .then(m => m.ShopModule),
-    },
-    {
-      path: 'supplier',
-      loadChildren: () => import('./supplier/supplier.module')
-        .then(m => m.SupplierModule),
-    },
-    {
       path: 'miscellaneous',
       loadChildren: () => import('./miscellaneous/miscellaneous.module')
         .then(m => m.MiscellaneousModule),

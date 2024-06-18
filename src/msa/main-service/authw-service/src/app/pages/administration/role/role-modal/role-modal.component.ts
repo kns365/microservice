@@ -48,7 +48,7 @@ export class RoleModalComponent implements OnInit {
             this.setInitialPrivilegesStatus();
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
-            console.log('getRoleById ', res);
+            console.error('getRoleById ', res);
           }
         },
         error: (err: any) => {
@@ -71,7 +71,7 @@ export class RoleModalComponent implements OnInit {
           this.setInitialPrivilegesStatus();
         } else {
           this.toastrService.warning('Error ' + res.message, PrivilegeConst.PRIVILEGE);
-          console.log('getAllPrivilege ', res);
+          console.error('getAllPrivilege ', res);
         }
       },
       error: (err: any) => {
@@ -139,7 +139,7 @@ export class RoleModalComponent implements OnInit {
             this.toastrService.success('Saved successfully', PrivilegeConst.ROLE);
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
-            console.log('createOrEditRole ', res);
+            console.error('createOrEditRole ', res);
           }
         },
         error: (err: any) => {

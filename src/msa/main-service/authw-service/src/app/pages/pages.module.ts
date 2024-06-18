@@ -7,7 +7,6 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {AdministrationComponent} from './administration/administration.component';
 import {HomeComponent} from './home/home.component';
-import {CategoryComponent} from './category/category.component';
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import {CategoryComponent} from './category/category.component';
     PagesComponent,
     AdministrationComponent,
     HomeComponent,
-    CategoryComponent,
   ],
 })
 export class PagesModule {

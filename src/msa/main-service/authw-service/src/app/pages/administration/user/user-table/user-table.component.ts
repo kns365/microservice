@@ -15,7 +15,7 @@ import {ResponseDto} from '../../../../shared/models/response-dto';
 @Component({
   selector: 'ngx-user-table',
   templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss']
+  styleUrls: ['./user-table.component.scss'],
 })
 
 export class UserTableComponent implements OnInit, AfterViewInit {
@@ -76,10 +76,10 @@ export class UserTableComponent implements OnInit, AfterViewInit {
             error: (err: any) => {
               this.toastrService.danger('Error ' + err.status, PrivilegeConst.USER);
               console.error(err);
-            }
+            },
           });
       },
-      dom: "<'row'<'col-md-4'l><'col-md-8'>><'row'<'col-md-12'tr>><'row'<'col-md-5'i><'col-md-7'p>>",
+      dom: '<\'row\'<\'col-md-4\'l><\'col-md-8\'>><\'row\'<\'col-md-12\'tr>><\'row\'<\'col-md-5\'i><\'col-md-7\'p>>',
       lengthMenu: [5, 10, 25, 50, 100, 250, 500, 1000],
       pageLength: 5,
       columns: [
@@ -87,13 +87,13 @@ export class UserTableComponent implements OnInit, AfterViewInit {
           title: 'Action',
           data: 'id',
           render: function (data, type, row, meta) {
-            let edit = '<button class="btn btn-outline-success btn-edit" style="margin-right: 0.5rem;" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></button>';
-            let del = '<button class="btn btn-outline-danger btn-delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+            const edit = '<button class="btn btn-outline-success btn-edit" style="margin-right: 0.5rem;" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></button>';
+            const del = '<button class="btn btn-outline-danger btn-delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
             return '<div class="btn-group">' + edit + del + '</div>';
           },
           orderable: false,
           className: 'text-center',
-          width: '10%'
+          width: '10%',
         },
         {
           title: 'Id',
@@ -102,26 +102,26 @@ export class UserTableComponent implements OnInit, AfterViewInit {
         },
         {
           title: 'Username',
-          data: "username",
+          data: 'username',
         },
         {
           title: 'Full name',
-          data: "fullName",
+          data: 'fullName',
         },
         {
           title: 'Email',
-          data: "email",
+          data: 'email',
         },
         {
           title: 'Roles',
-          data: "rolesString",
+          data: 'rolesString',
           orderable: false,
         },
         {
           title: 'Created date',
           data: 'createdDate',
           render: function (data, type, row, meta) {
-            let val = data ? moment(data).format('DD/MM/YYYY') : '';
+            const val = data ? moment(data).format('DD/MM/YYYY') : '';
             return val;
           },
           orderable: false,
@@ -143,12 +143,12 @@ export class UserTableComponent implements OnInit, AfterViewInit {
 
   reloadDataTable() {
     this.dtEle.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.ajax.reload()
+      dtInstance.ajax.reload();
     });
   }
 
   delete(input: UserDto): void {
-    if (confirm("Are you sure to delete " + input.username + ' ?')) {
+    if (confirm('Are you sure to delete ' + input.username + ' ?')) {
       this.userService.deleteUserById(input.id).subscribe({
           next: (res: ResponseDto) => {
             if (res && res.status === HttpStatusCode.Ok) {
@@ -156,7 +156,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
               this.reloadDataTable();
             } else {
               this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
-              console.log('deleteUserById ', res);
+              console.error('deleteUserById ', res);
             }
           },
           error: (err: any) => {
@@ -164,9 +164,9 @@ export class UserTableComponent implements OnInit, AfterViewInit {
             console.error(err);
           },
           complete: () => {
-          }
-        }
-      )
+          },
+        },
+      );
     }
   }
 
@@ -174,7 +174,7 @@ export class UserTableComponent implements OnInit, AfterViewInit {
     this.dialogService.open(UserModalComponent, {
       context: {
         input: input,
-      }
+      },
     })
       .onClose.subscribe((res) => {
       if (res && res.event && res.event === 'save') {
@@ -184,9 +184,9 @@ export class UserTableComponent implements OnInit, AfterViewInit {
   }
 
   onDateChange(event: any): void {
-    // console.log('event ', event);
-    // console.log('start ', moment(event.start).format('DD/MM/YYYY'));
-    // console.log('end ', moment(event.end).format('DD/MM/YYYY'));
+    // console.error('event ', event);
+    // console.error('start ', moment(event.start).format('DD/MM/YYYY'));
+    // console.error('end ', moment(event.end).format('DD/MM/YYYY'));
   }
 
 }

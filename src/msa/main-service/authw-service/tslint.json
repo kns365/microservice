@@ -1,7 +1,4 @@
 {
-  "linterOptions": {
-    "exclude": ["**/*.js","**/*.ts"]
-  },
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -37,10 +34,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      {
-        "limit": "300",
-        "ignore-pattern": "^import |^export | implements"
-      }
+      120
     ],
     "member-access": false,
     "no-arg": true,

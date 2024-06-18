@@ -3,10 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {RoleComponent} from './role/role.component';
 import {UserComponent} from './user/user.component';
 import {AuthGuard} from '../../@theme/components/auth/components/auth-guard.service';
-import {AuditLogComponent} from './audit-log/audit-log.component';
 import {AdministrationComponent} from './administration.component';
 import {PrivilegeComponent} from './privilege/privilege.component';
-import {NotFoundComponent} from '../miscellaneous/not-found/not-found.component';
 import {PrivilegeConst} from '../../shared/constants/PrivilegeConst';
 
 const routes: Routes = [{
@@ -35,14 +33,6 @@ const routes: Routes = [{
       canActivate: [AuthGuard],
       data: {
         hasRoles: [PrivilegeConst.PRIVILEGE]
-      },
-    },
-    {
-      path: 'auditLog',
-      component: AuditLogComponent,
-      canActivate: [AuthGuard],
-      data: {
-        hasRoles: [PrivilegeConst.AUDITLOG]
       },
     },
   ],

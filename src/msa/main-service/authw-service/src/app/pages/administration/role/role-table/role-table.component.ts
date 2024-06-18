@@ -143,7 +143,7 @@ export class RoleTableComponent implements OnInit, AfterViewInit {
               this.reloadDataTable();
             } else {
               this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
-              console.log('deleteRoleById ', res);
+              console.error('deleteRoleById ', res);
             }
           },
           error: (err: any) => {

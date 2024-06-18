@@ -32,7 +32,7 @@ export class PagesComponent {
       if (token.isValid()) {
         // this.authRoles = token['payload'].roles;//NbAuthJWTToken
         // this.authRoles = token['accessTokenPayload'].roles;//NbAuthOAuth2JWTToken
-        // console.log('this.authRoles ', this.authRoles);
+        // console.error('this.authRoles ', this.authRoles);
 
         this.roleProvider.getRole().subscribe((roles: string[]) => {
           this.authRoles = roles;
@@ -47,11 +47,6 @@ export class PagesComponent {
         link: '/pages/home',
         home: true,
       },
-      // {
-      //   title: 'ADMINISTRATIONS',
-      //   group: true,
-      //   hidden: (this.authRoles.indexOf('ROLE_ADMIN')) !== -1 ? false : true,
-      // },
       {
         title: 'Administration',
         icon: 'grid-outline',
@@ -72,76 +67,7 @@ export class PagesComponent {
             link: '/pages/administration/privilege',
             hidden: this.isHidden([PrivilegeConst.PRIVILEGE], this.authRoles),
           },
-          {
-            title: 'Audit log',
-            link: '/pages/administration/auditLog',
-            hidden: this.isHidden([PrivilegeConst.AUDITLOG], this.authRoles),
-          },
         ],
-      },
-      {
-        title: 'Category',
-        icon: 'grid-outline',
-        hidden: this.isHidden([PrivilegeConst.COUNTRY], this.authRoles),
-        children: [
-          {
-            title: 'Country',
-            link: '/pages/category/country',
-            hidden: this.isHidden([PrivilegeConst.COUNTRY], this.authRoles),
-          },
-          {
-            title: 'Province',
-            link: '/pages/category/province',
-            hidden: this.isHidden([PrivilegeConst.PROVINCE], this.authRoles),
-          },
-          {
-            title: 'District',
-            link: '/pages/category/district',
-            hidden: this.isHidden([PrivilegeConst.DISTRICT], this.authRoles),
-          },
-          {
-            title: 'Unit',
-            link: '/pages/category/unit',
-            hidden: this.isHidden([PrivilegeConst.UNIT], this.authRoles),
-          },
-          {
-            title: 'Group item',
-            link: '/pages/category/groupItem',
-            hidden: this.isHidden([PrivilegeConst.GROUPITEM], this.authRoles),
-          },
-          {
-            title: 'Item',
-            link: '/pages/category/item',
-            hidden: this.isHidden([PrivilegeConst.ITEM], this.authRoles),
-          },
-          {
-            title: 'Supply',
-            link: '/pages/category/supply',
-            hidden: this.isHidden([PrivilegeConst.SUPPLY], this.authRoles),
-          },
-          {
-            title: 'Shop order',
-            link: '/pages/category/shopOrder',
-            hidden: this.isHidden([PrivilegeConst.SHOPORDER], this.authRoles),
-          },
-          {
-            title: 'Chat',
-            link: '/pages/category/chat',
-            // hidden: this.isHidden([PrivilegeConst.CHAT], this.authRoles),
-          }
-        ],
-      },
-      {
-        title: 'Shop',
-        icon: 'shopping-bag-outline',
-        link: '/pages/shop',
-        hidden: this.isHidden([PrivilegeConst.SHOP], this.authRoles),
-      },
-      {
-        title: 'Supplier',
-        icon: 'shopping-bag-outline',
-        link: '/pages/supplier',
-        hidden: this.isHidden([PrivilegeConst.SUPPLIER], this.authRoles),
       },
     ];
   }
@@ -153,6 +79,5 @@ export class PagesComponent {
       return hasRoles.every((value) => authRoles.indexOf(value) >= 0 ? false : true);
     }
   }
-
 
 }

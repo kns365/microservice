@@ -48,7 +48,7 @@ export class PrivilegeModalComponent implements OnInit {
             this.setInitialRolesStatus();
           } else {
             this.toastrService.warning('Error ' + res.message, PrivilegeConst.PRIVILEGE);
-            console.log('getPrivilegeById ', res);
+            console.error('getPrivilegeById ', res);
           }
         },
         error: (err: any) => {
@@ -71,7 +71,7 @@ export class PrivilegeModalComponent implements OnInit {
           this.setInitialRolesStatus();
         } else {
           this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
-          console.log('getPrivilegeById ', res);
+          console.error('getPrivilegeById ', res);
         }
       },
       error: (err: any) => {
@@ -105,7 +105,7 @@ export class PrivilegeModalComponent implements OnInit {
 
   onRoleChange(role: RoleDto, $event: any) {
     this.checkedRolesMap[role.name] = $event.target.checked;
-    console.log('this.checkedRolesMap ', this.checkedRolesMap);
+    console.error('this.checkedRolesMap ', this.checkedRolesMap);
   }
 
   getCheckedRoles(): string[] {
@@ -125,7 +125,7 @@ export class PrivilegeModalComponent implements OnInit {
   save(privilege: PrivilegeDto) {
     this.loading = true;
     privilege.privilegesString = this.getCheckedRoles();// ['ROLE_USER'];
-    console.log('save privilege', privilege);
+    console.error('save privilege', privilege);
     this.privilegeService.createOrEditPrivilege(privilege).subscribe({
         next: (res: ResponseDto) => {
           if (res && res.status === HttpStatusCode.Ok) {
