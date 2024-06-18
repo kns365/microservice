@@ -138,9 +138,9 @@ export const NB_CORE_PROVIDERS = [
       // }),
       NbPasswordAuthStrategy.setup({
         name: 'email',
-        baseEndpoint: environment.SERVER_URL,
+        baseEndpoint: environment.API_ENDPOINT,
         login: {
-          endpoint: '/auth/getToken',
+          endpoint: '/getToken',
           method: "post",
           redirect: {
             success: "/pages",
@@ -149,7 +149,7 @@ export const NB_CORE_PROVIDERS = [
           requireValidToken: true,
         },
         logout: {
-          endpoint: '/auth/clearToken',
+          endpoint: '/clearToken',
           method: 'get',
           redirect: {
             success: '/auth/login',

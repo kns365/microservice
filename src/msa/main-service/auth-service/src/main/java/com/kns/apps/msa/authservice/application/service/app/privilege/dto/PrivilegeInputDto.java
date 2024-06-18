@@ -1,4 +1,4 @@
-package com.kns.apps.msa.authservice.application.service.privilege.dto;
+package com.kns.apps.msa.authservice.application.service.app.privilege.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

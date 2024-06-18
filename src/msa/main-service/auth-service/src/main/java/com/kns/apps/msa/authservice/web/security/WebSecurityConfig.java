@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,11 +24,46 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtProvider jwtProvider;
 
     @Bean
     public JwtProvider jwtProvider() {
         return new JwtProvider();
+    }
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Override
+    public void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf().disable()
+//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler()).and()
+//                .exceptionHandling().accessDeniedHandler(forbiddenHandler()).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// don't create session , session will be auto valid every request after first login
+                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/getToken", "/refreshToken").permitAll()
+                .antMatchers(HttpMethod.GET, "/clearToken").permitAll()
+                .antMatchers("/actuator/**").permitAll()
+                .anyRequest().authenticated()
+        ;
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 //    @Bean
@@ -44,37 +80,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    public ForbiddenHandler forbiddenHandler() throws Exception {
 //        return new ForbiddenHandler();
 //    }
-
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler()).and()
-//                .exceptionHandling().accessDeniedHandler(forbiddenHandler()).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()// don't create session , session will be auto valid every request after first login
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/getToken", "/refreshToken").permitAll()
-                .antMatchers(HttpMethod.GET, "/clearToken").permitAll()
-                .antMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated()
-        ;
-//        httpSecurity.addFilterBefore(jwtAuthenticationFilterBean(), UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }

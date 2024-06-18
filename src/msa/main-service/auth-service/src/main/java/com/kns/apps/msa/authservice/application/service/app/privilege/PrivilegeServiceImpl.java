@@ -1,7 +1,7 @@
-package com.kns.apps.msa.authservice.application.service.privilege;
+package com.kns.apps.msa.authservice.application.service.app.privilege;
 
-import com.kns.apps.msa.authservice.application.service.privilege.dto.PrivilegeDto;
-import com.kns.apps.msa.authservice.application.service.privilege.dto.PrivilegeInputDto;
+import com.kns.apps.msa.authservice.application.service.app.privilege.dto.PrivilegeDto;
+import com.kns.apps.msa.authservice.application.service.app.privilege.dto.PrivilegeInputDto;
 import com.kns.apps.msa.authservice.core.entity.Privilege;
 import com.kns.apps.msa.authservice.data.repository.PrivilegeRepository;
 import com.kns.apps.msa.authservice.data.specification.PrivilegeSpec;

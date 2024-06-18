@@ -46,6 +46,7 @@ zuul:
     auth-service:
       path: /auth/**
       service-id: auth-service
+      sensitive-headers: Cookie,Set-Cookie #Exclude authorization from sensitive headers
     order-service:
       path: /order/**
       service-id: order-service
@@ -58,7 +59,7 @@ zuul:
     repository: REDIS # JPA
     policy-list:
       auth-service:
-        - limit: 3 #optional - request number limit per refresh interval window
+        - limit: 100 #optional - request number limit per refresh interval window
           refresh-interval: 60 #default value (in seconds)
           type:
             - origin

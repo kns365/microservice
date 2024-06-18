@@ -3,6 +3,7 @@ package com.kns.apps.msa.zuulservice.security;
 import com.kns.apps.msa.configservice.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -35,11 +36,12 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 // Add a filter to validate the tokens with every request
-                .addFilterAfter(new JwtGwAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtGwAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 // authorization requests config
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
                 .antMatchers(jwtProvider.getUri()).permitAll()
+                // allow all who are accessing "swagger"
                 .antMatchers("/actuator/**").permitAll()
                 .antMatchers("/swagger", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/gallery/v3/api-docs/**", "/order/v3/api-docs/**", "/image/v3/api-docs/**", "/portalapi/v3/api-docs/**").permitAll()

@@ -1,6 +1,6 @@
-package com.kns.apps.msa.authservice.application.service.user.dto;
+package com.kns.apps.msa.authservice.application.service.app.user.dto;
 
-import com.kns.apps.msa.authservice.application.service.role.dto.RoleDto;
+import com.kns.apps.msa.authservice.application.service.app.role.dto.RoleDto;
 import com.kns.apps.msa.configservice.core.model.BaseEntityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;

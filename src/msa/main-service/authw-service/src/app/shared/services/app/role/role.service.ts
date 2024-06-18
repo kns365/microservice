@@ -10,31 +10,31 @@ import {ResponseDto} from '../../../models/response-dto';
 })
 export class RoleService {
 
-  private baseUrl = `${environment.API_ENDPOINT}`;
+  private baseUrl = `${environment.API_ENDPOINT}/api/roles`;
 
   constructor(private httpClient: HttpClient) {
   }
 
   getAllRole(): Observable<ResponseDto> {
-    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/roles/`).pipe();
+    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/`).pipe();
   }
 
   getAllRolePaging(input: any): Observable<ResponseDto> {
-    return this.httpClient.post<ResponseDto>(`${this.baseUrl}/roles/getAllRolePaging`, input).pipe();
+    return this.httpClient.post<ResponseDto>(`${this.baseUrl}/getAllRolePaging`, input).pipe();
   }
 
   getRoleById(id: number): Observable<ResponseDto> {
-    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/roles/${id}`).pipe();
+    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/${id}`).pipe();
   }
 
   createOrEditRole(input: RoleDto): Observable<ResponseDto> {
     if (input.id)
-      return this.httpClient.put<ResponseDto>(`${this.baseUrl}/roles/`, input).pipe();
+      return this.httpClient.put<ResponseDto>(`${this.baseUrl}/`, input).pipe();
     else
-      return this.httpClient.post<ResponseDto>(`${this.baseUrl}/roles/`, input).pipe();
+      return this.httpClient.post<ResponseDto>(`${this.baseUrl}/`, input).pipe();
   }
 
   deleteRoleById(id: number): Observable<ResponseDto> {
-    return this.httpClient.delete<ResponseDto>(`${this.baseUrl}/roles/${id}`).pipe();
+    return this.httpClient.delete<ResponseDto>(`${this.baseUrl}/${id}`).pipe();
   }
 }

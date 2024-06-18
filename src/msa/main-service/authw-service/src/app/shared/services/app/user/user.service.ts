@@ -11,31 +11,31 @@ import {ResponseDto} from '../../../models/response-dto';
 })
 export class UserService {
 
-  private baseUrl = `${environment.API_ENDPOINT}`;
+  private baseUrl = `${environment.API_ENDPOINT}/api/users`;
 
   constructor(private httpClient: HttpClient) {
   }
 
   getAllUser(): Observable<ResponseDto> {
-    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/users/`).pipe();
+    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/`).pipe();
   }
 
   getUserById(id: number): Observable<ResponseDto> {
-    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/users/${id}`).pipe();
+    return this.httpClient.get<ResponseDto>(`${this.baseUrl}/${id}`).pipe();
   }
 
   getAllUserPaging(input: DatatablesInputDto): Observable<ResponseDto> {
-    return this.httpClient.post<ResponseDto>(`${this.baseUrl}/users/getAllUserPaging`, input).pipe();
+    return this.httpClient.post<ResponseDto>(`${this.baseUrl}/getAllUserPaging`, input).pipe();
   }
 
   createOrEditUser(input: UserDto): Observable<ResponseDto> {
     if (input.id)
-      return this.httpClient.put<ResponseDto>(`${this.baseUrl}/users/`, input).pipe();
+      return this.httpClient.put<ResponseDto>(`${this.baseUrl}/`, input).pipe();
     else
-      return this.httpClient.post<ResponseDto>(`${this.baseUrl}/users/`, input).pipe();
+      return this.httpClient.post<ResponseDto>(`${this.baseUrl}/`, input).pipe();
   }
 
   deleteUserById(id: number): Observable<ResponseDto> {
-    return this.httpClient.delete<ResponseDto>(`${this.baseUrl}/users/${id}`).pipe();
+    return this.httpClient.delete<ResponseDto>(`${this.baseUrl}/${id}`).pipe();
   }
 }

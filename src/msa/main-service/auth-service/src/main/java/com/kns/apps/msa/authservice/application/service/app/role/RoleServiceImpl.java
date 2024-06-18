@@ -1,7 +1,7 @@
-package com.kns.apps.msa.authservice.application.service.role;
+package com.kns.apps.msa.authservice.application.service.app.role;
 
-import com.kns.apps.msa.authservice.application.service.role.dto.RoleDto;
-import com.kns.apps.msa.authservice.application.service.role.dto.RoleInputDto;
+import com.kns.apps.msa.authservice.application.service.app.role.dto.RoleDto;
+import com.kns.apps.msa.authservice.application.service.app.role.dto.RoleInputDto;
 import com.kns.apps.msa.authservice.core.entity.Privilege;
 import com.kns.apps.msa.authservice.core.entity.Role;
 import com.kns.apps.msa.authservice.data.repository.PrivilegeRepository;
