@@ -1,0 +1,16 @@
+nb-tabset {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep ngx-shop-dt-info,
+:host ::ng-deep ngx-shop-dt-contract,
+:host ::ng-deep ngx-shop-dt-order-table,
+:host ::ng-deep ngx-shop-dt-import-table,
+:host ::ng-deep ngx-shop-dt-import-detail-table,
+:host ::ng-deep ngx-shop-dt-export-table,
+:host ::ng-deep ngx-shop-dt-export-detail-table {
+  display: block;
+  padding: 1rem;
+}

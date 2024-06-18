@@ -1,0 +1,21 @@
+<div [nbSpinner]="loading">
+  <div class="row" *ngFor="let shopExportDetail of shopExportDetails; let index = index; first as isFirst; last as isLast">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="title{{index}}" class="label">Title</label>
+        <input nbInput type="text" [(ngModel)]="shopExportDetail.supply.barcode" id="title{{index}}" name="title{{index}}" placeholder="Title" fullWidth>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="phone{{index}}" class="label">Phone</label>
+        <input nbInput type="text" [(ngModel)]="shopExportDetail.supply.item.name" id="phone{{index}}" name="phone{{index}}" placeholder="Phone" fullWidth>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <br>
+      <button class="btn btn-outline-danger btn-delete" title="Delete contact" (click)="deleteSupply(index,shopExportDetail)"><i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>

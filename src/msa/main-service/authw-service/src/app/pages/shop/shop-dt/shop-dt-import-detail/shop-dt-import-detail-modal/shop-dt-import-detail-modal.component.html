@@ -1,0 +1,102 @@
+<nb-card [nbSpinner]="loading">
+  <nb-card-header>Shop import detail - [{{create.id}}]
+    <button class="btn btn-xs btn-light shadow-none border-0 float-right" title="Close modal" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nb-card-header>
+  <nb-card-body>
+    <form autocomplete="off" #createModal="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="shopName" class="label">Shop name</label>
+            <input type="text" [readOnly]="true" value="{{create.shop.code}}-{{create.shop.name}}" nbInput fullWidth id="shopName" name="shopName" placeholder="Shop name">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="shopPhone" class="label">Shop phone</label>
+            <input type="text" [readOnly]="true" [(ngModel)]="create.shop.phone" nbInput fullWidth id="shopPhone" name="shopPhone" placeholder="Shop phone">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="shopAddress" class="label">Shop address</label>
+            <input type="text" [readOnly]="true" [(ngModel)]="create.shop.address" nbInput fullWidth id="shopAddress" name="shopAddress" placeholder="Shop address">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="shopImportCode" class="label">Shop import code</label>
+            <input type="text" [readOnly]="true" value="{{create.shopImport.id}}-{{create.shopImport.code}}"
+                   nbInput fullWidth id="shopImportCode" name="shopImportCode" placeholder="Shop import code">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="supplierName" class="label">Supplier name</label>
+            <input type="text" [readOnly]="true" value="{{create.supplier.code}}-{{create.supplier.name}}"
+                   nbInput fullWidth id="supplierName" name="supplierName" placeholder="Supplier name">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="supplierPhone" class="label">Supplier phone</label>
+            <input type="text" [readOnly]="true" [(ngModel)]="create.supplier.phone" nbInput fullWidth id="supplierPhone" name="supplierPhone" placeholder="Supplier phone">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="supplierAddress" class="label">Supplier address</label>
+            <input type="text" [readOnly]="true" [(ngModel)]="create.supplier.address" nbInput fullWidth id="supplierAddress" name="supplierAddress" placeholder="Supplier address">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="shopOrderCode" class="label">Shop order code</label>
+            <input type="text" [readOnly]="true" value="{{create.shopImport.shopOrder.id}}-{{create.shopImport.shopOrder.code}}"
+                   nbInput fullWidth id="shopOrderCode" name="shopOrderCode" placeholder="Shop order code">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="supplyName" class="label">Supply name</label>
+            <input type="text" [readOnly]="true" value="{{create.supply.item.code}}-{{create.supply.item.name}}" nbInput fullWidth id="supplyName" name="supplyName"
+                   placeholder="Supply name">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="quantity" class="label">Quantity</label>
+            <input type="text" [readOnly]="true" format-number="N0" [(ngModel)]="create.quantity" nbInput fullWidth id="quantity" name="quantity" placeholder="Quantity">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="price" class="label">Price</label>
+            <input type="text" [readOnly]="true" format-number="N0" [(ngModel)]="create.price" nbInput fullWidth id="price" name="price" placeholder="Price">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="unit" class="label">Unit</label>
+            <input type="text" [readOnly]="true" [(ngModel)]="create.supply.unit.name" nbInput fullWidth id="unit" name="unit" placeholder="Unit">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group text-center">
+            <label for="barcodeImage" class="label">Barcode image</label>
+            <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="create.supply.barcode" [bc-display-value]="true" id="barcodeImage" [bc-width]="1" [bc-height]="40"></ngx-barcode6>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-secondary" (click)="cancel()" title="Close modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+  </nb-card-footer>
+</nb-card>
