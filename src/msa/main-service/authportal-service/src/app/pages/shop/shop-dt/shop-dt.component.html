@@ -1,0 +1,6 @@
+<nb-card>
+  <nb-card-body>
+<!--    <button nbButton class="float-right" *ngIf="!selectedTabIndex || selectedTabIndex===0" id="saveInfo" status="primary" size="small" (click)="save()" nbTooltip="Save info" nbTooltipStatus="primary">SAVE</button>-->
+    <nb-route-tabset [tabs]="tabs" (changeTab)="onChangeTab($event)"></nb-route-tabset>
+  </nb-card-body>
+</nb-card>

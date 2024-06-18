@@ -1,0 +1,44 @@
+<nb-card [nbSpinner]="loading">
+  <nb-card-header>User {{create.id}}
+    <button class="btn btn-xs btn-light shadow-none border-0 float-right" title="Close modal" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nb-card-header>
+  <nb-card-body>
+    <form autocomplete="off" #createModal="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="username" class="label">Username</label>
+            <input type="text" required minlength="3" [(ngModel)]="create.username" [readOnly]="create.id" nbInput fullWidth id="username" name="username" placeholder="Username">
+            <nb-icon [hidden]="createModal.controls['username'] && !createModal.controls['username'].invalid" icon="checkmark-outline" status="danger"></nb-icon>
+          </div>
+          <div class="form-group">
+            <label for="email" class="label">Email</label>
+            <input type="email" required minlength="3" [(ngModel)]="create.email" nbInput fullWidth id="email" name="email" placeholder="Email">
+            <nb-icon [hidden]="createModal.controls['email'] && !createModal.controls['email'].invalid" icon="checkmark-outline" status="danger"></nb-icon>
+          </div>
+          <div class="form-group">
+            <label for="fullName" class="label">Full name</label>
+            <input type="text" required minlength="3" [(ngModel)]="create.fullName" nbInput fullWidth id="fullName" name="fullName" placeholder="Full name">
+            <nb-icon [hidden]="createModal.controls['fullName'] && !createModal.controls['fullName'].invalid" icon="checkmark-outline" status="danger"></nb-icon>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="roles" class="label">Roles</label>
+            <div class="checkBoxScroll">
+              <ng-template ngFor let-role [ngForOf]="roles" id="roles" name="roles">
+                <div class="demo-items">
+                  <nb-checkbox [checked]="isRoleChecked(role.name)" (change)="onRoleChange(role, $event)">{{ role.name }}</nb-checkbox>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-secondary" (click)="cancel()" title="Close modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+    <button class="btn btn-outline-primary" (click)="save(create)" title="Save info" [disabled]="!createModal.form.valid || loading" [nbSpinner]="loading"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,8 @@
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .checkBoxScroll {
+    max-height: 15rem;
+    overflow: hidden scroll;
+  }
+}

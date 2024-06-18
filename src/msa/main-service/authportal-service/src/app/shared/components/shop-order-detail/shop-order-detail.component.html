@@ -1,0 +1,70 @@
+<nb-accordion multi>
+  <nb-accordion-item [expanded]="shopOrderDetails.length > 0">
+    <nb-accordion-item-header>
+      <button class="btn btn-outline-primary" [hidden]="hideEdit" (click)="addShopOrderDetail($event)" title="Add new"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      Shop order details: {{shopOrderDetails.length | number:'1.0-0'}} supply | {{sumQuantity | number:'1.0-0'}} quantity | Sum amount {{sumAmount | number:'1.0-0'}}
+    </nb-accordion-item-header>
+    <nb-accordion-item-body class="scroll">
+      <div *ngFor="let shopOrderDetail of shopOrderDetails; let index = index">
+        <div class="row">
+          <div class="">
+            <div class="form-group text-center">
+              <br>
+              <b>{{index + 1}}/</b>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <ngx-supply-select [valid]="shopOrderDetail.supply.id" [disabled]="hideEdit" [hideEdit]="hideEdit" [(ngModel)]="shopOrderDetail.supply" [size]="'small'"
+                                 (ngModelChange)="shopOrderDetail.supplyId=shopOrderDetail.supply.id;shopOrderDetail.price=shopOrderDetail.supply.price;shopOrderDetail.unit=shopOrderDetail.supply.unit.name;calculateSumAmount();"
+                                 [selectedSupplier]="supplier" id="supply" name="supply" ngDefaultControl></ngx-supply-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="supplyBarcode{{index}}" class="label">Supply barcode</label>
+              <input nbInput type="text" fieldSize="small" [ngModel]="shopOrderDetail.supply.barcode" id="supplyBarcode{{index}}" name="supplyBarcode{{index}}"
+                     placeholder="Supply barcode"
+                     fullWidth readonly>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="unit{{index}}" class="label">Unit</label>
+              <input nbInput type="text" fieldSize="small" [ngModel]="shopOrderDetail.unit" id="unit{{index}}" name="unit{{index}}" placeholder="Unit" fullWidth readonly>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="price{{index}}" class="label">Price</label>
+              <input nbInput type="text" fieldSize="small" [ngModel]="shopOrderDetail.price | number:'1.0-0'" id="price{{index}}" name="price{{index}}" placeholder="Price"
+                     fullWidth
+                     readonly>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="quantity{{index}}" class="label">Quantity</label>
+              <input type="number" fieldSize="small" status="info" [(ngModel)]="shopOrderDetail.quantity" (ngModelChange)="calculateSumAmount()" [min]="1"
+                     id="quantity{{index}}" name="quantity{{index}}" placeholder="Quantity" nbInput fullWidth [readOnly]="hideEdit">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="amount{{index}}" class="label">Amount</label>
+              <input nbInput type="text" fieldSize="small" [value]="shopOrderDetail.price * shopOrderDetail.quantity | number:'1.0-0'" id="amount{{index}}"
+                     name="amount{{index}}" placeholder="Amount" fullWidth readonly>
+            </div>
+          </div>
+          <div class="col-md-1 text-right">
+            <br>
+            <button class="btn btn-sm btn-outline-danger btn-delete" [hidden]="hideEdit" title="Delete shopOrderDetail" (click)="deleteShopOrderDetail(index,shopOrderDetail)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>
+

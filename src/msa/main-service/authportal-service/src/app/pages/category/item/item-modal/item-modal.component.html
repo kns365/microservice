@@ -1,0 +1,45 @@
+<nb-card [nbSpinner]="loading">
+  <nb-card-header>Item {{create.id}}
+    <button class="btn btn-xs btn-light shadow-none border-0 float-right" title="Close modal" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nb-card-header>
+  <nb-card-body>
+    <form autocomplete="off" #createModal="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="code" class="label">Code</label>
+            <input type="text" [(ngModel)]="create.code" [readOnly]="true" nbInput fullWidth id="code" name="code" placeholder="System generated">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name" class="label">Name</label>
+            <input type="text" required minlength="3" [(ngModel)]="create.name" nbInput fullWidth id="name" name="name" placeholder="Name">
+            <nb-icon [hidden]="createModal.controls['name'] && !createModal.controls['name'].invalid" icon="checkmark-outline" status="danger"></nb-icon>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <ngx-unit-select [(ngModel)]="create.unit" (ngModelChange)="create.unitId = create.unit.id" [valid]="create.unit.id"
+                             ngDefaultControl id="unit" name="unit"></ngx-unit-select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <ngx-group-item-select [(ngModel)]="create.groupItem" (ngModelChange)="create.groupItemId = create.groupItem.id" [valid]="create.groupItemId"
+                                   ngDefaultControl id="groupItem" name="groupItem"></ngx-group-item-select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-secondary" (click)="cancel()" title="Close modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+    <button class="btn btn-outline-primary" (click)="save(create)" title="Save info" [nbSpinner]="loading"
+            [disabled]="!createModal.form.valid || loading || !create.unitId || !create.groupItemId">
+      <i class="fa fa-save" aria-hidden="true"></i> Save
+    </button>
+  </nb-card-footer>
+</nb-card>

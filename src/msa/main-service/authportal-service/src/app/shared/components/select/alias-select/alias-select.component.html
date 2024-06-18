@@ -1,0 +1,7 @@
+<div [nbSpinner]="loading">
+  <label for="alias" class="label" [hidden]="hideLabel">Alias ({{items.length}})</label>
+  <nb-select placeholder="Select alias" [(ngModel)]="selectedAliasId" (ngModelChange)="onAliasChange()" id="alias" fullWidth>
+    <nb-option *ngFor="let item of items" [value]="item">{{ item}}</nb-option>
+  </nb-select>
+</div>
+

@@ -1,0 +1,26 @@
+<nb-card [nbSpinner]="loading">
+  <nb-card-header>Shop export - [{{create.id}}]-[{{create.code}}]
+    <button class="btn btn-xs btn-light shadow-none border-0 float-right" title="Close modal" (click)="cancel()"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nb-card-header>
+  <nb-card-body>
+    <form autocomplete="off" #createModal="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="shopName" class="label">Shop name</label>
+            <input type="text" [readOnly]="true" value="" nbInput fullWidth id="shopName" name="shopName" placeholder="Shop name">
+          </div>
+        </div>
+      </div>
+      <ngx-shop-order-detail *ngIf="create.shopId" [ngModel]="create.shopExportDetails" name="shopExportDetails" ngDefaultControl
+                             [hideAdd]="false" [shop]="create.shop" [hideEdit]="false" [disabled]="true"></ngx-shop-order-detail>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-secondary" (click)="cancel()" title="Close modal"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+    <button class="btn btn-outline-primary" (click)="save(create)" title="Save info" [nbSpinner]="loading"
+            [disabled]="!createModal.form.valid || !create.shopId || loading">
+      <i class="fa fa-save" aria-hidden="true"></i> Save
+    </button>
+  </nb-card-footer>
+</nb-card>

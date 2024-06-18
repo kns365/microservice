@@ -1,0 +1,12 @@
+<div [nbSpinner]="loading">
+  <label for="supply" class="label" [hidden]="hideLabel">Supply</label>
+<!--  <button class="btn btn-outline-primary btn-xs fa-pull-right" [autofocus]="false" [hidden]="hideLabel" (click)="openDetailNewTab(null)" title="Create new supply">-->
+  <!--    <i class="fa fa-plus" aria-hidden="true"></i>-->
+  <!--  </button>-->
+<!--  <input [ngModel]="valueInput" (keyup.enter)="$event" (ngModelChange)="onModelChange($event)" [disabled]="disabled" [nbAutocomplete]="supply" nbInput fullWidth type="text" id="supply" placeholder="Select supply"/>-->
+  <input (keyup.enter)="onModelChange($event)" [disabled]="disabled" [nbAutocomplete]="supply" nbInput fullWidth type="text" id="supply" placeholder="Select supply"/>
+  <nb-autocomplete #supply (selectedChange)="onSupplyChange($event)">
+    <nb-option *ngFor="let item of filteredItems$ | async" [value]="item.item.code" [title]="item.item.name"> {{ item.item.code }}-{{ item.item.name }} </nb-option>
+  </nb-autocomplete>
+  <nb-icon [hidden]="invalid" icon="checkmark-outline" status="danger"></nb-icon>
+</div>

@@ -1,0 +1,10 @@
+nb-tabset {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep ngx-supplier-dt-info, :host ::ng-deep ngx-supplier-dt-contract, :host ::ng-deep ngx-supply-table, :host ::ng-deep ngx-shop-order-table {
+  display: block;
+  padding: 1rem;
+}

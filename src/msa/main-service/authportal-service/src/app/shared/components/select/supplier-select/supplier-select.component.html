@@ -1,0 +1,10 @@
+<div [nbSpinner]="loading">
+  <label for="supplier" class="label" [hidden]="hideLabel">Supplier ({{suppliers.length}})</label>
+  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideEdit" (click)="openDetailNewTab(null)" title="Create new supplier">
+    <i class="fa fa-plus" aria-hidden="true"></i></button>
+  <nb-select *ngIf="!hideEdit" [disabled]="disabled" [(selected)]="selectedSupplier.id" id="supplier" placeholder="Select supplier" fullWidth>
+    <nb-option *ngFor="let supplier of suppliers" [value]="supplier.id" (selectionChange)="onSelectedSupplierChange(supplier)">{{ supplier.code}}-{{ supplier.name}}</nb-option>
+  </nb-select>
+  <input type="text" *ngIf="hideEdit" [readOnly]="true" value="{{selectedSupplier.code}}-{{selectedSupplier.name}}" nbInput fullWidth name="supplier" placeholder="Supplier name">
+  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
+</div>

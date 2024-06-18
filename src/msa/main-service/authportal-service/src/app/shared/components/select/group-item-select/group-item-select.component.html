@@ -1,0 +1,9 @@
+<div [nbSpinner]="loading">
+  <label for="groupItem" class="label" [hidden]="hideLabel">GroupItem ({{groupItems.length}})</label>
+  <button class="btn btn-outline-primary btn-xs fa-pull-right" [hidden]="hideAdd" (click)="openModal(null)" title="Create new group item">
+    <i class="fa fa-plus" aria-hidden="true"></i></button>
+  <nb-select [disabled]="disabled" [(selected)]="selectedGroupItem.id" id="groupItem" placeholder="Select groupItem" fullWidth>
+    <nb-option *ngFor="let groupItem of groupItems" [value]="groupItem.id" (selectionChange)="onSelectedGroupItemChange(groupItem)">{{ groupItem.name}}</nb-option>
+  </nb-select>
+  <nb-icon [hidden]="valid" icon="checkmark-outline" status="danger"></nb-icon>
+</div>
