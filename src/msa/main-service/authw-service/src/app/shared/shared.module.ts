@@ -19,7 +19,6 @@ import {
   NbTooltipModule,
 } from '@nebular/theme';
 import {FormatNumberDirective} from './directives/format-number.directive';
-import {NgxBarcode6Module} from 'ngx-barcode6';
 import {NbSecurityModule} from '@nebular/security';
 import {EnumToArrayPipe} from './pipes/enum-to-array-pipe';
 
@@ -53,7 +52,6 @@ const MODULES = [
   NbSpinnerModule,
   NbRouteTabsetModule,
   NbAccordionModule,
-  NgxBarcode6Module,
   NbStepperModule,
   ReactiveFormsModule,
   NbSecurityModule,
