@@ -1,6 +1,6 @@
 @echo off
 
-set REDIS_HOME=C:\WORK\app\redis
+set REDIS_HOME=%APP_HOME%\redis
 cd %REDIS_HOME%
 
 start redis-server.exe

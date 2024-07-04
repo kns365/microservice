@@ -1,4 +1,4 @@
-set KAFKA_HOME=C:\WORK\app\apache-kafka
+set KAFKA_HOME=%APP_HOME%\apache-kafka
 cd "script"
 start 1-start-zookeeper.bat
 timeout 3
