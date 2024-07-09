@@ -2,7 +2,7 @@ package vn.com.kns.portalapi.data.specification.other;
 
 import org.springframework.data.jpa.domain.Specification;
 import vn.com.kns.portalapi.core.entity.other.Ward;
-import vn.com.kns.portalapi.core.entity.Ward_;
+import vn.com.kns.portalapi.core.entity.other.Ward_;
 import vn.com.kns.portalapi.core.model.FilterInput;
 
 public class WardSpec {

@@ -2,7 +2,7 @@ package vn.com.kns.portalapi.data.specification.other;
 
 import org.springframework.data.jpa.domain.Specification;
 import vn.com.kns.portalapi.core.entity.other.DeliveryMethod;
-import vn.com.kns.portalapi.core.entity.DeliveryMethod_;
+import vn.com.kns.portalapi.core.entity.other.DeliveryMethod_;
 import vn.com.kns.portalapi.core.model.FilterInput;
 
 public class DeliveryMethodSpec {

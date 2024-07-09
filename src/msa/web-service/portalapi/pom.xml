@@ -11,7 +11,7 @@
     <groupId>vn.com.kns</groupId>
     <artifactId>portalapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>portalapi</name>
     <description>Portal API</description>
     <properties>
@@ -23,6 +23,8 @@
             <groupId>com.kns.apps.msa</groupId>
             <artifactId>config-service</artifactId>
             <version>0.0.1</version>
+            <!--<scope>system</scope>
+            <systemPath>${project.basedir}/lib/config-service-pack.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,7 +100,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,3 @@
-server:
-  port: 4320
 spring:
   application:
     name: portalapi-service

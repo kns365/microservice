@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Main Service Build Package" type="CompoundRunConfigurationType">
+    <toRun name="config-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="eureka-service [clean,package]" type="MavenRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -2,7 +2,7 @@ package vn.com.kns.portalapi.data.specification.shop;
 
 import org.springframework.data.jpa.domain.Specification;
 import vn.com.kns.portalapi.core.entity.shop.ShopImport;
-import vn.com.kns.portalapi.core.entity.other.ShopImport_;
+import vn.com.kns.portalapi.core.entity.shop.ShopImport_;
 import vn.com.kns.portalapi.core.model.FilterInput;
 
 public class ShopImportSpec {
