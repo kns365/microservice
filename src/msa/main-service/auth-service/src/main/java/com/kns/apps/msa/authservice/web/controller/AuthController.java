@@ -3,7 +3,7 @@ package com.kns.apps.msa.authservice.web.controller;
 import com.kns.apps.msa.authservice.application.service.auth.AuthService;
 import com.kns.apps.msa.authservice.application.service.auth.dto.GetTokenInput;
 import com.kns.apps.msa.authservice.application.service.auth.dto.RefreshTokenInput;
-import com.kns.apps.msa.configservice.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

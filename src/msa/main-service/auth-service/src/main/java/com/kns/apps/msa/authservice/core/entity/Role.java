@@ -1,6 +1,6 @@
 package com.kns.apps.msa.authservice.core.entity;
 
-import com.kns.apps.msa.configservice.core.model.BaseEntity;
+import com.kns.apps.msa.commonpack.core.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,8 +2,8 @@ package com.kns.apps.msa.authservice.application.service.app.privilege;
 
 import com.kns.apps.msa.authservice.application.service.app.privilege.dto.PrivilegeDto;
 import com.kns.apps.msa.authservice.application.service.app.privilege.dto.PrivilegeInputDto;
-import com.kns.apps.msa.configservice.core.model.PagingInput;
-import com.kns.apps.msa.configservice.core.model.PagingOutput;
+import com.kns.apps.msa.commonpack.core.model.PagingInput;
+import com.kns.apps.msa.commonpack.core.model.PagingOutput;
 
 import java.util.List;
 

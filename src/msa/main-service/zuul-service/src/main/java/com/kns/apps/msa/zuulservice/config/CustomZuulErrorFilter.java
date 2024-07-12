@@ -1,7 +1,7 @@
 package com.kns.apps.msa.zuulservice.config;
 
-import com.kns.apps.msa.configservice.application.helper.JsonHelper;
-import com.kns.apps.msa.configservice.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.application.helper.JsonHelper;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;

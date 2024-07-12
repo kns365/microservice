@@ -2,8 +2,8 @@ package com.kns.apps.msa.authservice.application.service.app.role;
 
 import com.kns.apps.msa.authservice.application.service.app.role.dto.RoleDto;
 import com.kns.apps.msa.authservice.application.service.app.role.dto.RoleInputDto;
-import com.kns.apps.msa.configservice.core.model.PagingInput;
-import com.kns.apps.msa.configservice.core.model.PagingOutput;
+import com.kns.apps.msa.commonpack.core.model.PagingInput;
+import com.kns.apps.msa.commonpack.core.model.PagingOutput;
 
 import java.util.List;
 

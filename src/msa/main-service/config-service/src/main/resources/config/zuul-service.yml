@@ -1,8 +1,8 @@
 spring:
   application:
     name: zuul-service
-  config:
-    import: application.properties
+#  config:
+#    import: application.properties
   security:
     user:
       name: zuul          # not use

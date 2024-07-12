@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
     url: ${auth-service.db.url}
     username: ${auth-service.db.username}
     password: ${auth-service.db.password}
@@ -12,8 +12,8 @@ spring:
     properties:
       hibernate:
         format_sql: false
-  config:
-    import: application.properties
+#  config:
+#    import: application.properties
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log

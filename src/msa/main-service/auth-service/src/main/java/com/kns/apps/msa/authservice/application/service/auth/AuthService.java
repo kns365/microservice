@@ -2,7 +2,7 @@ package com.kns.apps.msa.authservice.application.service.auth;
 
 import com.kns.apps.msa.authservice.application.service.auth.dto.GetTokenInput;
 import com.kns.apps.msa.authservice.application.service.auth.dto.RefreshTokenInput;
-import com.kns.apps.msa.configservice.security.JwtDto;
+import com.kns.apps.msa.commonpack.security.JwtDto;
 import org.springframework.security.core.Authentication;
 
 

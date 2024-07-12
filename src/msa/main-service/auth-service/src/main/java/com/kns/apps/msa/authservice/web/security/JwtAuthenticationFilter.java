@@ -1,6 +1,6 @@
 package com.kns.apps.msa.authservice.web.security;
 
-import com.kns.apps.msa.configservice.security.JwtProvider;
+import com.kns.apps.msa.commonpack.security.JwtProvider;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

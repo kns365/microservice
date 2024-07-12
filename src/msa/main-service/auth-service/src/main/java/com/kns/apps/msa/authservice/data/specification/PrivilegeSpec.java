@@ -3,7 +3,7 @@ package com.kns.apps.msa.authservice.data.specification;
 import com.kns.apps.msa.authservice.core.entity.Privilege;
 import com.kns.apps.msa.authservice.core.entity.Privilege_;
 import com.kns.apps.msa.authservice.core.entity.Role_;
-import com.kns.apps.msa.configservice.core.model.FilterInput;
+import com.kns.apps.msa.commonpack.core.model.FilterInput;
 import org.springframework.data.jpa.domain.Specification;
 
 public class PrivilegeSpec {

@@ -1,6 +1,6 @@
 package com.kns.apps.msa.zuulservice.security;
 
-import com.kns.apps.msa.configservice.security.JwtProvider;
+import com.kns.apps.msa.commonpack.security.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;

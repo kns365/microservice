@@ -5,9 +5,9 @@ import com.kns.apps.msa.authservice.application.service.app.privilege.dto.Privil
 import com.kns.apps.msa.authservice.core.entity.Privilege;
 import com.kns.apps.msa.authservice.data.repository.PrivilegeRepository;
 import com.kns.apps.msa.authservice.data.specification.PrivilegeSpec;
-import com.kns.apps.msa.configservice.core.model.FilterInput;
-import com.kns.apps.msa.configservice.core.model.PagingInput;
-import com.kns.apps.msa.configservice.core.model.PagingOutput;
+import com.kns.apps.msa.commonpack.core.model.FilterInput;
+import com.kns.apps.msa.commonpack.core.model.PagingInput;
+import com.kns.apps.msa.commonpack.core.model.PagingOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

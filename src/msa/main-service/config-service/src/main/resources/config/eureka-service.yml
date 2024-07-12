@@ -5,8 +5,8 @@ eureka:
   server:
     enable-self-preservation: false
 spring:
-  config:
-    import: application.properties
+#  config:
+#    import: application.properties
   security:
     user:
       name: ${account.eureka-service.username}
