@@ -12,8 +12,6 @@ spring:
     properties:
       hibernate:
         format_sql: false
-#  config:
-#    import: application.properties
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log

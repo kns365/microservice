@@ -34,6 +34,9 @@ Spring admin: 2.3.1
   - Accept 2 url: getToken, refreshToken
   - Generate JWT
   - Connect DB: User, Role, Privilege
+- ### 6/ Common pack-8764 (Config service, Security)
+  - application-[dev/uat/prod].properties
+  - Chứa tất cả config kết nối đến hệ thống khác, phân tách các môi trường dev, uat, prod.
     
 ## Required server:
 Kakfa: localhost:9092

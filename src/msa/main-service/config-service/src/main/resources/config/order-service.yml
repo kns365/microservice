@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: order-service
-  config:
-    import: application.properties
   kafka:
     producer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}

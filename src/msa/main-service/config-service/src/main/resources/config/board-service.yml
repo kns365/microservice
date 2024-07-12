@@ -1,6 +1,4 @@
 spring:
-#  config:
-#    import: application.properties
   boot:
     admin:
       context-path: /admin

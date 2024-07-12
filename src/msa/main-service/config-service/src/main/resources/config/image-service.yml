@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: image-service
-  config:
-    import: application.properties
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log

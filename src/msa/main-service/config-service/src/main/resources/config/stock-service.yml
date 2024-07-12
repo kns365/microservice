@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: stock-service
-  config:
-    import: application.properties
   kafka:
     consumer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
