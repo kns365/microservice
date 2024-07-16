@@ -61,7 +61,7 @@ public class UserController {
 
     public ResponseEntity<ResponseDto> defaultFallback() {
         log.info("fallbackGetAllUserPaging ... ");
-        com.kns.apps.msa.configservice.core.model.ResponseDto res = new com.kns.apps.msa.configservice.core.model.ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
+        com.kns.apps.msa.commonpack.core.model.ResponseDto res = new com.kns.apps.msa.commonpack.core.model.ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         return new ResponseEntity(res, HttpStatus.OK);
     }
 

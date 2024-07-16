@@ -1,6 +1,6 @@
 package com.kns.apps.msa.orderservice.service;
 
-import com.kns.apps.msa.configservice.core.model.kafka.OrderEvent;
+import com.kns.apps.msa.commonpack.core.model.kafka.OrderEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

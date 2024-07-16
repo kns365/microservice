@@ -1,6 +1,6 @@
 package com.kns.apps.msa.stockservice.service;
 
-import com.kns.apps.msa.configservice.core.model.kafka.OrderEvent;
+import com.kns.apps.msa.commonpack.core.model.kafka.OrderEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;

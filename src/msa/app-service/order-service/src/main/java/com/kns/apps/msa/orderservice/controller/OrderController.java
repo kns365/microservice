@@ -1,8 +1,8 @@
 package com.kns.apps.msa.orderservice.controller;
 
-import com.kns.apps.msa.configservice.core.model.ResponseDto;
-import com.kns.apps.msa.configservice.core.model.kafka.Order;
-import com.kns.apps.msa.configservice.core.model.kafka.OrderEvent;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.kafka.Order;
+import com.kns.apps.msa.commonpack.core.model.kafka.OrderEvent;
 import com.kns.apps.msa.orderservice.service.OrderProducer;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;

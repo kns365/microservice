@@ -1,6 +1,6 @@
 package com.kns.apps.msa.galleryservice.controller;
 
-import com.kns.apps.msa.configservice.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
 import com.kns.apps.msa.galleryservice.entity.Gallery;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
