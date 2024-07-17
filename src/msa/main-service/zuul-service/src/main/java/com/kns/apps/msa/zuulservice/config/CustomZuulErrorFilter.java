@@ -45,6 +45,7 @@ public class CustomZuulErrorFilter extends ZuulFilter {
                 String errorMsg = zuulException.getCause().getCause().getLocalizedMessage();//429 TOO_MANY_REQUESTS
 //                log.error("Zuul failure detected: " + errorMsg, zuulException);
                 log.error("Zuul failure detected: " + errorMsg + "-" + context.getResponseStatusCode());
+//                zuulException.printStackTrace();
 
                 /*if (throwable.getCause().getCause().getCause() instanceof ConnectException) {
                     context.remove("throwable");

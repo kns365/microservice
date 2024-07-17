@@ -9,7 +9,11 @@ import org.springframework.http.ResponseEntity;
 public class BaseController {
     public ResponseEntity<ResponseDto> defaultFallback() {
         log.info("defaultFallback ... ");
-        ResponseDto res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
-        return new ResponseEntity(res, HttpStatus.OK);
+        return new ResponseEntity(new ResponseDto(HttpStatus.SERVICE_UNAVAILABLE.value(), HttpStatus.SERVICE_UNAVAILABLE.name(), null, null), HttpStatus.OK);
     }
+//    public ResponseEntity<?> defaultFallback() {
+//        log.info("defaultFallback ... ");
+//        ResponseDto res = new ResponseDto(HttpStatus.SERVICE_UNAVAILABLE.value(), HttpStatus.SERVICE_UNAVAILABLE.name(), null, null);
+//        return new ResponseEntity(res, HttpStatus.OK);
+//    }
 }

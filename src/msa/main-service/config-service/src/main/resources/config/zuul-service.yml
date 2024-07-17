@@ -58,8 +58,13 @@ zuul:
           type:
             - origin
       order-service:
-        - limit: 100 #optional - request number limit per refresh interval window
-          refresh-interval: 60 #default value (in seconds)
+        - limit: 100
+          refresh-interval: 60
+          type:
+            - origin
+      gallery-service:
+        - limit: 100
+          refresh-interval: 60
           type:
             - origin
 # timeout
@@ -69,7 +74,7 @@ zuul:
 #    max-per-route-connections: 50
 #    max-total-connections: 200
 ribbon:
-  ConnectTimeout: 1000
+  ConnectTimeout: 5000
   ReadTimeout: 10000
 #  MaxAutoRetries: 1
 #  MaxAutoRetriesNextServer: 1
