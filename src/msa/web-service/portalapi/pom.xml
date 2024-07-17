@@ -24,7 +24,7 @@
             <artifactId>common-pack</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../out/artifacts/common_pack_jar/common-pack.jar</systemPath>
+            <systemPath>${pom.basedir}/../../out/artifacts/common_pack_jar/common-pack.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -179,6 +179,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>
