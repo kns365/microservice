@@ -1,11 +1,24 @@
 spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: ${auth-service.db.url}
+    username: ${auth-service.db.username}
+    password: ${auth-service.db.password}
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
   kafka:
     bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
     topic:
-      name: order_topics
+      name: log_topics
     consumer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
-      group-id: email
+      group-id: log
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

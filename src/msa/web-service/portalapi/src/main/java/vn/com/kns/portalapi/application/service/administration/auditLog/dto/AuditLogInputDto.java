@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 @NoArgsConstructor
 public class AuditLogInputDto {
     private Long id;
+    private String serviceName = "PortalApi";
     private String clientName;
     private Long execDuration;
     private String clientIpAddress;

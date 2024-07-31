@@ -11,6 +11,14 @@ spring:
           producer:
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  kafka:
+    bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
+    producer:
+      bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topic:
+      name: log_topics
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: ${db.url}

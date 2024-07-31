@@ -19,6 +19,7 @@
         <module>main-service/zuul-service</module>
         <module>main-service/board-service</module>
         <module>main-service/auth-service</module>
+        <module>main-service/log-service</module>
 
         <module>app-service/gallery-service</module>
         <module>app-service/image-service</module>

@@ -1,12 +1,12 @@
 package vn.com.kns.portalapi.application.helper;
 
+import com.kns.apps.msa.commonpack.core.model.kafka.LogEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.ContentCachingRequestWrapper;
-import org.springframework.web.util.ContentCachingResponseWrapper;
 import vn.com.kns.portalapi.application.service.administration.auditLog.AuditLogService;
+import vn.com.kns.portalapi.application.service.administration.auditLog.LogProducer;
 import vn.com.kns.portalapi.application.service.administration.auditLog.dto.AuditLogInputDto;
 import vn.com.kns.portalapi.application.service.auth.dto.LoginRequest;
 import vn.com.kns.portalapi.core.model.ResponseDto;
@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -30,8 +26,11 @@ public class AuditLogHelper {
 
     private static AuditLogService auditLogService;
 
-    public AuditLogHelper(AuditLogService auditLogService) {
+    private static LogProducer logProducer;
+
+    public AuditLogHelper(AuditLogService auditLogService, LogProducer logProducer) {
         this.auditLogService = auditLogService;
+        this.logProducer = logProducer;
     }
 
     public static void create(HttpServletRequest request, HttpServletResponseCopier response, Date execDurStart, Exception exception) {
@@ -41,6 +40,19 @@ public class AuditLogHelper {
             log.debug("{}", auditLogInput);
             if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"}).anyMatch(auditLogInput.getPath()::contains)) {
                 auditLogService.createOrEdit(auditLogInput);
+                LogEvent logEvent = LogEvent.builder()
+                        .serviceName(auditLogInput.getServiceName())
+                        .clientName(auditLogInput.getClientName())
+                        .execDuration(auditLogInput.getExecDuration())
+                        .clientIpAddress(auditLogInput.getClientIpAddress())
+                        .path(auditLogInput.getPath())
+                        .httpStatus(auditLogInput.getHttpStatus())
+                        .exception(auditLogInput.getException())
+                        .browserInfo(auditLogInput.getBrowserInfo())
+                        .input(auditLogInput.getInput())
+                        .output(auditLogInput.getOutput())
+                        .build();
+                logProducer.sendMessage(logEvent);
             }
         } catch (Exception e) {
             log.error("Error create auditLog");

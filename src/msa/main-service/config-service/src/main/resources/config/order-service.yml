@@ -1,5 +1,6 @@
 spring:
   kafka:
+    bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
     producer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
