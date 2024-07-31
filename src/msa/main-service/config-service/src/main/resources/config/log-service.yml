@@ -18,7 +18,7 @@ spring:
       name: log_topics
     consumer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
-      group-id: log
+      group-id: log_consumers
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
