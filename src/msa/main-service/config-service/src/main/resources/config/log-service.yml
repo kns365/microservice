@@ -8,14 +8,14 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: false
   kafka:
     bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
     topic:
-      name: log_topics
+      name: ${server.kafka.topic.log}
     consumer:
       bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
       group-id: log_consumers

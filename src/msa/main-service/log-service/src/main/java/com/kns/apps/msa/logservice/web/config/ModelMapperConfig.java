@@ -1,4 +1,4 @@
-package com.kns.apps.msa.logservice.config;
+package com.kns.apps.msa.logservice.web.config;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;

@@ -1,9 +1,9 @@
-package com.kns.apps.msa.logservice.service.auditLog;
+package com.kns.apps.msa.logservice.application.service.auditLog;
 
 import com.kns.apps.msa.logservice.core.entity.AuditLog;
-import com.kns.apps.msa.logservice.data.AuditLogRepository;
-import com.kns.apps.msa.logservice.service.auditLog.dto.AuditLogDto;
-import com.kns.apps.msa.logservice.service.auditLog.dto.AuditLogInputDto;
+import com.kns.apps.msa.logservice.data.repository.AuditLogRepository;
+import com.kns.apps.msa.logservice.application.service.auditLog.dto.AuditLogDto;
+import com.kns.apps.msa.logservice.application.service.auditLog.dto.AuditLogInputDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

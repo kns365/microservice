@@ -1,4 +1,4 @@
-package com.kns.apps.msa.logservice.data;
+package com.kns.apps.msa.logservice.data.repository;
 
 import com.kns.apps.msa.logservice.core.entity.AuditLog;
 import org.springframework.data.domain.Page;

@@ -12,6 +12,14 @@ spring:
     properties:
       hibernate:
         format_sql: false
+  kafka:
+    bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
+    producer:
+      bootstrap-servers: ${server.kafka.host}:${server.kafka.port}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topic:
+      name: ${server.kafka.topic.log}
 logging:
   file:
     name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log

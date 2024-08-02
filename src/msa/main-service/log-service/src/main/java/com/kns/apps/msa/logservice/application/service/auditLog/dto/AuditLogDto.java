@@ -1,4 +1,4 @@
-package com.kns.apps.msa.logservice.service.auditLog.dto;
+package com.kns.apps.msa.logservice.application.service.auditLog.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
-package com.kns.apps.msa.logservice.service;
+package com.kns.apps.msa.logservice.application.service;
 
 import com.kns.apps.msa.commonpack.core.model.kafka.LogEvent;
-import com.kns.apps.msa.logservice.service.auditLog.AuditLogService;
-import com.kns.apps.msa.logservice.service.auditLog.dto.AuditLogInputDto;
+import com.kns.apps.msa.logservice.application.service.auditLog.AuditLogService;
+import com.kns.apps.msa.logservice.application.service.auditLog.dto.AuditLogInputDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class LogConsumer {
     @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void consume(LogEvent event) {
         try {
-            log.info(String.format("Log event received in log-service => %s", event.toString()));
+            log.debug("{}", event);
             auditLogService.createOrEdit(new AuditLogInputDto(event));
         } catch (Exception e) {
             e.printStackTrace();

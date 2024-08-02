@@ -20,7 +20,7 @@ public class ResponseDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
-    public ResponseDto(Integer errorCode, String errorMessage, String transactionId, Object data) {
+    public ResponseDto(Integer errorCode, String errorMessage,  String transactionId, Object data) {
         if (errorCode == ResponseStatusCode.SUCCESS.getVal() || errorCode == ResponseStatusCode.SUCCESS_200.getVal()) {
             this.status = ResponseStatusCode.SUCCESS.name();
         }
@@ -35,7 +35,6 @@ public class ResponseDto {
 //     "status": 500,
 //     "error": "Internal Server Error",
 //     "message": "GENERAL"
-
 //    {
 //        "errorCode": 200,
 //            "errorMessage": "OK",

@@ -1,4 +1,4 @@
-package com.kns.apps.msa.logservice.security;
+package com.kns.apps.msa.logservice.web.security;
 
 import com.kns.apps.msa.commonpack.security.JwtProvider;
 import org.springframework.context.annotation.Bean;
