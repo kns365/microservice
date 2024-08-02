@@ -21,6 +21,7 @@ public class LogHelper {
     private static LogProducer logProducer;
     private static String serviceName = "";
     private static Environment env;
+    private static String[] ignorePaths = new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"};
 
     public LogHelper(LogProducer logProducer, Environment env) {
         this.logProducer = logProducer;
@@ -28,16 +29,32 @@ public class LogHelper {
         this.serviceName = env.getProperty("spring.application.name");
     }
 
-    public static void push(HttpServletRequest request, HttpServletResponse response, Object input, Object output, Date execDurStart, String exception) {
+    public static void push(LogEvent logEvent) {
         try {
-            LogEvent logEvent = getClientInfo(request, response, JsonHelper.objectToJson(input), JsonHelper.objectToJson(output), exception, execDurStart);
             log.debug("{}", logEvent);
-            if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"}).anyMatch(logEvent.getPath()::contains)) {
+            if (!validPaths(logEvent.getPath(), ignorePaths)) {
+                logEvent.setServiceName(serviceName);
                 logProducer.sendMessage(logEvent);
             }
         } catch (Exception e) {
             log.error("Error push log");
         }
+    }
+
+    public static void push(HttpServletRequest request, HttpServletResponse response, Object input, Object output, Date execDurStart, String exception) {
+        try {
+            LogEvent logEvent = getClientInfo(request, response, JsonHelper.objectToJson(input), JsonHelper.objectToJson(output), exception, execDurStart);
+            log.debug("{}", logEvent);
+            if (!validPaths(logEvent.getPath(), ignorePaths)) {
+                logProducer.sendMessage(logEvent);
+            }
+        } catch (Exception e) {
+            log.error("Error push log");
+        }
+    }
+
+    private static Boolean validPaths(String path, String[] ignorePaths) {
+        return Arrays.stream(ignorePaths).anyMatch(path::contains);
     }
 
     public static LogEvent getClientInfo(HttpServletRequest request, HttpServletResponse response, String input, String output, String exception, Date execDurStart) throws IOException {

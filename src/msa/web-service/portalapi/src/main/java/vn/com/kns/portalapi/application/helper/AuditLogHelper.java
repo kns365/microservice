@@ -1,10 +1,9 @@
 package vn.com.kns.portalapi.application.helper;
 
-import com.kns.apps.msa.commonpack.application.service.auditLog.LogProducer;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import com.kns.apps.msa.commonpack.core.model.kafka.LogEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import vn.com.kns.portalapi.application.service.administration.auditLog.AuditLogService;
@@ -26,15 +25,11 @@ import java.util.Date;
 public class AuditLogHelper {
 
     private static AuditLogService auditLogService;
-    private static LogProducer logProducer;
-    private static Environment env;
-    private static String serviceName = "";
+    private static LogHelper logHelper;
 
-    public AuditLogHelper(AuditLogService auditLogService, LogProducer logProducer,Environment env) {
+    public AuditLogHelper(AuditLogService auditLogService, LogHelper logHelper/*, LogProducer logProducer,Environment env*/) {
         this.auditLogService = auditLogService;
-        this.logProducer = logProducer;
-        this.env = env;
-        this.serviceName = env.getProperty("spring.application.name");
+        this.logHelper = logHelper;
     }
 
     public static void create(HttpServletRequest request, HttpServletResponseCopier response, Date execDurStart, Exception exception) {
@@ -44,8 +39,7 @@ public class AuditLogHelper {
             log.debug("{}", auditLogInput);
             if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"}).anyMatch(auditLogInput.getPath()::contains)) {
 //                auditLogService.createOrEdit(auditLogInput);
-                logProducer.sendMessage(LogEvent.builder()
-                        .serviceName(serviceName)
+                logHelper.push(LogEvent.builder()
                         .clientName(auditLogInput.getClientName())
                         .execDuration(auditLogInput.getExecDuration())
                         .clientIpAddress(auditLogInput.getClientIpAddress())

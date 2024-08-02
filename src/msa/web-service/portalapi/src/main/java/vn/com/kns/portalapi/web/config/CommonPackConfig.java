@@ -1,5 +1,6 @@
 package vn.com.kns.portalapi.web.config;
 
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import com.kns.apps.msa.commonpack.application.service.auditLog.LogProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +18,13 @@ public class CommonPackConfig {
         return new LogProducer();
     }
 
-//    @Autowired
-//    private Environment env;
-//    @Autowired
-//    private LogProducer logProducer;
-//    @Bean
-//    public LogHelper logHelper() {
-//        return new LogHelper(logProducer, env);
-//    }
+    @Autowired
+    private Environment env;
+    @Autowired
+    private LogProducer logProducer;
+    @Bean
+    public LogHelper logHelper() {
+        return new LogHelper(logProducer, env);
+    }
 
 }
