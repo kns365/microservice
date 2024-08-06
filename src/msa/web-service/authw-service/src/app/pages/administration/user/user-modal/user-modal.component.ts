@@ -9,6 +9,7 @@ import {HttpStatusCode} from '@angular/common/http';
 import {PrivilegeDto} from '../../../../shared/services/app/privilege/dto/privilege-dto';
 import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
 import {ResponseDto} from '../../../../shared/models/response-dto';
+import {ResponseStatus} from '../../../../shared/constants/ResponseStatus';
 
 @Component({
   selector: 'ngx-user-modal',
@@ -43,11 +44,11 @@ export class UserModalComponent implements OnInit {
     this.loading = true;
     this.userService.getUserById(id).subscribe({
         next: (res: ResponseDto) => {
-          if (res && res.status === HttpStatusCode.Ok) {
+          if (res && res.status === ResponseStatus.SUCCESS) {
             this.create = <UserDto>res.data;
             this.setInitialRolesStatus();
           } else {
-            this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
+            this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.USER);
             console.error('getUserById ', res);
           }
         },
@@ -66,11 +67,11 @@ export class UserModalComponent implements OnInit {
     this.loading = true;
     this.roleService.getAllRole().subscribe({
       next: (res: ResponseDto) => {
-        if (res && res.status === HttpStatusCode.Ok) {
+        if (res && res.status === ResponseStatus.SUCCESS) {
           this.roles = <RoleDto[]>res.data;
           this.setInitialRolesStatus();
         } else {
-          this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
+          this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.ROLE);
           console.error('getAllRole ', res);
         }
       },
@@ -128,10 +129,10 @@ export class UserModalComponent implements OnInit {
     console.error('save user', user);
     this.userService.createOrEditUser(user).subscribe({
         next: (res: ResponseDto) => {
-          if (res && res.status === HttpStatusCode.Ok) {
+          if (res && res.status === ResponseStatus.SUCCESS) {
             this.toastrService.success('Saved successfully', PrivilegeConst.USER);
           } else {
-            this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
+            this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.USER);
             console.error('createOrEditUser ', res);
           }
         },

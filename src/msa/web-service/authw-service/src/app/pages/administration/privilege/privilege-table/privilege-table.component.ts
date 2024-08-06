@@ -6,6 +6,7 @@ import {PrivilegeModalComponent} from '../privilege-modal/privilege-modal.compon
 import {PrivilegeDto} from '../../../../shared/services/app/privilege/dto/privilege-dto';
 import {PrivilegeService} from '../../../../shared/services/app/privilege/privilege.service';
 import {DatatablesOutputDto} from '../../../../shared/models/dataTables/datatables-output-dto';
+import {ResponseStatus} from '../../../../shared/constants/ResponseStatus';
 
 import * as moment from 'moment';
 import {ResponseDto} from '../../../../shared/models/response-dto';
@@ -131,11 +132,11 @@ export class PrivilegeTableComponent implements OnInit, AfterViewInit {
     if (confirm('Are you sure to delete ' + input.name + ' ?')) {
       this.privilegeService.deletePrivilegeById(input.id).subscribe({
           next: (res: ResponseDto) => {
-            if (res && res.status === HttpStatusCode.Ok) {
+            if (res && res.status === ResponseStatus.SUCCESS) {
               this.toastrService.success('Deleted successfully', PrivilegeConst.PRIVILEGE);
               this.reloadDataTable();
             } else {
-              this.toastrService.warning('Error ' + res.message, PrivilegeConst.PRIVILEGE);
+              this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.PRIVILEGE);
               console.error(res);
             }
           },

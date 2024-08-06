@@ -11,6 +11,7 @@ import {DatatablesOutputDto} from '../../../../shared/models/dataTables/datatabl
 import * as moment from 'moment';
 import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
 import {ResponseDto} from '../../../../shared/models/response-dto';
+import {ResponseStatus} from '../../../../shared/constants/ResponseStatus';
 
 @Component({
   selector: 'ngx-user-table',
@@ -136,11 +137,11 @@ export class UserTableComponent implements OnInit, AfterViewInit {
     if (confirm('Are you sure to delete ' + input.username + ' ?')) {
       this.userService.deleteUserById(input.id).subscribe({
           next: (res: ResponseDto) => {
-            if (res && res.status === HttpStatusCode.Ok) {
+            if (res && res.status === ResponseStatus.SUCCESS) {
               this.toastrService.success('Deleted successfully', PrivilegeConst.USER);
               this.reloadDataTable();
             } else {
-              this.toastrService.warning('Error ' + res.message, PrivilegeConst.USER);
+              this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.USER);
               console.error('deleteUserById ', res);
             }
           },

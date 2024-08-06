@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import {ResponseDto} from '../../../../shared/models/response-dto';
 import {HttpStatusCode} from '@angular/common/http';
 import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
+import {ResponseStatus} from '../../../../shared/constants/ResponseStatus';
 
 @Component({
   selector: 'ngx-role-modal',
@@ -43,11 +44,11 @@ export class RoleModalComponent implements OnInit {
     this.loading = true;
     this.roleService.getRoleById(id).subscribe({
         next: (res: ResponseDto) => {
-          if (res && res.status === HttpStatusCode.Ok) {
+          if (res && res.status === ResponseStatus.SUCCESS) {
             this.create = <RoleDto>res.data;
             this.setInitialPrivilegesStatus();
           } else {
-            this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
+            this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.ROLE);
             console.error('getRoleById ', res);
           }
         },
@@ -66,11 +67,11 @@ export class RoleModalComponent implements OnInit {
     this.loading = true;
     this.privilegeService.getAllPrivilege().subscribe({
       next: (res: ResponseDto) => {
-        if (res && res.status === HttpStatusCode.Ok) {
+        if (res && res.status === ResponseStatus.SUCCESS) {
           this.privileges = <PrivilegeDto[]>res.data;
           this.setInitialPrivilegesStatus();
         } else {
-          this.toastrService.warning('Error ' + res.message, PrivilegeConst.PRIVILEGE);
+          this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.PRIVILEGE);
           console.error('getAllPrivilege ', res);
         }
       },
@@ -135,10 +136,10 @@ export class RoleModalComponent implements OnInit {
     role.privilegesString = this.getCheckedPrivileges(); // ['ROLE_USER'];
     this.roleService.createOrEditRole(role).subscribe({
         next: (res: ResponseDto) => {
-          if (res && res.status === HttpStatusCode.Ok) {
+          if (res && res.status === ResponseStatus.SUCCESS) {
             this.toastrService.success('Saved successfully', PrivilegeConst.ROLE);
           } else {
-            this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
+            this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.ROLE);
             console.error('createOrEditRole ', res);
           }
         },

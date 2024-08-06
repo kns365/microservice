@@ -11,6 +11,7 @@ import {ResponseDto} from '../../../../shared/models/response-dto';
 import {PrivilegeConst} from '../../../../shared/constants/PrivilegeConst';
 import {HttpStatusCode} from '@angular/common/http';
 import {PrivilegeDto} from '../../../../shared/services/app/privilege/dto/privilege-dto';
+import {ResponseStatus} from '../../../../shared/constants/ResponseStatus';
 
 @Component({
   selector: 'ngx-role-table',
@@ -142,11 +143,11 @@ export class RoleTableComponent implements OnInit, AfterViewInit {
     if (confirm('Are you sure to delete ' + input.name + ' ?')) {
       this.roleService.deleteRoleById(input.id).subscribe({
           next: (res: ResponseDto) => {
-            if (res && res.status === HttpStatusCode.Ok) {
+            if (res && res.status === ResponseStatus.SUCCESS) {
               this.toastrService.success('Deleted successfully', PrivilegeConst.ROLE);
               this.reloadDataTable();
             } else {
-              this.toastrService.warning('Error ' + res.message, PrivilegeConst.ROLE);
+              this.toastrService.warning('Error ' + res.errorMessage, PrivilegeConst.ROLE);
               console.error('deleteRoleById ', res);
             }
           },
