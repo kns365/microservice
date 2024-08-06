@@ -38,18 +38,21 @@ public class AuditLogHelper {
             AuditLogInputDto auditLogInput = new AuditLogInputDto(logClientInfo, execDurStart);
             log.debug("{}", auditLogInput);
             if (!Arrays.stream(new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"}).anyMatch(auditLogInput.getPath()::contains)) {
-//                auditLogService.createOrEdit(auditLogInput);
-                logHelper.push(LogEvent.builder()
-                        .clientName(auditLogInput.getClientName())
-                        .execDuration(auditLogInput.getExecDuration())
-                        .clientIpAddress(auditLogInput.getClientIpAddress())
-                        .path(auditLogInput.getPath())
-                        .httpStatus(auditLogInput.getHttpStatus())
-                        .exception(auditLogInput.getException())
-                        .browserInfo(auditLogInput.getBrowserInfo())
-                        .input(auditLogInput.getInput())
-                        .output(auditLogInput.getOutput())
-                        .build());
+                if (logHelper.isConnected()) {
+                    logHelper.push(LogEvent.builder()
+                            .clientName(auditLogInput.getClientName())
+                            .execDuration(auditLogInput.getExecDuration())
+                            .clientIpAddress(auditLogInput.getClientIpAddress())
+                            .path(auditLogInput.getPath())
+                            .httpStatus(auditLogInput.getHttpStatus())
+                            .exception(auditLogInput.getException())
+                            .browserInfo(auditLogInput.getBrowserInfo())
+                            .input(auditLogInput.getInput())
+                            .output(auditLogInput.getOutput())
+                            .build());
+                } else {
+                    auditLogService.createOrEdit(auditLogInput);
+                }
             }
         } catch (Exception e) {
             log.error("Error create auditLog");

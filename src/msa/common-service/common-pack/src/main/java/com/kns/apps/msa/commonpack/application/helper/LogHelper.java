@@ -23,6 +23,10 @@ public class LogHelper {
     private static Environment env;
     private static String[] ignorePaths = new String[]{"auditLogs", "swagger", "api-doc", "ws", "testchat", "actuator"};
 
+    public boolean isConnected() {
+        return logProducer.isConnected();
+    }
+
     public LogHelper(LogProducer logProducer, Environment env) {
         this.logProducer = logProducer;
         this.env = env;
