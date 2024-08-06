@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Clean-Package All Service" type="CompoundRunConfigurationType">
+    <toRun name="auth-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="email-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="stock-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="image-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="eureka-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="portalapi [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="config-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="board-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="order-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="gallery-service [clean,package]" type="MavenRunConfiguration" />
+    <toRun name="zuul-service [clean,package]" type="MavenRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>

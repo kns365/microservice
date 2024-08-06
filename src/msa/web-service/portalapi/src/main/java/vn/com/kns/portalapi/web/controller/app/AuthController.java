@@ -32,42 +32,42 @@ public class AuthController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody RegisterRequest registerRequest) {
-        authService.signup(registerRequest);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @GetMapping("/verifyAccount/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token) throws Exception {
-        try {
-            authService.verifyAccount(token);
-        } catch (Exception e) {
-            log.error("Error verifyAccount: {}", e.getMessage());
-            return new ResponseEntity(e.getMessage(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Account activated successully", HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
-    }
-
-    @GetMapping("/logout")
-    public ResponseEntity<?> logoutGet(Authentication authentication) {
-        authService.logout(authentication);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @PostMapping("/refreshToken")
-    public ResponseEntity<AuthenticationResponse> refreshToken(@Valid @RequestBody TokenRefreshRequest tokenRefreshRequest) throws Exception {
-        try {
-            return new ResponseEntity<>(authService.refreshToken(tokenRefreshRequest), HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("Error refreshToken: {}", e.getMessage());
-            return new ResponseEntity(e.getMessage(), HttpStatus.OK);
-        }
-    }
+//    @PostMapping("/signup")
+//    public ResponseEntity<?> signup(@RequestBody RegisterRequest registerRequest) {
+//        authService.signup(registerRequest);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/verifyAccount/{token}")
+//    public ResponseEntity<String> verifyAccount(@PathVariable String token) throws Exception {
+//        try {
+//            authService.verifyAccount(token);
+//        } catch (Exception e) {
+//            log.error("Error verifyAccount: {}", e.getMessage());
+//            return new ResponseEntity(e.getMessage(), HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("Account activated successully", HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+//        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/logout")
+//    public ResponseEntity<?> logoutGet(Authentication authentication) {
+//        authService.logout(authentication);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/refreshToken")
+//    public ResponseEntity<AuthenticationResponse> refreshToken(@Valid @RequestBody TokenRefreshRequest tokenRefreshRequest) throws Exception {
+//        try {
+//            return new ResponseEntity<>(authService.refreshToken(tokenRefreshRequest), HttpStatus.OK);
+//        } catch (Exception e) {
+//            log.error("Error refreshToken: {}", e.getMessage());
+//            return new ResponseEntity(e.getMessage(), HttpStatus.OK);
+//        }
+//    }
 
 }

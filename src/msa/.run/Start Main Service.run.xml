@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start Main Service" type="CompoundRunConfigurationType">
+    <toRun name="ConfigServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="EurekaServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="BoardServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="ZuulServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="LogServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <toRun name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>
