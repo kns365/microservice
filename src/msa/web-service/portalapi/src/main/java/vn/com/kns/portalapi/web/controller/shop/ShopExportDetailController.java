@@ -12,7 +12,9 @@ import vn.com.kns.portalapi.application.service.shop.shopExportDetail.dto.ShopEx
 import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import vn.com.kns.portalapi.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
@@ -29,86 +31,92 @@ public class ShopExportDetailController {
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL)
     @GetMapping("/")
     public ResponseEntity<?> getAllShopExportDetail() {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<ShopExportDetailDto> output = shopExportDetailService.getAll();
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopExportDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL)
     @PostMapping("/getAllShopExportDetailPaging")
     public ResponseEntity<?> getAllShopExportDetailPaging(@RequestBody DataTablesInput input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             PagingOutput paging = shopExportDetailService.getAllPaging(new PagingInput(input));
             DataTablesOutput<ShopExportDetailDto> output = new DataTablesOutput(input, paging);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopExportDetailPaging {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL)
     @GetMapping("/{id}")
     public ResponseEntity<?> getShopExportDetailById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopExportDetailDto output = shopExportDetailService.getById(input);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getShopExportDetailById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL_CREATE)
     @PostMapping("/")
     public ResponseEntity<?> createShopExportDetail(@RequestBody ShopExportDetailInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopExportDetailDto shopExportDetail = shopExportDetailService.createOrEdit(input);
             response = new ResponseDto(HttpStatus.OK, shopExportDetail.getId());
         } catch (Exception e) {
             log.error("Error createShopExportDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL_EDIT)
     @PutMapping("/")
     public ResponseEntity<?> editShopExportDetail(@RequestBody ShopExportDetailInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopExportDetailService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error editShopExportDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPEXPORTDETAIL_DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteShopExportDetailById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopExportDetailService.deleteById(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteShopExportDetailById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 }

@@ -12,7 +12,9 @@ import vn.com.kns.portalapi.application.service.shop.shopOrderDetail.dto.ShopOrd
 import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import vn.com.kns.portalapi.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
@@ -29,86 +31,92 @@ public class ShopOrderDetailController {
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL)
     @GetMapping("/")
     public ResponseEntity<?> getAllShopOrderDetail() {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<ShopOrderDetailDto> output = shopOrderDetailService.getAll();
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopOrderDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL)
     @PostMapping("/getAllShopOrderDetailPaging")
     public ResponseEntity<?> getAllShopOrderDetailPaging(@RequestBody DataTablesInput input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             PagingOutput paging = shopOrderDetailService.getAllPaging(new PagingInput(input));
             DataTablesOutput<ShopOrderDetailDto> output = new DataTablesOutput(input, paging);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopOrderDetailPaging {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL)
     @GetMapping("/{id}")
     public ResponseEntity<?> getShopOrderDetailById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopOrderDetailDto output = shopOrderDetailService.getById(input);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getShopOrderDetailById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL_CREATE)
     @PostMapping("/")
     public ResponseEntity<?> createShopOrderDetail(@RequestBody ShopOrderDetailInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopOrderDetailDto shopOrderDetail = shopOrderDetailService.createOrEdit(input);
             response = new ResponseDto(HttpStatus.OK, shopOrderDetail.getId());
         } catch (Exception e) {
             log.error("Error createShopOrderDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL_EDIT)
     @PutMapping("/")
     public ResponseEntity<?> editShopOrderDetail(@RequestBody ShopOrderDetailInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopOrderDetailService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error editShopOrderDetail {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPORDERDETAIL_DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteShopOrderDetailById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopOrderDetailService.deleteById(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteShopOrderDetailById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 }

@@ -12,7 +12,9 @@ import vn.com.kns.portalapi.application.service.administration.role.dto.RoleInpu
 import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import vn.com.kns.portalapi.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
@@ -30,86 +32,92 @@ public class RoleController {
     @PreAuthorize(HasPrivilegeConst.ROLE)
     @GetMapping("/")
     public ResponseEntity<?> getAllRole() {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<RoleDto> output = roleService.getAll();
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllRole {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.ROLE)
     @PostMapping("/getAllRolePaging")
     public ResponseEntity<?> getAllRolePaging(@RequestBody DataTablesInput input, HttpServletRequest request) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             PagingOutput paging = roleService.getAllPaging(new PagingInput(input));
             DataTablesOutput<RoleDto> output = new DataTablesOutput(input, paging);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllRolePaging {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.ROLE)
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> getRoleById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             RoleDto output = roleService.getById(input);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getRoleById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.ROLE_CREATE)
     @PostMapping("/")
     public ResponseEntity<ResponseDto> createRole(@RequestBody RoleInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             roleService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error createRole {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.ROLE_EDIT)
     @PutMapping("/")
     public ResponseEntity<ResponseDto> editRole(@RequestBody RoleInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             roleService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error editRole {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.ROLE_DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDto> deleteRoleById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             roleService.deleteById(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteRoleById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 }

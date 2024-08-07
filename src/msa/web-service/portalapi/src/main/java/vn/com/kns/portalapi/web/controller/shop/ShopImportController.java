@@ -12,7 +12,9 @@ import vn.com.kns.portalapi.application.service.shop.shopImport.dto.ShopImportIn
 import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import vn.com.kns.portalapi.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
@@ -29,86 +31,92 @@ public class ShopImportController {
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT)
     @GetMapping("/")
     public ResponseEntity<?> getAllShopImport() {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<ShopImportDto> output = shopImportService.getAll();
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopImport {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT)
     @PostMapping("/getAllShopImportPaging")
     public ResponseEntity<?> getAllShopImportPaging(@RequestBody DataTablesInput input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             PagingOutput paging = shopImportService.getAllPaging(new PagingInput(input));
             DataTablesOutput<ShopImportDto> output = new DataTablesOutput(input, paging);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllShopImportPaging {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT)
     @GetMapping("/{id}")
     public ResponseEntity<?> getShopImportById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopImportDto output = shopImportService.getById(input);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getShopImportById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT_CREATE)
     @PostMapping("/")
     public ResponseEntity<?> createShopImport(@RequestBody ShopImportInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             ShopImportDto shopImport = shopImportService.createOrEdit(input);
             response = new ResponseDto(HttpStatus.OK, shopImport.getId());
         } catch (Exception e) {
             log.error("Error createShopImport {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT_EDIT)
     @PutMapping("/")
     public ResponseEntity<?> editShopImport(@RequestBody ShopImportInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopImportService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error editShopImport {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SHOPIMPORT_DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteShopImportById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             shopImportService.deleteById(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteShopImportById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 }

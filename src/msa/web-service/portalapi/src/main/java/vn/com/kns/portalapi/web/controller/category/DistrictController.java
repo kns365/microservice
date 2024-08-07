@@ -15,7 +15,9 @@ import vn.com.kns.portalapi.core.constant.MethodNameConst;
 import vn.com.kns.portalapi.core.constant.ServiceNameConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import vn.com.kns.portalapi.core.model.ResponseDto;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
@@ -35,100 +37,107 @@ public class DistrictController {
     @PreAuthorize(HasPrivilegeConst.DISTRICT)
     @GetMapping("/")
     public ResponseEntity<?> getAllDistrict() {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<DistrictDto> output = districtService.getAll(null);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllDistrict {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT)
     @GetMapping("/getAllDistrictByProvinceId/{provinceId}")
     public ResponseEntity<?> getAllDistrictByProvinceId(@PathVariable("provinceId") Long provinceId) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             List<DistrictDto> output = districtService.getAll(provinceId);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllDistrict {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT)
     @PostMapping("/getAllDistrictPaging")
     public ResponseEntity<?> getAllDistrictPaging(@RequestBody DataTablesInput input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             PagingOutput paging = districtService.getAllPaging(new PagingInput(input));
             DataTablesOutput<DistrictDto> output = new DataTablesOutput(input, paging);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllDistrictPaging {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT)
     @GetMapping("/{id}")
     public ResponseEntity<?> getDistrictById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             DistrictDto output = districtService.getById(input);
-            response = new ResponseDto(HttpStatus.OK, output);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getDistrictById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT_CREATE)
     @PostMapping("/")
     public ResponseEntity<?> createDistrict(@RequestBody DistrictInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             districtService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error createDistrict {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT_EDIT)
     @PutMapping("/")
     public ResponseEntity<?> editDistrict(@RequestBody DistrictInputDto input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             districtService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error editDistrict {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.DISTRICT_DELETE)
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDto> deleteDistrictById(@PathVariable("id") Long input) {
-        ResponseDto response = new ResponseDto();
+        Date execDurStart = new Date();
+        ResponseDto res = new ResponseDto();
         try {
             districtService.deleteById(input);
-            response = new ResponseDto(HttpStatus.OK, null);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteDistrictById {}", e.getMessage());
-            response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);
+            res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(res, HttpStatus.OK);
     }
 
 }
