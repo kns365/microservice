@@ -13,6 +13,9 @@ import vn.com.kns.portalapi.application.service.auth.dto.LoginRequest;
 import vn.com.kns.portalapi.application.service.auth.dto.TokenRefreshRequest;
 import vn.com.kns.portalapi.application.service.auth.dto.RegisterRequest;
 import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.util.Date;
 
@@ -24,7 +27,10 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 @Slf4j
 public class AuthController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private AuthService authService;
 

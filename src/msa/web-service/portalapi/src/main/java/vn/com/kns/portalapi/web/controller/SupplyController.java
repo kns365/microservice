@@ -14,6 +14,9 @@ import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
 import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
@@ -25,7 +28,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/supplies")
 public class SupplyController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private SupplyService supplyService;
 
@@ -40,21 +46,25 @@ public class SupplyController {
         } catch (Exception e) {
             log.error("Error getAllSupply {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SUPPLY)
     @GetMapping("/getAllSupplyBySupplierId/{supplierId}")
-    public ResponseEntity<?> getAllSupplyBySupplierId(@PathVariable("supplierId") Long supplierId) {
+    public ResponseEntity<?> getAllSupplyBySupplierId(@PathVariable("supplierId") Long input) {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            List<SupplyDto> output = supplyService.getAll(supplierId);
+            List<SupplyDto> output = supplyService.getAll(input);
             res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllSupplyBySupplierId {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -71,6 +81,8 @@ public class SupplyController {
         } catch (Exception e) {
             log.error("Error getAllSupplyPaging {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -86,21 +98,25 @@ public class SupplyController {
         } catch (Exception e) {
             log.error("Error getSupplyById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.SUPPLY)
     @GetMapping("")
-    public ResponseEntity<?> getSupplyByItemCode(@RequestParam(value = "itemCode", required = false) String itemCode) {
+    public ResponseEntity<?> getSupplyByItemCode(@RequestParam(value = "itemCode", required = false) String input) {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            SupplyDto output = supplyService.getByItemCode(itemCode);
+            SupplyDto output = supplyService.getByItemCode(input);
             res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getSupplyByItemCode {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -111,11 +127,13 @@ public class SupplyController {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            SupplyDto supply = supplyService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, supply.getId());
+            SupplyDto output = supplyService.createOrEdit(input);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output.getId());
         } catch (Exception e) {
             log.error("Error createSupply {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -131,6 +149,8 @@ public class SupplyController {
         } catch (Exception e) {
             log.error("Error editSupply {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -146,6 +166,8 @@ public class SupplyController {
         } catch (Exception e) {
             log.error("Error deleteSupplyById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }

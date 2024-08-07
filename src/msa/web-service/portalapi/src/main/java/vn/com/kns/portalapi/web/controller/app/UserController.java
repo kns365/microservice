@@ -1,6 +1,9 @@
 package vn.com.kns.portalapi.web.controller.app;
 
 import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -25,7 +28,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/users")
 public class UserController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private UserService userService;
 
@@ -40,6 +46,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error getAllUser {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -57,6 +65,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error getAllUserPaging {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -78,6 +88,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error getUserById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -93,6 +105,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error createUser {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -108,6 +122,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error editUser {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -123,6 +139,8 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error deleteUserById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }

@@ -15,6 +15,9 @@ import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
 import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
@@ -26,7 +29,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/auditLogs")
 public class AuditLogController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private AuditLogService auditLogService;
 
@@ -42,6 +48,8 @@ public class AuditLogController {
         } catch (Exception e) {
             log.error("Error getAllAuditLog {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -58,21 +66,25 @@ public class AuditLogController {
         } catch (Exception e) {
             log.error("Error getAllAuditLogPaging {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
 
     @PreAuthorize(HasPrivilegeConst.AUDITLOG)
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAuditLogById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getAuditLogById(@PathVariable("id") Long input) {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            AuditLogDto output = auditLogService.getById(id);
+            AuditLogDto output = auditLogService.getById(input);
             res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAuditLogById {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -89,6 +101,8 @@ public class AuditLogController {
         } catch (Exception e) {
             log.error("Error createAuditLog {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -105,6 +119,8 @@ public class AuditLogController {
         } catch (Exception e) {
             log.error("Error editAuditLog {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -112,15 +128,17 @@ public class AuditLogController {
     @PreAuthorize(HasPrivilegeConst.AUDITLOG_DELETE)
     @Hidden
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAuditLogById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteAuditLogById(@PathVariable("id") Long input) {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            auditLogService.deleteById(id);
+            auditLogService.deleteById(input);
             res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, null);
         } catch (Exception e) {
             log.error("Error deleteAuditLogById {}", e);
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }

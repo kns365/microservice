@@ -13,6 +13,9 @@ import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
 import com.kns.apps.msa.commonpack.core.model.ResponseDto;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
@@ -24,7 +27,10 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/shopOrderDetails")
 public class ShopOrderDetailController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private ShopOrderDetailService shopOrderDetailService;
 
@@ -39,6 +45,8 @@ public class ShopOrderDetailController {
         } catch (Exception e) {
             log.error("Error getAllShopOrderDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -55,6 +63,8 @@ public class ShopOrderDetailController {
         } catch (Exception e) {
             log.error("Error getAllShopOrderDetailPaging {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -70,6 +80,8 @@ public class ShopOrderDetailController {
         } catch (Exception e) {
             log.error("Error getShopOrderDetailById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -80,11 +92,13 @@ public class ShopOrderDetailController {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            ShopOrderDetailDto shopOrderDetail = shopOrderDetailService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, shopOrderDetail.getId());
+            ShopOrderDetailDto output = shopOrderDetailService.createOrEdit(input);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output.getId());
         } catch (Exception e) {
             log.error("Error createShopOrderDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -100,6 +114,8 @@ public class ShopOrderDetailController {
         } catch (Exception e) {
             log.error("Error editShopOrderDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -115,6 +131,8 @@ public class ShopOrderDetailController {
         } catch (Exception e) {
             log.error("Error deleteShopOrderDetailById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }

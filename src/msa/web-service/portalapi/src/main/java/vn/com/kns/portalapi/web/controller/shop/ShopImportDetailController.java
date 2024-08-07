@@ -1,6 +1,9 @@
 package vn.com.kns.portalapi.web.controller.shop;
 
+import com.kns.apps.msa.commonpack.application.helper.LogHelper;
+import com.kns.apps.msa.commonpack.core.model.ResponseDto;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +16,22 @@ import vn.com.kns.portalapi.application.service.supply.dto.SupplyDto;
 import vn.com.kns.portalapi.core.constant.HasPrivilegeConst;
 import vn.com.kns.portalapi.core.model.PagingInput;
 import vn.com.kns.portalapi.core.model.PagingOutput;
-import com.kns.apps.msa.commonpack.core.model.ResponseDto;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import java.util.Date;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesInput;
 import vn.com.kns.portalapi.core.model.dataTables.DataTablesOutput;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @Slf4j
 @RequestMapping("/shopImportDetails")
 public class ShopImportDetailController {
-
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
     @Autowired
     private ShopImportDetailService shopImportDetailService;
 
@@ -40,6 +46,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error getAllShopImportDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -55,6 +63,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error getAllShopImportDetailByShopId {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -65,12 +75,13 @@ public class ShopImportDetailController {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-//            List<ShopImportDetailDto> output = shopImportDetailService.getAllSupplyByShopId(shopId);
             List<SupplyDto> output = shopImportDetailService.getAllSupplyByShopId(shopId);
             res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output);
         } catch (Exception e) {
             log.error("Error getAllSupplylByShopId {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, null, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -87,6 +98,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error getAllShopImportDetailPaging {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -102,6 +115,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error getShopImportDetailById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -112,11 +127,13 @@ public class ShopImportDetailController {
         Date execDurStart = new Date();
         ResponseDto res = new ResponseDto();
         try {
-            ShopImportDetailDto shopImportDetail = shopImportDetailService.createOrEdit(input);
-            response = new ResponseDto(HttpStatus.OK, shopImportDetail.getId());
+            ShopImportDetailDto output = shopImportDetailService.createOrEdit(input);
+            res = new ResponseDto(HttpStatus.OK.value(), HttpStatus.OK.name(), null, output.getId());
         } catch (Exception e) {
             log.error("Error createShopImportDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -132,6 +149,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error editShopImportDetail {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
@@ -147,6 +166,8 @@ public class ShopImportDetailController {
         } catch (Exception e) {
             log.error("Error deleteShopImportDetailById {}", e.getMessage());
             res = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionUtils.getStackTrace(e), null, null);
+        } finally {
+            LogHelper.push(request, response, input, res.getData(), execDurStart, res.getErrorMessage());
         }
         return new ResponseEntity(res, HttpStatus.OK);
     }
