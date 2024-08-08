@@ -26,6 +26,7 @@ Spring admin: 2.3.1
     - [Hystrix dashboard](http://localhost:8763/hystrix/monitor?stream=http://localhost:8763)
     - [Turbine stream](http://localhost:8763) Kafka stream, combine all hystrix stream into one
     - Secure frontend
+    - Central logfile
 - ### 5/ Auth service-8765 & Auth portal-8766 (config-client,eureka-client,admin-client,sleuth,hystrix,security)
     - Accept 2 url: getToken, refreshToken
     - Generate JWT
