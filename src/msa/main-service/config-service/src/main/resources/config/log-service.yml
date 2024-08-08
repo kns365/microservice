@@ -27,9 +27,3 @@ spring:
           json:
             trusted:
               packages: '*'
-logging:
-  file:
-    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
-  logback:
-    rollingpolicy:
-      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz

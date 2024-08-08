@@ -3,12 +3,6 @@ spring:
     user:
       name: zuul          # not use
       password: zuul#123  # not use
-logging:
-  file:
-    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
-  logback:
-    rollingpolicy:
-      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
 zuul:
   SendErrorFilter:
     post:

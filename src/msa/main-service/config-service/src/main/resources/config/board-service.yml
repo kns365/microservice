@@ -21,12 +21,6 @@ spring:
 #    port: 5672
 #    username: admin
 #    password: admin
-logging:
-  file:
-    name: ${logging.file.path}/${spring.application.name}/${spring.application.name}.log
-  logback:
-    rollingpolicy:
-      file-name-pattern: ${logging.file.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.%i.log.gz
 hystrix:
   dashboard:
     proxy-stream-allow-list: '*'
