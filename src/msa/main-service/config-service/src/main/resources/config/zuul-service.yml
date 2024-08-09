@@ -2,7 +2,7 @@ spring:
   security:
     user:
       name: zuul          # not use
-      password: zuul#123  # not use
+      password: 123qwe  # not use
 zuul:
   SendErrorFilter:
     post:
